@@ -4,11 +4,13 @@ before_install:
 - sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended
   texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
 script:
-- make note
+- _build
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory _build probability_notes.tex
 deploy:
   provider: releases
   api_key:
     secure: xUHo+oIBaxGmsLgeOUVLcVuKn8BXHPq2TQUDrpywGiHeKk0Cwd6lvK1qcvzy3ikh/QBIG8Ws6j6rLlo0DDu7+429drEvlugRwbbem1bNpowPm4rEPlvIq/K/K4wvBMmd9mHGtpSJcsjjw7uKaFusTEvSVWSfgW/gGEo+7k2Jl6U0wiXMmkSk+DbE0QGYHXbbvYGsslkW+nIBnyVkMOR1RVKpUm0I/oPr0BrCdkhcGG2zAaabYZRXSl0LAV/5mblchnETTqbPTFTstwwoKGCmPyLed6anYoVpVSIHJYSD8IHuc+9cFSmTudRu0JM0ijs76G60kbYC9pz4IncflciG0qo8FpocmFjjn5equO3mVkMWEswDZYq98XFeJnHUOqpmKF3X5mpTIYEJPjmu9S/xotccmmdFXfrWDTkJCHpIZyjOPKO7VGcMq+Jw7WMmnJPA/eSNhss48PYJ1ZuiCA6Wkb8Pd9J5tHEdDs6b+H63qMX8KbWF2kkdN/Pu3E5+agVag5GMzXiZwRTrrd21hZ6l4OkF5IymLlFD6/khwjDrAYHppceaGTS20O8xx1Ojv9OlDEUsdYRBsXRfziyfR+4AvoQftjjQGxwedJN9QueZ9Yfp4l+ZGqjeUTsOozcEmb723KVQHQJ1CEIiC5yUI/mTGn1M7GHDBQJQUp9AGYjbmxI=
-  file: probability_notes.pdf
+  file: _build/probability_notes.pdf
   on:
-    repo: NineKa/Probability-Notes
+    tags: true
+  skip_cleanup: true
