@@ -4,6 +4,6 @@
 
 .DS_Store
 
-*.pdf
+/tex/*.pdf
 *.log
 *.aux
