@@ -15,6 +15,10 @@
 \newcommand\perm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
 \newcommand\comb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
 
+\newenvironment{solution}[1][\proofname]{%
+  \proof[\ttfamily \scshape \large Solution.]%
+}{\endproof}
+
 \begin{document}
 
 \input{section1_experiments_samplespace_events_and_probability}

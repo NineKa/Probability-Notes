@@ -1,3 +1,7 @@
 /target/
+/.texpadtmp/
 .DS_Store
-/.texpadtmp/    
+
+*.pdf
+*.log
+*.aux

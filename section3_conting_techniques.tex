@@ -7,6 +7,7 @@ $n_1 \cdot n_2$.
 Toss a coin and roll a die simultaneously. The former can have two outcomes,
 and for each of these, the latter can have six outcomes. Thus, the total number
 of possible outcomes is $2 \times 6 = 12$. 
+\end{example}
 
 \paragraph{Recall} for any $n \in \mathbb{N}$, $n! = 1 \times 2 \times
 \dots \times n$, and $0! = 1$ by definition. 
@@ -31,4 +32,170 @@ in,
     n \cdot (n-1) \cdot \dots \cdot (n - m + 1) = \frac{n!}{(n - m)!}
 \end{equation*}
 \end{proof}
+
+\begin{example}
+The papers from $3$ different exams need to be graded. $5$ graders are
+available for this job. Each exam requires only one grader. Then the number of
+ways of assigning graders to different exams is, 
+\begin{equation*}
+    \perm[5]{3} = \frac{5!}{(5 - 3)!} = 60
+\end{equation*}
 \end{example}
+
+\begin{theorem}
+    If $r \leq n$, the number of ways of selecting an unordered sample of $r$
+objects from a total of $n$ distinct objects is,
+\begin{equation*}
+    \comb[n]{r} = \frac{n!}{(n - r)!r!}
+\end{equation*}
+This is also denoted by $n \choose r$.
+\end{theorem}
+\begin{proof}
+    Suppose this can be done in $m$ ways. Now if we had $r$ distinct boxes,
+then we could fill them up in two steps:
+\begin{enumerate}[noitemsep,topsep=0pt]
+\item 
+    select an unordered sample of size $r$ from the $n$ distinct objects.
+    This can be done in $m$ ways.
+\item
+    use these $r$ objects to fill up the $r$ boxes by putting one object in
+    each box. This can be done in $\perm[r]{r}$ ways.
+\end{enumerate}
+Thus the total number of ways of filling up those $r$ boxes is $m \cdot
+r!$. Hence,
+\begin{equation*}
+    m \cdot r! = \perm[n]{r} = \frac{n!}{(n - r)!}
+    \Rightarrow
+    m = \frac{n!}{(n - r)!r!}
+\end{equation*}
+\end{proof}
+
+\begin{example}
+    A committee of $3$ is to be formed from a group of $10$ people. How many
+different committees are possible?
+\end{example}
+\begin{solution}
+    Number of different committees is,
+    \begin{equation*}
+        {10 \choose 3} = \frac{10 \cdot 9 \cdot 8}{3 \cdot 2 \cdot 1} = 120
+    \end{equation*}
+\end{solution}
+
+\paragraph{Recall} ${n \choose r}$ is the coefficient of $x^r$ in the expansion
+of $(1+x)^n$,
+\begin{equation*}
+    (1+x)^n = \sum_{r = 0}^n {n \choose r} x^r
+\end{equation*}
+These are called binomial coefficients. 
+
+\begin{theorem}
+    The number of ways of partitioning $n$ distinct objects into $k$ distinct
+groups containing $n_1, n_2, \dots, n_k$ object respectively where $n_1 +
+\dots + n_k = n$ is,
+\begin{equation*}
+    {n \choose {n_1, n_2, \dots, n_k}} = 
+    \frac{n!}{n_1! \cdot n_2! \cdot \cdots \cdot n_k!}
+\end{equation*}
+\end{theorem}
+\begin{proof}
+    The first group can be formed in $n \choose n_1$ ways. For each of these
+$n \choose n_1$ possibilities, the second group can be formed in ${n - n_1}
+\choose n_2$ many ways. Continuing like this, the total number of ways of
+partitioning the $n$ objects into $k$ groups is, 
+\begin{align*}
+    &{n \choose n_1} \cdot {{n - n_1} \choose n_2} \cdot
+    {{n - n_1 - n_2} \choose n_3} \cdot \dots \cdot 
+    {{n - n_1 - n_2 - \dots - n_{k-1}} \choose n_k}                          \\
+    =& \frac{n!}{n_1!(n-n_1)!} \cdot \frac{(n - n_1)!}{n_2! (n - n_1 - n_2)!}
+       \cdot \frac{(n - n_1 - n_2)!}{n_3!(n - n_1 - n_2 - n_3)!} \cdot
+       \dots \cdot \frac{(n - n_1 - \dots - n_{k-1})!}{n_k! (n - \sum_{i=1}^k
+       n_i)!}                                                                \\
+    =& \frac{n!}{n_1! \cdot n_2! \cdot \dots \cdot n_k!}
+\end{align*}
+\end{proof}
+
+\begin{example}
+    $4$ people get into an elevator, and each of them can get one of $10$
+floors. Assuming each person gets off at a random floor, what is the
+probability that no two get off at the same floor?
+\end{example}
+
+\begin{solution}
+    Let $S$ be the sample space and $E$ denote the event that no two get off at
+the same floor. The first person can get off at any of the $10$ floors. For
+each of these $10$ possibilities, the second person can get off at any of the
+$10$ floors and so on. Hence,
+    \begin{equation*}
+        \vert S \vert = 10 \times 10 \times 10 \times 10 = 10^4
+    \end{equation*}
+    Each of these outcomes is equally likely. And, 
+    \begin{equation*}
+        \vert E \vert = \perm[10]{4} = 10 \times 9 \times 8 \times 7
+    \end{equation*}
+    Hence required probability is, 
+    \begin{equation*}
+        P(E) = \frac{\vert E \vert}{\vert S \vert} 
+             = \frac{10 \times 9 \times 8 \times 7}{10^4}
+             = \frac{63}{125}
+    \end{equation*}
+\end{solution}
+
+\textbf{Note} This is similar to the birthday problem (Example 2.7 of
+textbook).
+
+\begin{example}
+    A committee of $5$ is to be selected from a group of $6$ men and $9$ women.
+If the selection is made randomly, what is the probability that the committee
+consists of $3$ men and $2$ women?
+\end{example}
+\begin{solution}
+    Let $S$ be the sample space and $E$ denote the event that the committee
+consists of $3$ men and $2$ women. Then $\vert S \vert = {15 \choose 5}$. Each
+of these outcomes is equally likely. And, $\vert E \vert = {6 \choose 3} \cdot
+{9 \choose 2}$. Hence, required possibility is, 
+\begin{equation*}
+    P(E) = \frac{\vert E \vert}{\vert S \vert}
+         = \frac{{6 \choose 3} \cdot {9 \choose 2}}{{15 \choose 5}}
+         = \frac{240}{1001}
+\end{equation*}
+\end{solution}
+
+\begin{example}
+    A $5$-card poker hand is said to be a full house if it consists of $3$ card
+s of the same denomination and $2$ other cards of the same denomination (the
+two denominations are necessarily different). If a $5$-card hand is dealt out
+randomly, what is the probability that it is a full house?
+\end{example}
+\begin{solution}
+    Obviously, $\vert S \vert = {52 \choose 5}$. Each of these outcomes is
+equally likely. In order to get a full house, the two denominations can be
+chosen in $13 \cdot 12$ ways, and then the suits can be chosen in ${4 \choose
+3} \cdot {4 \choose 2}$ ways. Hence,
+\begin{equation*}
+    \vert E \vert = 13 \cdot 12 \cdot {4 \choose 3} \cdot {4 \choose 2}
+\end{equation*}
+And the required probability, 
+\begin{equation*}
+    P(E) = \frac{\vert E \vert}{\vert S \vert}
+         = \frac{13 \cdot 12 \cdot {4 \choose 3} \cdot {4 \choose 2}}{{52
+           \choose 5}}
+         = \frac{6}{4165}
+\end{equation*}
+\end{solution}
+
+\begin{example}
+    \emph{(Exercise 2.64 of textbook)} A balanced die is tossed six times, and
+the numbers on the uppermost face is recorded each time. What is the
+probability that the numbers recorded are $1, 2, 3, 4, 5$ and $6$ in any order?
+\end{example}
+\begin{solution}
+    The first toss can result in any of the $6$ faces. For each of them, the
+second toss can result in any of the $6$ faces and so on. Hence, $\vert S
+\vert = 6^6$, and each of the outcomes is equally likely. And, $\vert E \vert
+= 6!$. Hence, the required probability is, 
+\begin{equation*}
+    P(E) = \frac{\vert E \vert}{\vert S \vert} 
+         = \frac{6!}{6^6} 
+         = \frac{5}{324}
+\end{equation*}
+\end{solution}
