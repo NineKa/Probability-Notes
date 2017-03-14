@@ -1,0 +1,34 @@
+\section{Counting Techniques}
+Suppose you have to complete two tasks. If Task 1 can be completed in $n_1$
+ways, and for each of these $n_1$ possibilities, Task 2 can be completed in
+$n_2$ ways, then the total number of ways the two tasks can be completed is
+$n_1 \cdot n_2$.
+\begin{example}
+Toss a coin and roll a die simultaneously. The former can have two outcomes,
+and for each of these, the latter can have six outcomes. Thus, the total number
+of possible outcomes is $2 \times 6 = 12$. 
+
+\paragraph{Recall} for any $n \in \mathbb{N}$, $n! = 1 \times 2 \times
+\dots \times n$, and $0! = 1$ by definition. 
+
+\begin{theorem}
+    If we are given $n$ distinct objects and $m$ distinct boxes each of which
+can hold one object and $n \leq m$, then the number of ways of filling up the
+boxes is, 
+\begin{equation*}
+    \perm[n]{m} = \frac{n!}{(n - m)!}
+\end{equation*}
+\end{theorem}
+\begin{proof}
+    The first box can be filled up in $n$ ways. For each of these $n$ ways, the
+second box can be filled up in $n - 1$ ways (by using any of the remaining $n
+- 1$ objects). Thus the first two boxes can be filled up in $n \cdot (n - 1)$
+ways. For each of these $n \cdot (n - 1)$ ways, the third box can be filled up
+in $(n - 2)$ ways. Thus, the first $3$ boxes can be filled up in $n \cdot (n -
+1) \cdot (n - 2)$ ways. Continuing like this, the $m$ boxes can be filled up
+in, 
+\begin{equation*}
+    n \cdot (n-1) \cdot \dots \cdot (n - m + 1) = \frac{n!}{(n - m)!}
+\end{equation*}
+\end{proof}
+\end{example}

@@ -1,0 +1,231 @@
+\section{Experiments, Sample Space, Events and Probability}
+\paragraph{Recall}
+\begin{itemize}[noitemsep,topsep=0pt]
+    \item
+    A set $A$ is countably infinite if $A$ is inifinite and there exists
+a one-to-one map from $A$ to $\mathbb{N}$, where $\mathbb{N} = \lbrace 0, 1,
+2, 3, \dots \rbrace$, the set of natural numbers. An infinite set that is not
+countable is called uncountable. $\mathbb{N}, \mathbb{Z}, \mathbb{Q}$ (set of
+rationals) are countably infinite. $\mathbb{R}$ is uncountable. $\lbrace x
+\in \mathbb{R} \vert x > 2 \rbrace$ is uncountable. The set of irrational
+numbers is uncountable.
+    \item
+    If $\lbrace a_n \rbrace_{n \geq 1}$ is a sequence of real numbers, then we
+say the limit of $\lbrace a_n \rbrace_{n \geq 1}$ exists and equals $a$ (i.e. $
+\lim_{n \rightarrow \infty} a_n = a$), if for all $\epsilon > 0, \exists
+N_\epsilon$ such that $\forall n \geq N_\epsilon$, $\vert a_n - a \vert
+\leq \epsilon$.
+\end{itemize}
+
+\begin{definition}
+    An experiment is the process lay which an observation is made. The set of
+all possible outcomes of an experiment form the sample space for the
+experiment. A subset of the sample space is called an event.
+\end{definition}
+
+\begin{example}
+experiments, sample space, events
+\begin{itemize}[noitemsep,topsep=0pt]
+    \item
+    \textbf{Experiment}:
+        measuring the lifetime of a cell in a continuous time unit.          \\
+    \textbf{Sample Space}: $S = [0, \infty)$                                 \\
+    \textbf{Event}:
+        $E = [1000, 2000]$ corresponds to the lifetime being in between $1000$
+        and $2000$ units.                                                    \\
+    \item
+    \textbf{Experiment}:
+        rolling a die                                                        \\
+    \textbf{Sample Space}: $S = \lbrace 1, 2, 3, 4, 5, 6 \rbrace$            \\
+    \textbf{Events}: $E = \lbrace 3 \rbrace$, $E = \lbrace 2, 4, 6 \rbrace$
+\end{itemize}
+\end{example}
+
+\begin{definition}
+    an event that contains only one sample point (i.e. corresponds to a single
+outcome) is called a \emph{simple event}. An event that is not simple is called
+a \emph{compound} event. A sample space that is finite or countably infinite is
+called a \emph{discrete} sample space.
+\end{definition}
+
+A probabilistic model for an experiment with a discrete sample space $S =
+\lbrace w_1, w_2, w_3, \dots \rbrace$ can be constructed by assigning a
+non-negative numbers $p(w_i)$ to each $w_i$, such that $\sum_{w_i
+\in S} p(w_i) = 1$. The number $p(w_i)$ is called the probability of the simple
+event $\lbrace w_i \rbrace$. Intuitively, the interpretation is that if we
+repeat the experiment $n$ times and $n_i$ is the number of times the outcome
+turns out to be $w_i$, then $\lim_{n \rightarrow \infty} \frac{n_i}{n} =
+p(w_i)$. Probability of an event $E$ is defined as $p(E) = \sum_{w_i
+\in E} p(w_i)$.
+
+\begin{example}
+probability
+\begin{itemize}[noitemsep,topsep=0pt]
+    \item
+    \textbf{Experiment}: rolling a fair die.                                 \\
+    The corresponding probabilities are given by $p(i) = \frac{1}{6}, \forall i
+    \in \mathbb{N}, 1 \leq i \leq 6$.                                        \\
+    $p(\text{even numbers} = p(\lbrace 2, 4, 6 \rbrace) = \frac{1}{6} +
+    \frac{1}{6} + \frac{1}{6} = \frac{1}{2}$.
+    \item
+    \textbf{Experiment}: tossing a fair coin twice.                          \\
+    $S = \lbrace HH, HT, TH, TT \rbrace$, $p(HH) = \frac{1}{4} = p(HT) = p(TH)
+    = P(TT)$                                                                 \\
+    $p(\text{at least one head}) = p(\lbrace HH, HT, TH \rbrace) = \frac{1}{4}
+    + \frac{1}{4} + \frac{1}{4} = \frac{3}{4}$.
+\end{itemize}
+\end{example}
+
+\begin{definition}
+    let $S$ be the sample space associated with an experiment. A probability
+$P$ on $S$ assigns to each $A \subseteq S$, a number $P(A)$, called the
+probability of the event $A$, such that
+\begin{itemize}[noitemsep,topsep=0pt]
+    \item $P(A) \geq 0$,
+    \item $P(S) = 1$,
+    \item if $A_1, A_2, A_3, \dots$ are events such that $A_i \cap A_j =
+          \emptyset \quad \forall i \neq j$, then
+          \begin{equation*}
+              P(\bigcup_{i=1}^{\infty}A_i) = \sum_{i=1}^{\infty} P(A_i)
+          \end{equation*}
+          In particular,
+          \begin{equation*}
+              P(A_1 \cup A_2 \cup \dots \cup A_n) = \sum_{i=1}^n P(A_i)
+              \text{ whenever }
+              A_i \cap A_j = \emptyset \quad \forall i \leq i < j \leq n
+          \end{equation*}
+\end{itemize}
+\end{definition}
+
+\textbf{Note} This definition also makes sense for sample space that are not
+discrete. We will work with such examples later in this course.
+
+\begin{theorem}
+some basic properties:
+\begin{enumerate}[noitemsep,topsep=0pt]
+    \item If $A \subseteq B$, then $P(A) \leq P(B)$,
+    \item $P(A^\complement) = 1 - P(A)$
+    \item $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+    \item $P(\bigcup_{i = 1}^{\infty} A_i) \leq \sum_{i=1}^{\infty} P(A_i)$.
+          In particular, $P(\bigcup_{i=1}^{n} A_i) \leq \sum_{i=1}^{n} P(A_i)$.
+    \item $P(A) = P(A \cap B) + P(A \cap B^\complement)
+                = P(A \cap B) + P(A \setminus B)$
+\end{enumerate}
+\end{theorem}
+\begin{proof}$\quad$                                                         \\
+\begin{enumerate}[noitemsep,topsep=0pt]
+\item
+    $B = A \cup (B \setminus A)$, since $A \subseteq B$. Further, $A$ and
+    $B \setminus A$ are disjoint events. Hence, by finite additivity, $P(B) =
+    P(A) + P(B \setminus A)$. Since $P(B \setminus A) \geq 0$, $P(A) \leq
+    P(B)$.
+\item
+    $S = A \cup A^\complement$ and $A$ and $A^\complement$ are disjoint. Hence,
+    $P(S) = P(A \cup A^\complement) = P(A) + P(A^\complement)$, by finite
+    additivity. Since $P(S) = 1$, $P(A^\complement) = 1 - P(A)$.
+\item
+    $A \cup B = (A \setminus B) \cup (B \setminus A) \cup (A \cap B)$, and
+    obviously, $A \setminus B$, $B \setminus A$, $A \cap B$ are mutually
+    disjoint. Hence, by finite additivity,
+    \begin{equation}
+        \label{thm-probability-basic-3-1}
+        P(A \cup B) = P(A \setminus B) + P(B \setminus A) + P(A \cap B)
+    \end{equation}
+    Further, $A = (A \setminus B) \cup (A \cap B)$. Hence,
+    \begin{equation}
+        \label{thm-probability-basic-3-2}
+        P(A) = P(A \setminus B) + P(A \cap B)
+        \Rightarrow
+        P(A \setminus B) = P(A) - P(A \cap B)
+    \end{equation}
+    Similarly,
+    \begin{equation}
+        \label{thm-probability-basic-3-3}
+        P(B \setminus A) = P(B) - P(A \cap B)
+    \end{equation}
+    Using, \ref{thm-probability-basic-3-2} and \ref{thm-probability-basic-3-3}
+    in \ref{thm-probability-basic-3-1}, we get,
+    \begin{align*}
+        P(A \cup B) &= P(A) - P(A \cap B) + P(B) - P(A \cap B) + P(A \cap B) \\
+                    &= P(A) + P(B) - P(A \cap B)
+    \end{align*}
+\item
+    Define,
+    \begin{align*}
+        B_1 &= A_1                                                           \\
+        B_2 &= A_2 \setminus A_1                                             \\
+        B_3 &= A_3 \setminus (A_1 \cup A_2)                                  \\
+            &  \dots                                                         \\
+        B_{k+1} &= A_{k+1} \setminus (A_1 \cup A_2 \cup \dots \cup A_k)      \\
+            &  \dots
+    \end{align*}
+    Note that,
+    \begin{equation}
+        \label{thm-probability-basic-4-1}
+        B_i \subseteq A_i \quad \forall i \geq 1
+    \end{equation}
+    Further, $B_j = A_j \setminus (A1 \cup \dots \cup A_{j-1})$ and $(A_1 \cup
+    \dots A_{j-1})$ are disjoint events. Hence, if $i < j$, then $B_j$ and
+    $A_1 \cup \dots \cup A_i$ are mutually disjoint as well. Since $B_i
+    \subseteq A_i \subseteq (A_1 \cup \dots A_i)$, $B_j$ and $B_i$ are disjoint
+    whenever $i < j$. Hence,
+    \begin{equation}
+        \label{thm-probability-basic-4-2}
+        B_1, B_2, B_3, \dots \text{ is a sequence of mutually disjoint events}
+    \end{equation}
+    Now,
+    \begin{equation}
+        \label{thm-probability-basic-4-3}
+        B_i \subseteq A_i \quad \forall i \geq 1
+        \Rightarrow
+        \bigcup_{i=1}^\infty B_i \subseteq \bigcup_{i=1}^\infty A_i
+    \end{equation}
+    Concisely, if $x \in \bigcup_{i=1}^\infty A_i$, then $\exists i_0 \geq 1$
+    such that $i_0$ is the smallest index for with $x \in A_{i_0}$, i.e. $x
+    \in A_{i_0}$ but $x \notin A_1 \cup \dots \cup A_{i_0 - 1} \Rightarrow x
+    \in A_{i_0} \setminus (A_1 \cup \dots \cup A_{i_0 - 1}) = B_{i_0}$. Hence,
+    \begin{equation}
+        \label{thm-probability-basic-4-4}
+        \forall x \in \bigcup_{i = 1}^\infty A_i
+        \text{ is an element of } B_{i_0}
+        \text{ for some } i_0
+        \Rightarrow
+        \bigcup_{i=1}^\infty A_i \subseteq \bigcup_{i=1}^\infty B_i
+    \end{equation}
+    Combing \ref{thm-probability-basic-4-3} and \ref{thm-probability-basic-4-4}
+    we get,
+    \begin{equation*}
+        \bigcup_{i=1}^\infty A_i = \bigcup_{i=1}^\infty B_i
+    \end{equation*}
+    Since $B_i \quad \forall i \geq 1$ are mutually disjoint,
+    \begin{equation*}
+        P(\bigcup_{i=1}^\infty A_i) = P(\bigcup_{i=1}^\infty B_i)
+                                    = \sum_{i=1}^\infty P(B_i)
+                                    \leq \sum_{i=1}^\infty P(A_i)
+    \end{equation*}
+    where the last step uses the fact that $B_i \subseteq A_i$ and hence
+    $P(B_i) \leq P(A_i)$.
+\item
+    \begin{itemize}[noitemsep,topsep=0pt]
+    \item $P(A) = P(A \cap B) + P(A \cap B^\complement)$                     \\
+    We want to show that $A \cap B$ and $A \cap B^\complement$ are disjoint.
+    Assume the opposite, there exist a $x \in A \cap B$ and $x \in A \cap
+    B^\complement$. But we have,
+    \begin{equation*}
+        \begin{cases}
+        x \in A \cap B &\Rightarrow x \in A \land x \in B                    \\
+        x \in A \cap B^\complement &\Rightarrow x \in A \land x \in
+            B^\complement
+        \end{cases} \Rightarrow
+        x \in B \land x \in B^\complement
+    \end{equation*}
+    By contradiction, we show that $A \cap B$ and $A \cap B^\complement$ are
+    actually disjoint set. Obviously we have $A = (A \cap B) \cup (A \cap
+    B^\complement)$. Thus, by finite additivity, we have $P(A) = P(A \cap B) +
+    P(A \cap B^\complement)$.
+    \item $P(A) = P(A \cap B) + P(A \setminus B)$                            \\
+    Note that $A \setminus B = A \cap (B^\complement)$. Thus, it is equivalent
+    to the equality that we showed above.
+    \end{itemize}
+\end{enumerate}
+\end{proof}

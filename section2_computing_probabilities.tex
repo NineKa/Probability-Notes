@@ -1,0 +1,65 @@
+\section{Computing Probabilities}
+\paragraph{Recall}
+For a discrete sample space $S = \lbrace w_1, w_2, w_3, \dots \rbrace$,
+probability of any event $E$, $P(E)$ is given by 
+\begin{equation*}
+    P(E) = \sum_{w_i \in E} P(\lbrace w_i \rbrace)
+\end{equation*}
+So given an experiment, in order to compute probabilities of events, one can
+first compute the probability of each sample point (i.e. $P(\lbrace w_i
+\rbrace)$, and then for any event $E$, $P(E)$ will be given by sum of the
+probabilities of sample points that are elements of $E$ (i.e. using the
+equation above).
+
+\paragraph{Special case}: If the sample space $S$ is finite and each outcome is
+equally likely, then $\forall w \in S$, 
+\begin{equation*}
+    P(\lbrace w \rbrace) = \frac{1}{\vert S \vert}
+\end{equation*}
+Hence, 
+\begin{equation*}
+    P(E) = \frac{\vert E \vert}{\vert S \vert} \quad \forall E \subseteq S
+\end{equation*}
+
+\begin{example}
+    Products manufactured in a facility are tested for defects. Historical
+records indicate that $8\%$ of products have a type A defect, $6\%$ have a type
+B defect, and $2\%$ have both type of defects. If one item is chosen at random,
+what is the probability that, 
+\begin{enumerate}[noitemsep,topsep=0pt]
+    \item it has exactly one type of defect?
+    \item it is not defective?
+\end{enumerate}
+\paragraph{Solution} Let $A$ denote the event that the item has a type A
+defect, and let $B$ denote the item has a type B defect. Then, $P(A) = 0.08$,
+$P(B) = 0.06$ and $P(A \cap B) = 0.02$.
+\begin{enumerate}[noitemsep,topsep=0pt]
+\item
+    The event that the item has exactly one type of defect is represented by, 
+    \begin{align*}
+        A \triangle B &= (A \setminus B) \cup (B \setminus A)                \\
+        P(A \setminus B) &= P(A) - P(A \cap B)                               \\
+        P(B \setminus A) &= P(B) - P(A \cap B)
+    \end{align*}
+    Since $A \setminus B$ and $B \setminus A$ are disjoint, 
+    \begin{align*}
+        P(A \triangle B) &= P(A \setminus B) + P(B \setminus A)              \\
+                         &= P(A) + P(B) - 2 P(A \cap B)                      \\
+                         &= 0.08 + 0.06 - 2 \cdot 0.02 = 0.1
+    \end{align*}
+\item
+    The event that the item is not defective is given by $(A \cup
+    B)^\complement$. Now,
+    \begin{align*}
+        P(A \cup B) &= P(A) + P(B) - P(A \cap B)                             \\
+                    &= 0.08 + 0.06 - 0.02                                    \\
+                    &= 0.12
+    \end{align*}
+    Hence, 
+    \begin{align*}
+        P((A \cup B)^\complement) &= 1 - P(A \cup B)                         \\
+                                  &= 1 - 0.12                                \\
+                                  &= 0.88
+    \end{align*}
+\end{enumerate}
+\end{example}
