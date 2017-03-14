@@ -1,13 +1,14 @@
 sudo: required
 dist: trusty
 before_install:
-- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
+- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended
+  texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
 script:
 - make note
 deploy:
   provider: releases
   api_key:
-    secure: Z5rRdUWrKUpXNhW7fZQPEk2ORSkt25Buqms1SZiItNmAoD3InOmMKJd6EFhzCj8PnDlycK/gM9dFD2OTrgwzUOGGjegaCyEHxLJ9hYfwEswx/NxoZwFhw8yPIOsAmoOa4nRaWuvdmmf6ik+SBzNU0yXuhotzgPzO2q14VkaEN0F1FbGvJXJP8irJK/UVNnFUyfY59EgxWhb6/woQc+1Use93yH4n7WL5GOKfUKzJVWid41YmQ2q/edeocShCXNbUICJwwwZCk4eS9vcOZ9kA9mxDBHd61BQgiEGAzZk0W40t2FfLQFfg31mdx+8T03Cd8xzBQZYySe/j7q68c0hJs+bdrbwfPDJ9t9XLzIjCjjqe/b4n0GZSvj3pVFy2wOqR1AkgRCAXINORc6EkWPEeskgj0rHVPGE+O3g6yAICpd5MZ0vBFZxaTpZ33jgzs4KQp2KsejtAC+6Ri97Ig29jTsFTchZ3UcVnxxaWssHScHZBbb3xmgBmcu/5W5oJiiqfDprLdr4Kmpb3uohFMBADOeU86mwVOYt1zbOUCcsa7d2pcEAsCGCX9rmuKRyF6hcg0EbWtvdaHsQTYxJm8PqJQd3e1UPRm7bKaIi4Cpw8ELJMQgkoIs76xljZgaYvLAA25pzM58ny5vQv6edwJnvkAsMKJSpKENMrf/v+vTHj/Gs=
-  file: ./target/probability_notes.pdf
+    secure: xUHo+oIBaxGmsLgeOUVLcVuKn8BXHPq2TQUDrpywGiHeKk0Cwd6lvK1qcvzy3ikh/QBIG8Ws6j6rLlo0DDu7+429drEvlugRwbbem1bNpowPm4rEPlvIq/K/K4wvBMmd9mHGtpSJcsjjw7uKaFusTEvSVWSfgW/gGEo+7k2Jl6U0wiXMmkSk+DbE0QGYHXbbvYGsslkW+nIBnyVkMOR1RVKpUm0I/oPr0BrCdkhcGG2zAaabYZRXSl0LAV/5mblchnETTqbPTFTstwwoKGCmPyLed6anYoVpVSIHJYSD8IHuc+9cFSmTudRu0JM0ijs76G60kbYC9pz4IncflciG0qo8FpocmFjjn5equO3mVkMWEswDZYq98XFeJnHUOqpmKF3X5mpTIYEJPjmu9S/xotccmmdFXfrWDTkJCHpIZyjOPKO7VGcMq+Jw7WMmnJPA/eSNhss48PYJ1ZuiCA6Wkb8Pd9J5tHEdDs6b+H63qMX8KbWF2kkdN/Pu3E5+agVag5GMzXiZwRTrrd21hZ6l4OkF5IymLlFD6/khwjDrAYHppceaGTS20O8xx1Ojv9OlDEUsdYRBsXRfziyfR+4AvoQftjjQGxwedJN9QueZ9Yfp4l+ZGqjeUTsOozcEmb723KVQHQJ1CEIiC5yUI/mTGn1M7GHDBQJQUp9AGYjbmxI=
+  file: probability_notes.pdf
   on:
     repo: NineKa/Probability-Notes
