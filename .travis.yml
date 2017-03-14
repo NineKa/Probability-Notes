@@ -5,7 +5,7 @@ before_install:
   texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
 script:
 - mkdir _build
-- cp -a ./tex/ ./
+- cp -a ./tex/* ./
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory _build probability_notes.tex
 deploy:
   provider: releases
