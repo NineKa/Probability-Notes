@@ -1,5 +1,5 @@
-note:	*.tex
+note:	./tex/*.tex
 	mkdir -p ./target
-	pdflatex -halt-on-error -output-directory ./target probability_notes.tex
+	cd ./tex/ && pdflatex -halt-on-error -output-directory ../target probability_notes.tex
 clean:
 	rm -rf ./target/
