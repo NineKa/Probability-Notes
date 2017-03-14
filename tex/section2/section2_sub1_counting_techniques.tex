@@ -1,0 +1,396 @@
+\subsection{Counting Techniques}
+Suppose you have to complete two tasks. If Task 1 can be completed in $n_1$
+ways, and for each of these $n_1$ possibilities, Task 2 can be completed in
+$n_2$ ways, then the total number of ways the two tasks can be completed is
+$n_1 \cdot n_2$.
+\begin{example}
+Toss a coin and roll a die simultaneously. The former can have two outcomes,
+and for each of these, the latter can have six outcomes. Thus, the total number
+of possible outcomes is $2 \times 6 = 12$. 
+\end{example}
+
+\noindent \textbf{Recall} for any $n \in \mathbb{N}$, $n! = 1 \times 2 \times
+\dots \times n$, and $0! = 1$ by definition. 
+
+\begin{theorem}
+    If we are given $n$ distinct objects and $m$ distinct boxes each of which
+can hold one object and $n \leq m$, then the number of ways of filling up the
+boxes is, 
+\begin{equation*}
+    \perm[n]{m} = \frac{n!}{(n - m)!}
+\end{equation*}
+\end{theorem}
+\begin{proof}
+    The first box can be filled up in $n$ ways. For each of these $n$ ways, the
+second box can be filled up in $n - 1$ ways (by using any of the remaining $n
+- 1$ objects). Thus the first two boxes can be filled up in $n \cdot (n - 1)$
+ways. For each of these $n \cdot (n - 1)$ ways, the third box can be filled up
+in $(n - 2)$ ways. Thus, the first $3$ boxes can be filled up in $n \cdot (n -
+1) \cdot (n - 2)$ ways. Continuing like this, the $m$ boxes can be filled up
+in, 
+\begin{equation*}
+    n \cdot (n-1) \cdot \dots \cdot (n - m + 1) = \frac{n!}{(n - m)!}
+\end{equation*}
+\end{proof}
+
+\begin{example}
+The papers from $3$ different exams need to be graded. $5$ graders are
+available for this job. Each exam requires only one grader. Then the number of
+ways of assigning graders to different exams is, 
+\begin{equation*}
+    \perm[5]{3} = \frac{5!}{(5 - 3)!} = 60
+\end{equation*}
+\end{example}
+
+\begin{theorem}
+    If $r \leq n$, the number of ways of selecting an unordered sample of $r$
+objects from a total of $n$ distinct objects is,
+\begin{equation*}
+    \comb[n]{r} = \frac{n!}{(n - r)!r!}
+\end{equation*}
+This is also denoted by $n \choose r$.
+\end{theorem}
+\begin{proof}
+    Suppose this can be done in $m$ ways. Now if we had $r$ distinct boxes,
+then we could fill them up in two steps:
+\begin{enumerate}[noitemsep,topsep=0pt]
+\item 
+    select an unordered sample of size $r$ from the $n$ distinct objects.
+    This can be done in $m$ ways.
+\item
+    use these $r$ objects to fill up the $r$ boxes by putting one object in
+    each box. This can be done in $\perm[r]{r}$ ways.
+\end{enumerate}
+Thus the total number of ways of filling up those $r$ boxes is $m \cdot
+r!$. Hence,
+\begin{equation*}
+    m \cdot r! = \perm[n]{r} = \frac{n!}{(n - r)!}
+    \Rightarrow
+    m = \frac{n!}{(n - r)!r!}
+\end{equation*}
+\end{proof}
+
+\begin{example}
+    A committee of $3$ is to be formed from a group of $10$ people. How many
+different committees are possible?
+\end{example}
+\begin{solution}
+    Number of different committees is,
+    \begin{equation*}
+        {10 \choose 3} = \frac{10 \cdot 9 \cdot 8}{3 \cdot 2 \cdot 1} = 120
+    \end{equation*}
+\end{solution}
+
+\noindent \textbf{Recall} ${n \choose r}$ is the coefficient of $x^r$ in the
+expansion of $(1+x)^n$,
+\begin{equation*}
+    (1+x)^n = \sum_{r = 0}^n {n \choose r} x^r
+\end{equation*}
+These are called binomial coefficients. 
+
+\begin{theorem}
+    The number of ways of partitioning $n$ distinct objects into $k$ distinct
+groups containing $n_1, n_2, \dots, n_k$ object respectively where $n_1 +
+\dots + n_k = n$ is,
+\begin{equation*}
+    {n \choose {n_1, n_2, \dots, n_k}} = 
+    \frac{n!}{n_1! \cdot n_2! \cdot \cdots \cdot n_k!}
+\end{equation*}
+\end{theorem}
+\begin{proof}
+    The first group can be formed in $n \choose n_1$ ways. For each of these
+$n \choose n_1$ possibilities, the second group can be formed in ${n - n_1}
+\choose n_2$ many ways. Continuing like this, the total number of ways of
+partitioning the $n$ objects into $k$ groups is, 
+\begin{align*}
+    &{n \choose n_1} \cdot {{n - n_1} \choose n_2} \cdot
+    {{n - n_1 - n_2} \choose n_3} \cdot \dots \cdot 
+    {{n - n_1 - n_2 - \dots - n_{k-1}} \choose n_k}                          \\
+    =& \frac{n!}{n_1!(n-n_1)!} \cdot \frac{(n - n_1)!}{n_2! (n - n_1 - n_2)!}
+       \cdot \frac{(n - n_1 - n_2)!}{n_3!(n - n_1 - n_2 - n_3)!} \cdot
+       \dots \cdot \frac{(n - n_1 - \dots - n_{k-1})!}{n_k! (n - \sum_{i=1}^k
+       n_i)!}                                                                \\
+    =& \frac{n!}{n_1! \cdot n_2! \cdot \dots \cdot n_k!}
+\end{align*}
+\end{proof}
+
+\begin{example}
+    $4$ people get into an elevator, and each of them can get one of $10$
+floors. Assuming each person gets off at a random floor, what is the
+probability that no two get off at the same floor?
+\end{example}
+
+\begin{solution}
+    Let $S$ be the sample space and $E$ denote the event that no two get off at
+the same floor. The first person can get off at any of the $10$ floors. For
+each of these $10$ possibilities, the second person can get off at any of the
+$10$ floors and so on. Hence,
+    \begin{equation*}
+        \vert S \vert = 10 \times 10 \times 10 \times 10 = 10^4
+    \end{equation*}
+    Each of these outcomes is equally likely. And, 
+    \begin{equation*}
+        \vert E \vert = \perm[10]{4} = 10 \times 9 \times 8 \times 7
+    \end{equation*}
+    Hence required probability is, 
+    \begin{equation*}
+        P(E) = \frac{\vert E \vert}{\vert S \vert} 
+             = \frac{10 \times 9 \times 8 \times 7}{10^4}
+             = \frac{63}{125}
+    \end{equation*}
+\end{solution}
+
+\textbf{Note} This is similar to the birthday problem (Example 2.7 of
+textbook).
+
+\begin{example}
+    A committee of $5$ is to be selected from a group of $6$ men and $9$ women.
+If the selection is made randomly, what is the probability that the committee
+consists of $3$ men and $2$ women?
+\end{example}
+\begin{solution}
+    Let $S$ be the sample space and $E$ denote the event that the committee
+consists of $3$ men and $2$ women. Then $\vert S \vert = {15 \choose 5}$. Each
+of these outcomes is equally likely. And, $\vert E \vert = {6 \choose 3} \cdot
+{9 \choose 2}$. Hence, required possibility is, 
+\begin{equation*}
+    P(E) = \frac{\vert E \vert}{\vert S \vert}
+         = \frac{{6 \choose 3} \cdot {9 \choose 2}}{{15 \choose 5}}
+         = \frac{240}{1001}
+\end{equation*}
+\end{solution}
+
+\begin{example}
+    A $5$-card poker hand is said to be a full house if it consists of $3$ card
+s of the same denomination and $2$ other cards of the same denomination (the
+two denominations are necessarily different). If a $5$-card hand is dealt out
+randomly, what is the probability that it is a full house?
+\end{example}
+\begin{solution}
+    Obviously, $\vert S \vert = {52 \choose 5}$. Each of these outcomes is
+equally likely. In order to get a full house, the two denominations can be
+chosen in $13 \cdot 12$ ways, and then the suits can be chosen in ${4 \choose
+3} \cdot {4 \choose 2}$ ways. Hence,
+\begin{equation*}
+    \vert E \vert = 13 \cdot 12 \cdot {4 \choose 3} \cdot {4 \choose 2}
+\end{equation*}
+And the required probability, 
+\begin{equation*}
+    P(E) = \frac{\vert E \vert}{\vert S \vert}
+         = \frac{13 \cdot 12 \cdot {4 \choose 3} \cdot {4 \choose 2}}{{52
+           \choose 5}}
+         = \frac{6}{4165}
+\end{equation*}
+\end{solution}
+
+\begin{example}
+    \emph{(Exercise 2.64 of textbook)} A balanced die is tossed six times, and
+the numbers on the uppermost face is recorded each time. What is the
+probability that the numbers recorded are $1, 2, 3, 4, 5$ and $6$ in any order?
+\end{example}
+\begin{solution}
+    The first toss can result in any of the $6$ faces. For each of them, the
+second toss can result in any of the $6$ faces and so on. Hence, $\vert S
+\vert = 6^6$, and each of the outcomes is equally likely. And, $\vert E \vert
+= 6!$. Hence, the required probability is, 
+\begin{equation*}
+    P(E) = \frac{\vert E \vert}{\vert S \vert} 
+         = \frac{6!}{6^6} 
+         = \frac{5}{324}
+\end{equation*}
+\end{solution}
+
+\begin{theorem}
+    Suppose $k \geq 1$ and $r \geq 0$ are integers, then the number of
+nonnegative integer solutions $(x_1, x_2, \dots, x_k)$ to
+\begin{equation}
+    \label{thm-counting-tech-1-1}
+    x_1 + x_2 + \dots + x_k = r
+\end{equation}
+is ${{r + k - 1} \choose {k - 1}} = {{r + k - 1} \choose {n}}$.
+\end{theorem}
+\begin{proof}
+    If we expand $(1 + x + x^2 + \dots)^k$ into a power series, then each term
+will be a monomial of the form $x^{n_1} \cdot x^{n_2} \cdot \dots \cdot
+x^{n_k} = x^{n_1 + \dots + n_k}$. Hence the numbers of non-negative integer
+solutions to \ref{thm-counting-tech-1-1} above is same as the coefficient of
+$x^r$ in the expansion of $(1 + x + x^2 + \dots)^k = (1 - x)^{-k}$, which
+equals ${{r + k - 1} \choose {k - 1}}$ (recall the negative binomial series).
+\end{proof}
+
+\begin{example}
+    If $P(A) = 0.8$, and $P(B) = 0.7$, then
+    \begin{enumerate}[noitemsep,topsep=0pt]
+        \item What is the largest possible value of $P(A \cap B)$?
+        \item What is the smallest possible value of $P(A \cap B)$?
+    \end{enumerate}
+\end{example}
+\begin{solution} \quad                                                       \\
+    \begin{enumerate}[noitemsep,topsep=0pt]
+        \item 
+        $P(A \cap B) \leq P(B)$, (since $A \cap B \subseteq B$) and similarly, 
+        $P(A \cap B) \leq P(A)$. Hence $P(A \cap B) \leq \min{\lbrace P(A),
+        P(B) \rbrace} = 0.7$.
+        \item
+        \begin{align*}
+                        & P(A \cup B) = P(A) + P(B) - P(A \cap B)            \\
+            \Rightarrow & P(A) + P(B) - P(A \cap B) \leq 1                   \\
+            \Rightarrow & P(A \cap B) \geq P(A) + P(B) - 1 = 0.5
+        \end{align*}
+    \end{enumerate}
+\end{solution}
+
+\begin{example}
+    A deck of $52$ cards is shuffled, and the cards are turned up one at a
+time. What is the probability that a card with face value $4$ appears before
+any card with face value $5$?
+\end{example}
+\begin{solution}
+    Let $C$ denote the set of cards. The sample space $S$ consists of all $52!$
+arrangements of the cards. Further let $E_1$ be the event that a card with face
+value $4$ appears before a card with face value $5$, and $E_2$ be the event
+that a card with face value $5$ appears before a card with face value $4$.
+Then, 
+\begin{equation}
+    \label{thm-counting-tech-2-1}
+    E_1 \cup E_2 = S \text{ and } E_1 \cap E_2 = \emptyset
+\end{equation}
+Let $\phi : C \rightarrow C$ be the map that takes $4$ of any suit to $5$ of
+that suit, and $5$ of any suit to $4$ of that suit, and leaves the reset of
+cards fixed. Then $\phi$ is a bijection between $E_1$ and $E_2$. Hence $\vert
+E_1 \vert = \vert E_2 \vert \Rightarrow P(E_1) = \frac{\vert E_1 \vert}{\vert
+S \vert} = \frac{\vert E_2 \vert}{\vert S \vert} = P(E_2)$. Since,
+\begin{align*}
+    1 &= P(S)                                                                \\
+      &= P(E_1 \cup E_2)                                                     \\
+      &= P(E_1) + P(E_1)     &\text{(because of \ref{thm-counting-tech-2-1})}
+\end{align*}
+We have, $2 \cdot P(E_1) = 1 \Rightarrow P(E_1) = \frac{1}{2}$.
+\end{solution}
+
+\begin{example}
+    Mary will go to a parity of either Tim, Jim, or Pim goes.
+    \begin{align*}
+        P(\text{Tim going}) &= 0.15                                          \\
+        P(\text{Jim going}) &= 0.10                                          \\
+        P(\text{Pim going}) &= 0.05
+    \end{align*}
+    Would you say Mary will go to the party with probability at least
+    $\frac{1}{2}$?
+\end{example}
+\begin{solution}
+    Let $T$ denote the event that Tim goes to the party, $J$ denote the event
+that $Jim$ goes to the party, and $P$ denote the event that Pim goes to the
+party. Then, 
+\begin{align*}
+    P(\text{Mary goes to the party}) &= P(T \cup J \cup P)                   \\
+                                     &\leq P(T) + P(J) + P(P)                \\
+                                     &= 0.30
+\end{align*}
+The answer is no.
+\end{solution}
+
+\begin{example}
+    A football team consists of $20$ offensive and $20$ defensive players. THe
+players are to be paired in groups of $2$ for the purpose of determining
+roommates. If the pairing is done at random, what is the probability that there
+are probability that there are no defensive-offensive roommate pairs?
+\end{example}
+\begin{solution}
+    Let $S$ be the set of ways of pairing $40$ players into $20$ unordered
+groups of size $2$ each, then 
+\begin{equation*}
+    \vert S \vert 
+    = \frac{{40 \choose {2, 2, \dots, 2}}}{20!}
+    = \frac{40!}{2^{20} \cdot 20!}
+\end{equation*}
+In order for no offensive-defensive pairing to happen, the defensive players
+need to be paired among themselves, and the offensive players need to be paired
+among themselves. This can be done in,
+\begin{equation*}
+    \frac{{20 \choose {2, 2, \dots, 2}}}{10!} \cdot \frac{{20 \choose {2, 2,
+    \dots, 2}}}{10!}
+    = \frac{(20!)^2}{(2^{10} \cdot 10!)^2}
+    = \frac{(20!)^2}{2^{20} \cdot (10!)^2}
+\end{equation*}
+\end{solution}
+\begin{solution}
+    Rank the players $1$ through $40$. To pair up $40$ players into $20$
+groups, the first players can be paired up in $39$ ways. Once this has
+happened, the players with the smallest rank among the remaining $38$ players
+can be paired up in $37$ ways. In the next step, the player with the smallest
+rank among the remaining $36$ players, can be paired up in $35$ ways and so on.
+Hence, 
+\begin{equation*}
+    \vert S \vert = 39 \cdot 37 \cdot 35 \cdot \dots \cdot 3 \cdot 1
+\end{equation*}
+    By the same argument, players can be paired up so that there are no
+offensive-defensive pairs in $(19 \cdot 17 \cdot \dots \cdot 3 \cdot 1)^2$ many
+ways. Thus, the required probability is, 
+\begin{equation*}
+    P(\text{no defensive-offensive pairs}) = 
+    \frac{(19 \cdot 17 \cdot \dots \cdot 3 \cdot 1)^2}
+         {39 \cdot 37 \cdot 35 \cdot \dots \cdot 3 \cdot 1}
+\end{equation*}
+\end{solution}
+
+Now suppose the problem had been posed like this:
+\begin{example}
+    A football team consists of $20$ offensive and $20$ defensive players. A
+travel agency has booked $20$ rooms in a hotel for the football team. The
+players are to be paired in groups of $2$ and each pair will share one hotel
+room. If the players are paired and each pair is assigned a hotel room all at
+random, then what is the probability that there are no defensive-offensive
+roommate pairs?
+\end{example}
+\noindent \textbf{Note}: for this problem, because the hotel room, a roommate
+pair checks into, is taken into account, the sample space will consist of
+elements each of which is an ordered collection of $20$ roommate pairs. So the
+sample space would be different. However, the probability of the required event
+is still the same. This is because of the following reason:
+
+An ordered group of $20$ roommate pairs can be formed in two steps:
+\begin{enumerate}[noitemsep,topsep=0pt]
+    \item form an unordered group of $20$ roommate pairs
+    \item order them in $20!$ possible ways. 
+\end{enumerate}
+
+Thus, when computing the required probability, the factor of $20!$ will cancel
+out in the numerators and the denominators, leading to the same answer. But one
+can also use a slightly different counting technique to get to the same answer.
+\begin{solution}
+    Let $S$ denotes the set of ways of pairing $40$ players into $20$ ordered
+groups of size $2$ each. Then,
+\begin{equation*}
+    \vert S \vert = {{40} \choose {2, 2, \dots, 2}} = \frac{40!}{2^{20}}
+\end{equation*}
+
+    The offensive players can be paired among themselves into $10$ ordered
+groups in $\frac{20!}{2^{10}}$ ways, and same for defensive players. Now we
+would like to merge the ordered collection of $10$ offensive-offensive pairs
+with the ordered collection of $10$ defensive-defensive pairs, to get one
+ordered collection of $20$ roommate pairs. 
+
+    Pictorially this is same as having $10$ numbered sticks and $10$ numbered
+balls, and we want to insert the sticks in to $11$ possible places marked in
+the picture. Keeping the relative position of the sticks unchanged (i.e., stick
+$2$ will be inserted in a place to the right of stick $1$ etc.)
+\begin{figure}[H]
+    \centering
+    \includesvg[./section2/figure/]{sec2-sub1-fig1}
+\end{figure}
+letting $x_k$ be the number of sticks inserted at mark $k$, we see that the
+number of ways done is same as the number of nonnegative integer solutions to
+$x_1 + x_2 + \dots + x_{11} = 10$, which equals ${{10 + 11 - 1} \choose {11 -
+1}} = {20 \choose 10}$. Hence the required probability is,
+\begin{equation*}
+    P(\text{no defensive-offensive pairs}) 
+    = \frac{\frac{20!}{2^{10}} \cdot
+            \frac{20!}{2^{10}} \cdot
+            {20 \choose 10}}
+           {\frac{40!}{2^{20}}}
+    = \frac{(20!)^3}{(10!)^2 \cdot 40!}
+\end{equation*}
+
+    Same as before.
+\end{solution}

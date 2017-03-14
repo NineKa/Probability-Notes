@@ -1,5 +1,7 @@
 /target/
+/tex/.texpadtmp/
 /.texpadtmp/
+
 .DS_Store
 
 *.pdf

@@ -1,0 +1,49 @@
+\subsection{Multiplicative Law of Probability}
+If $P(B) > 0$, then $P(A \cap B) = P(B) \cdot P(A \vert B)$. Similarly, if
+$P(A) > 0$, then $P(A \cap B) = P(A) \cdot P(B \vert A)$. Using this
+repeatedly,
+\begin{align*}
+    P(A_1 \cap A_2 \cap \dots \cap A_k) 
+    &= P(A_k \vert A_1 \cap A_2 \cap \dots \cap A_{k-1}) \cdot
+       P(A_1 \cap \dots \cap A_{k-1})                                        \\
+    &= P(A_k \vert A_1 \cap A_2 \cap \dots \cap A_{k-1}) \cdot
+       P(A_{k-1} \vert A_1 \cap A_2 \cap \dots \cap A_{k-2}) \cdot
+       P(A_1 \cap \dots \cap A_{k-2})                                        \\
+    &\dots                                                                   \\
+    &= P(A_k \vert A_1 \cap A_2 \cap \dots \cap A_{k-1}) \cdot
+       P(A_{k-1} \vert A_1 \cap A_2 \cap \dots \cap A_{k-2}) \cdot
+       \dots \cdot
+       P(A_2 \vert A_1) \cdot
+       P(A_1)
+\end{align*}
+provided with $P(A_1 \cap \dots \cap A_{k-1}) > 0$.
+
+\begin{example}
+    A student estimates his probability of receiving an A grade to be
+$\frac{1}{2}$ in a French elective course and $\frac{2}{3}$ in a chemistry
+course. He has to take exactly one of these courses. If he decides to make his 
+decision on the flip of a fair coin, what is the probability that he takes
+chemistry and gets an A?
+\end{example}
+\begin{solution}
+    Let $C$ be the events that the student takes chemistry course, and $A$ be
+the events that the student is getting an A. Then, 
+\begin{equation*}
+    P(A \cap C) = P(C) \cdot P(A \vert C)
+                = \frac{1}{2} \cdot \frac{2}{3}
+                = \frac{1}{3}
+\end{equation*}
+\end{solution}
+
+\begin{example}
+    If $P(B) > 0$, show that $P(A^\complement \vert B) = 1 - P(A \vert B)$.
+\end{example}
+\begin{solution}
+    \begin{equation*}
+        P(A^\complement \vert B) 
+        = \frac{P(A^\complement \cap B)}{P(B)}                              
+        = \frac{P(B) - P(A \cap B)}{P(B)}                                   
+        = 1 - \frac{P(A \cap B)}{P(B)}                                      
+        = 1 - P(A \vert B)
+    \end{equation*}
+\end{solution}

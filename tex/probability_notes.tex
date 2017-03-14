@@ -6,6 +6,10 @@
 \usepackage{amsthm}
 \usepackage{enumitem}
 \usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{import}
+\usepackage{float}
 
 \theoremstyle{definition}
 \newtheorem{theorem}{Theorem}[section]
@@ -15,13 +19,15 @@
 \newcommand\perm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
 \newcommand\comb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
 
-\newenvironment{solution}[1][\proofname]{%
-  \proof[\ttfamily \scshape \large Solution.]%
+\newenvironment{solution}[1][\proofname]{
+  \proof[\ttfamily \scshape \large Solution.]
 }{\endproof}
 
-\begin{document}
+\newcommand{\includesvg}[2][]{
+  \subimport{#1}{#2.pdf_tex}
+}
 
-\input{section1_experiments_samplespace_events_and_probability}
-\input{section2_computing_probabilities}
-\input{section3_conting_techniques}
+\begin{document}
+\input{section1/section1_experiments_samplespace_events_and_probability}
+\input{section2/section2_computing_probabilities}
 \end{document}
