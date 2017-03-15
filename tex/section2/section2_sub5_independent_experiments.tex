@@ -1,0 +1,106 @@
+\subsection{Independent Experiments}
+\begin{definition}
+    Two experiments $E_1$ and $E_2$ conducted jointly are said to have been
+conducted independently if the following holds. If $A_1$ is any event whose
+occurrence depends only on the outcome of $E_1$ and $A_2$ is any event whose
+occurrence depends only of $E_2$, then $A_1$ and $A_2$ are independent.
+\end{definition}
+Can be generalized to countably many experiments.
+
+\begin{example}
+    Toss a fair coin three times independently. $P(\text{three tails}) =
+(\frac{1}{2})^3 = \frac{1}{8}$.
+\end{example}
+
+\begin{example}
+    Toss a fair coin and roll a fair die independently. What is
+$P(\lbrace \text{tails} \rbrace \cap \lbrace \text{even numbers from
+die} \rbrace)$?
+\end{example}
+\begin{solution}
+    \begin{equation*}
+        P(\lbrace \text{tails} \rbrace \cap \lbrace \text{even numbers from
+          die} \rbrace)
+        = P(\lbrace \text{tails} \rbrace) \cdot
+          P(\lbrace \text{even numbers from die} \rbrace)
+        = \frac{1}{2} \cdot \frac{1}{2}
+        = \frac{1}{4}
+    \end{equation*}
+\end{solution}
+
+\begin{example}[exercise 2.119 of textbook]
+    Two fair dice are tossed repeatedly and the sum of the two uppermost faces
+is determined on each toss. What is the probability that we obtain a sum of $3$
+before obtaining a sum of $7$?
+\end{example}
+\begin{solution}
+    The experiment is rolling two dice independently countably infinitely many
+times, and notice the sum of the two uppermost faces. Let $E_{3, i}$ be the
+event that we get a sum of $3$ in the $i$-th toss. Let $E_{7, i}$ be the event
+that we get a sum of $7$ in the $i$-th toss. Let $F_i$ be the event that we get
+a sum that is not $3$ nor $7$ in the $i$-th toss. Then, 
+\begin{align*}
+    P(E_{3, i}) &= \frac{2}{36} = \frac{1}{18} \quad \forall i \geq 1        \\
+    P(E_{7, i}) &= \frac{6}{36} = \frac{1}{6}  \quad \forall i \geq 1        \\
+    P(F_i)     &= 1 - P(F_{3, i}) - P(F_{7, i}) = \frac{7}{9}
+\end{align*}
+\begin{align*}
+       P(\text{sum of $3$ before sum of $7$})
+    &= P(E_{3, 1}) + P(F_1 \cap E_{3, 2}) + P(F_1 \cap F_2 \cap E_{3, 3}) +
+       \dots                                                                 \\
+    &= P(E_{3, 1}) + P(F_1) \cdot P(E_{3, 2}) + P(F_1) \cdot P(F_2) \cdot
+       P(E_{3, 3}) + \dots                                                   \\
+    &= \sum_{i = 0}^\infty (\frac{7}{9})^i \cdot \frac{1}{18}                \\
+    &= \frac{1}{18} \cdot \frac{1}{1 - \frac{7}{9}}
+     = \frac{1}{18} \cdot \frac{9}{2}
+     = \frac{1}{4}
+\end{align*}
+\end{solution}
+
+\begin{example}[exercise 2.154(b) of textbook]
+    A drawer contains $n$ different pairs of socks. The two socks making up a
+matching pair are distinguishable. A person selects $2r$ many socks at random,
+where $2r < n$. What is the probability that there is no matching pair in the
+sample?
+\end{example}
+\begin{solution}
+    As, $\vert S \vert = {{2n} \choose {2r}}$, and $\vert E \vert = {{n}
+\choose {2r}} \cdot 2^{2r}$ (choose $2r$ pairs and then select one of the two
+socks in each pair). Thus, the required probability is,
+\begin{equation*}
+       P(\text{no matching pair})
+    = \frac{{{n} \choose {2r}} \cdot 2^{2r}}{{{2n} \choose {2r}}}
+\end{equation*}
+\end{solution}
+
+\begin{example}[exercise 2.181 of textbook]
+    Suppose that $n$ indistinguishable balls are to be arranged in $N$
+distinguishable boxes. If $n \geq N$ and all arrangements are equally likely,
+then show that the probability of no box being empty is given by
+$\frac{{{n-1} \choose {N - 1}}}{{{N + n -1} \choose {N - 1}}}$
+\end{example}
+\begin{solution}
+    Since the ball are indistinguishable. The sample space $S$ is given by,
+    \begin{equation*}
+        S = \lbrace (x_1, x_2, \dots, x_N) \vert x_i \text{ are nonnegative
+                    integers such that } \sum_{i = 1}^N x_i = n \rbrace
+    \end{equation*}
+    Here $x_i$ represents the number of balls in box $i$. Hence, $\vert S
+\vert = {{N + n - 1} \choose {N - 1}}$. If $E$ is the event that no box is
+empty, then $\vert E \vert$ equals the number of positive integer valued
+solutions to,
+    \begin{equation}
+        \label{thm-counting-tech-5-1}
+        x_1 + x_2 + \dots + x_N = n
+    \end{equation}
+    Let $y_i = x_i - 1$. Then $y_i \geq 0$. The number of positive
+integer-valued solutions to \ref{thm-counting-tech-5-1} above is same as the
+number of nonnegative integer-valued solution to $y_1 + y_2 + \dots + y_N = n
+- N$. Hence, $\vert E \vert = {{n -N + N - 1} \choose {N - 1}} = {{n - 1}
+\choose {N - 1}}$. Thus the required probability is, 
+    \begin{equation*}
+          P(\text{no ox being empty}) 
+        = \frac{\vert E \vert}{\vert S \vert}
+        = \frac{{{n - 1}\choose {N - 1}}}{{{N + n - 1} \choose {N - 1}}}
+    \end{equation*}
+\end{solution}

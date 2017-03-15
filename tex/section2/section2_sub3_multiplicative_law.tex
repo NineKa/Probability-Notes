@@ -47,3 +47,62 @@ the events that the student is getting an A. Then,
         = 1 - P(A \vert B)
     \end{equation*}
 \end{solution}
+
+
+\begin{example}
+    If $P(B) > 0$, show that $P(A_1 \cup A_2 \vert B) = P(A_1 \vert B) + P(A_2
+\vert B) - P(A_1 \cap A_2 \vert B)$.
+\end{example}
+\begin{solution}
+    \begin{align*}
+           P(A_1 \cup A_2 \vert B)
+        &= \frac{P((A_1 \cup A_2) \cap B)}{P(B)}                             \\
+        &= \frac{P((A_1 \cap B) \cup (A_2 \cap B))}{P(B)}                    \\
+        &= \frac{P(A_1 \cap B) + P(A_2 \cap B) - P(A_1 \cap A_2 \cap B)}
+                {P(B)}                                                       \\
+        &= P(A_1 \vert B) + P(A_2 \cap B) - P(A_1 \cap A_2 \vert B)
+    \end{align*}
+\end{solution}
+
+\begin{example}
+    Show that if $A_1 \subseteq A_2$, then $P(A_1 \vert B) \leq P(A_2 \vert
+B)$.
+\end{example}
+\begin{solution}
+    \begin{align*}
+           P(A_2 \vert B)
+        &= \frac{P(A_2 \cap B)}{P(B)}
+         = \frac{P((A_2 \cap (A_1 \cup A_1^\complement)) \cap B)}{P(B)}      \\
+        &= \frac{P(((A_2 \cap A_1) \cup (A_2 \cap A_1^\complement)) \cap
+           B)}{P(B)}                                                         \\
+        &= \frac{P((A_1 \cap B) \cup ((A_2 \cap A_1^\complement) \cap B))}
+           {P(B)}                                                            \\
+        &= \frac{P(A_1 \cap B) + P((A_2 \cap A_1^\complement) \cap B)}{P(B)} \\
+        &= P(A_1 \vert B) + P(A_2 \cap A_1^\complement \vert B)              
+    \end{align*}
+    As $P(A_2 \cap A_1^\complement \vert B) \geq 0$, $P(A_1 \vert B) \leq P(A_2
+\vert B)$.
+\end{solution}
+
+\begin{definition}
+    If $B_1, B_2, \dots, B_k$ are subsets of a set $S$, such that,
+    \begin{enumerate}[noitemsep, topsep=0em]
+        \item $\bigcup_{i=1}^k B_i = S$ (exhaustive), and,
+        \item $B_i \cap B_j = \emptyset$ whenever $i \neq j$ 
+              (mutually disjoint)
+    \end{enumerate}
+    then, $\lbrace B_1, B_2, \dots, B_k \rbrace$ is said to be a partition of
+$S$.
+
+    \noindent
+    If instead we had a countably infinite sequence $B_1, B_2, \dots$ of
+subsets of $S$, such that,
+    \begin{enumerate}[noitemsep, topsep=0em]
+        \item $\bigcup_{i=1}^\infty B_i = S$, and, 
+        \item $B_i \cap B_j = \emptyset \quad \forall i \neq j$
+    \end{enumerate}
+    then, $\lbrace B_1, B_2, \dots, \rbrace$ is a partition of $S$.
+\end{definition}
+
+\noindent \textbf{Note}: for any event $B$, $\lbrace B, B^\complement \rbrace$
+is always a partition of $S$.

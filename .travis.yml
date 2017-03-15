@@ -1,3 +1,6 @@
+branches:
+  except:
+    - master
 sudo: required
 dist: trusty
 before_install:

@@ -1,0 +1,69 @@
+\subsection{Law of Total Probability}
+\begin{theorem}
+    If $\lbrace B_1, B_2, \dots \rbrace$ (finite or countably infinite) is a
+partition of a sample space $S$ with $P(B_i) > 0$, then for any event $A$,
+\begin{equation*}
+    P(A) = \sum_{i \geq 1} P(A \vert B_i) \cdot P(B_i)
+\end{equation*}
+\end{theorem}
+\begin{proof}
+    Since $\bigcup_{i \geq 1} B_i = S$, then 
+    \begin{equation*}
+        A = A \cap (\bigcup_{i \geq 1} B_i)
+          = \bigcup_{i \geq 1} (A \cap B_1)
+    \end{equation*}
+    Since, $B_i \cap B_j = \emptyset \quad \forall i \neq j$, $(A \cap B_i)
+\cap (A \cap B_j) = \emptyset$. Hence,
+    \begin{equation*}
+        P(A) = P(\bigcup_{i \geq 1} (A \cap B_i))
+             = \sum_{i \geq 1} P(A \cap B_i)
+             = \sum_{i \geq 1} P(A \vert B_i) \cdot P(B_i)
+    \end{equation*}
+\end{proof}
+
+\begin{example}
+    Mary is given two jars. The first jar contains $5$ red balls and $3$ blue
+balls. The second jar contains $4$ red balls and $3$ blue balls. Mary chooses
+jar $1$ with probability $\frac{1}{3}$ and jar $2$ with probability
+$\frac{2}{3}$, and then selects one ball at random from the chosen jar. What is
+the probability that the selected ball is red?
+\end{example}
+\begin{solution}
+    Let $U_1$ denotes the event that Mary choose jar $1$, $U_2$ denotes the
+event that Mary choose jar $2$, and $R$ denotes the event that the chosen ball
+is actually red.
+\begin{equation*}
+    P(R) = P(R \vert U_1) \cdot P(U_1) + P(R \vert U_2) \cdot P(U_2)        
+         = \frac{5}{8} \cdot \frac{1}{3} + \frac{6}{7} \cdot \frac{2}{3}    
+         = \frac{5}{24} + \frac{8}{21}
+         = \frac{33}{56}
+\end{equation*}
+\end{solution}
+
+\begin{theorem}[Bayes' rule]
+    If $\lbrace B_1, B_2, \dots \rbrace$ is a partition of a sample space $S$
+and $P(B_i) > 0$, then for any event $A$ with $P(A) > 0$,
+\begin{equation*}
+    P(B_i \vert A) = \frac{P(A \vert B_i) \cdot P(B_i)}
+                          {\sum_{k \geq 1} P(A \vert B_k) \cdot P(B_k)}
+\end{equation*}
+\end{theorem}
+\begin{proof}
+    \begin{equation*}
+          P(B_i \vert A) = \frac{P(A \cap B_i)}{P(A)}
+        = \frac{P(A \cap B_i) P(B_i)}{\sum_{k \geq 1} P(A \vert B_k) P(B_k)}
+    \end{equation*}
+\end{proof}
+
+\begin{example}
+    In the setup of the previous problem, if the selected ball turns out be
+red, then what is the probability that jar $1$ was selected?
+\end{example}
+\begin{solution}
+    \begin{equation*}
+        P(U_1 \vert R) = \frac{P(R \vert U_1) \cdot P(U_1)}{P(R)}
+                       = \frac{\frac{5}{8} \cdot \frac{1}{3}}
+                              {\frac{33}{56}}
+                       = \frac{35}{99}
+    \end{equation*}
+\end{solution}

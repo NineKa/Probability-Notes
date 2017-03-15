@@ -183,10 +183,10 @@ And the required probability,
 \end{equation*}
 \end{solution}
 
-\begin{example}
-    \emph{(Exercise 2.64 of textbook)} A balanced die is tossed six times, and
-the numbers on the uppermost face is recorded each time. What is the
-probability that the numbers recorded are $1, 2, 3, 4, 5$ and $6$ in any order?
+\begin{example}[Exercise 2.64 of textbook]
+    A balanced die is tossed six times, and the numbers on the uppermost face
+is recorded each time. What is the probability that the numbers recorded are
+$1, 2, 3, 4, 5$ and $6$ in any order?
 \end{example}
 \begin{solution}
     The first toss can result in any of the $6$ faces. For each of them, the
@@ -393,4 +393,41 @@ $x_1 + x_2 + \dots + x_{11} = 10$, which equals ${{10 + 11 - 1} \choose {11 -
 \end{equation*}
 
     Same as before.
+\end{solution}
+
+%% appending notes from 01-19-2017 %%
+\begin{example}
+    A hand of $5$ cards is dealt at random from a deck of $52$ cards. What is
+the probability that the hand is a two-pair? (Example of two-pair: 5 of hearts,
+5 of spades, 7 of hearts, 7 of clubs, and king of diamonds)
+\end{example}
+\begin{solution}
+    \textbf{Experiment}: selecting a hand of $5$ cards at random from a deck of
+$52$ cards. Let $C$ be set of $52$ cards. Then $S = \lbrace \lbrace c_1, c_2,
+c_3, c_4, c_5 \rbrace \vert c_i \in C \quad \forall 1 \leq i \leq 5 \land c_i
+\neq c_j \quad \forall 1 \leq i < j \leq 5 \rbrace$, and $\vert S \vert = {52
+\choose 5}$.
+
+    For any $c \in C$, let $f(c)$ denote its face value. Then the event we are
+interested in is, 
+\begin{align*}
+    E = \lbrace \lbrace c_1, \dots, c_5 \rbrace \in S \vert
+        & \exists \text{ a permutation } i_1, i_2, \dots, i_5 \text{ of } 
+        1, 2, \dots, 5 \text{ s.t. }                                         \\
+        & f(c_{i_1}) = f(c_{i_2}) \land
+        f(c_{i_3}) = f(c_{i_4}) \land
+        f(c_{i_1}), f(c_{i_3}), f(c_{i_5}) \text{ are distinct }
+        \rbrace
+\end{align*}
+Then, 
+\begin{align*}
+    \vert E \vert &= {13 \choose 3} \cdot {3 \choose 2} \cdot {4 \choose 2}
+                     \cdot {4 \choose 2} \cdot {4 \choose 1}                 \\
+                  &= \frac{13 \cdot 12 \cdot 11}{2} \cdot 36 \cdot 4
+\end{align*}
+Thus, the required probability is, 
+\begin{equation*}
+    P(\text{the hand is a two-pair}) = \frac{13 \cdot 12 \cdot 11 \cdot
+                                       72}{{52 \choose 5}}
+\end{equation*}
 \end{solution}
