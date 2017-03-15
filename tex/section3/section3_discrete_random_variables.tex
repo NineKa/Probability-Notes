@@ -1,0 +1,210 @@
+\section{Discrete Random Variables (RVs)}
+\begin{definition}
+    A random variable is a function defined on some sample space that takes
+values in $\mathbb{R}^d$, i.e., if $S$ is a sample space and $X : S
+\rightarrow \mathbb{R}^d$, then $X$ is an $\mathbb{R}^d$-valued random
+variable. If $d \geq 2$, these are also called random vectors.
+\end{definition}
+
+\begin{example} \quad                                                        \\
+\begin{enumerate}[noitemsep, topsep=0em]
+    \item \label{sec3-example-1}
+          \textbf{Experiment}: roll a fair die                               \\
+          \textbf{Sample Space}: $S = \lbrace 1, 2, \dots, 6 \rbrace$        \\
+          Then $X_1 : S \rightarrow \mathbb{R}^2$ defined as
+          \begin{equation*}
+              X_1(i) = (i^2, 3 \cdot i), i \in \lbrace 1, 2, \dots, 6 \rbrace
+          \end{equation*}
+          is a random variable.
+    \item \label{sec3-example-2}
+          \textbf{Experiment}: select a person from a city and measure his/her
+          height                                                             \\
+          \textbf{Sample Space}: $S = (0, \infty)$. 
+          Then $X_1 : S \rightarrow \mathbb{R}$ defined as
+          \begin{equation*}
+              X_2(u) = u, u \in S
+          \end{equation*}
+          is a random variable defined on $S$.
+\end{enumerate}
+\end{example}
+
+\begin{definition}
+    An random variable $X$ is discrete if it can assume only a finite or
+countably infinite number of distinct values.
+\end{definition}
+
+\begin{example}
+    In (\ref{sec3-example-1}) above, $X_1$ is a discrete, where in
+(\ref{sec3-example-2}) above, $X_2$ is not.
+\end{example}
+
+If $X$ is an $\mathbb{R}^d$-valued random variable defined on a sample space
+$S$, then for any $A \subseteq \mathbb{R}^d$, $X^{-1}(A) = \lbrace w \in S
+\vert X(w) \in A \rbrace$ is an event. The event $X^{-1}(A)$ is written simply
+as $\lbrace X \in A \rbrace$. If $O$ is a probability on $S$, then we write
+$P(X \in A)$ to mean $P(\lbrace w \in S \vert X(w) \in A \rbrace)$.
+
+\begin{definition}
+    If $X$ is a discrete random variable defined on a sample space $S$ with
+associated probability $P$ and the set of all possible values of $X$ are $x_1,
+x_2, x_3, \dots$, then the probability distribution of $X$ is represented by
+the collection $p(x_i) = P(X = x_i), i = 1, 2, 3, \dots$
+\end{definition}
+
+To compute the probability distribution of a discrete random variable $X$, one
+can follow these steps:
+\begin{itemize}[noitemsep, topsep=0em]
+    \item List all possible values of $X$ as $x_1, x_2, x_3, \dots$
+    \item For each $i$, compute $P(X = x_i)$. Then the distribution of $X$ will
+          be given by $p(x_i) = P(X = x_i), i = 1, 2, 3, \dots$ 
+\end{itemize}
+
+\begin{example}
+    Toss a fair coin twice, let $X = \text{ number of tails }$. Find the
+distribution of $X$.
+\end{example}
+\begin{solution}
+    The possible values of $X$ are $0$, $1$ and $2$. Thus the distribution of
+$X$ is given by, 
+\begin{align*}
+    p(0) &= P(X = 0) = P(HH) = \frac{1}{4}                                   \\
+    P(1) &= P(X = 1) = P(HT) + P(TH) = \frac{1}{4}+\frac{1}{4} = \frac{1}{2} \\
+    P(2) &= P(X = 2) = P(TT) = \frac{1}{4}
+\end{align*}
+\end{solution}
+
+\begin{example}
+    Roll a fair die until $6$ appears. Let $X$ equal the number of required
+tosses. Find the distribution $X$.
+\end{example}
+\begin{solution}
+    Possible values of $X$ are $1, 2, 3, \dots$, the distribution of $X$ is
+given by, 
+\begin{align*}
+    p(i) &= P(X = i)                                                         \\
+         &= P(\bigcap_{k=1}^{i-1} \lbrace \text{not $6$ in $k$-th toss} \rbrace
+            \cap \lbrace \text{$6$ in $i$-th toss} \rbrace)                  \\
+         &= \prod_{k=1}^{i-1} P(\text{not $6$ in $k$-th toss}) \cdot
+            P(\text{$6$ in $i$-th toss})                                     \\
+         &= (\frac{5}{6})^{i-1} \cdot \frac{1}{6}          & i = 1, 2, 3, \dots
+\end{align*}
+\end{solution}
+
+\begin{example}
+    Let $S$ be a sample space and $E$ be an event. Define the random variable
+$1_E$ as, 
+\begin{equation*}
+    1_E(w) = \begin{cases}
+        0 & w \notin E                                                      \\
+        1 & w \in E 
+    \end{cases}
+\end{equation*}
+find the distribution of $1_E$
+\end{example}
+\begin{solution}
+    Possible values of $1_E$ are $0$ and $1$. Thus the distribution of $1_E$ is
+given by, 
+\begin{align*}
+    p(0) &= P(1_E = 0)
+          = P(\lbrace w \vert 1_E(w) = 0\rbrace)
+          = P(E^\complement) 
+          = 1 - P(E)                                                         \\
+    p(1) &= P(1_E = 1) = P(E)
+\end{align*}
+\end{solution}
+
+\begin{example}
+    Toss a fair coin and roll a fair die independently. Let,
+    \begin{equation*}
+        X_1 = \begin{cases}
+            0 & \text{toss results in tails}                                 \\
+            1 & \text{toss results in heads}
+        \end{cases}
+    \end{equation*}
+    and, 
+    \begin{equation*}
+        X_2 = \text{the number on the uppermost face of the die}
+    \end{equation*}.
+    Let $X = (X_1, X_2)$ (so $X$ is a $\mathbb{R}^2$-valued random variable).
+What is the distribution of $X$?
+\end{example}
+\begin{solution}
+    possible values of $X$ are $\langle i, j\rangle$, where $i \in \lbrace 0, 1
+\rbrace$ and $j \in \lbrace 1, 2, \dots, 6 \rbrace$, and for any such $i, j$,
+\begin{equation*}
+    p(\langle i,j \rangle) = P(X = \langle i,j \rangle)
+                           = \frac{1}{2} \cdot \frac{1}{6}
+                           = \frac{1}{12}
+\end{equation*}
+This specifies the distribution of $X$.
+\end{solution}
+
+\begin{theorem}
+    If $X$ is a discrete random variable with possible values $x_1, x_2,
+\dots$ and $p(x_i), i = 1, 2, \dots$ is the probability distribution of $X$,
+then,
+\begin{enumerate}[noitemsep, topsep=0em]
+    \item \label{sec3-thm-1}
+          $0 \leq p(x_i) \leq 1$, and,
+    \item \label{sec3-thm-2}
+          $\sum_{i = 1, 2, \dots} p(x_i) = 1$
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+    As $p(x_i) = P(X = x_i)$ by definition. This immediately proves
+(\ref{sec3-thm-1}). Next, since the events $\lbrace X = x_i \rbrace, i = 1, 2,
+\dots$ are mutually disjoint,
+\begin{equation*}
+      \sum_{i = 1, 2, \dots} p(x_i) = \sum_{i = 1, 2, \dots} P(X = x_i)
+    = P(X \in \lbrace x_1, x_2, \dots \rbrace)
+\end{equation*}
+    Now, $\lbrace x_1, x_2, \dots \rbrace$ is the set of all possible values of
+$X$. Hence the event $\lbrace w \in S \vert X(w) \in \lbrace x_1, x_2, \dots
+\rbrace \rbrace$ is the entire sample space $S$. Therefore $\sum_{i = 1, 2,
+\dots} p(x_i) = P(S) = 1$, as claimed in part (\ref{sec3-thm-2}).
+\end{proof}
+
+\begin{example}
+    A single cell can either die, with probability $0.1$, or split into two
+cells, with probability $0.9$ producing a new generation of cells. Each cel in
+the new generation dies or splits independently with the same probabilities. If
+you start with one cell (generation zero), and let it split/die to produce
+cells in generation one, find the distribution of the number of cells in
+generation two. 
+\end{example}
+\begin{solution}
+    Let $X_1 = \text{number of cells in generation one}$, and $X_2 =
+\text{number of cells in generation two}$. Then, 
+\begin{align*}
+    P(X_1 = 0) &= 0.1                                                        \\
+    P(X_2 = 2) &= 0.9
+\end{align*}
+The possible values $X_2$ can take one from $0$, $2$ and $4$.
+\begin{align*}
+    P(X_2 = 0 \vert X_1 = 0) &= 1                                            \\
+    P(X_2 = 2 \vert X_1 = 0) &= 0                                            \\
+    P(X_2 = 4 \vert X_1 = 0) &= 0                                            \\
+    P(X_2 = 0 \vert X_1 = 2) &= (0.1)^2                                      \\
+    P(X_2 = 2 \vert X_1 = 2) &= 0.1 \cdot 0.9 + 0.1 \cdot 0.9
+                              = 2 \cdot 0.1 \cdot 0.9                        \\
+    P(X_2 = 4 \vert X_1 = 2) &= (0.9)^2
+\end{align*}
+Hence the distribution of $X_2$ is given by,
+\begin{align*}
+    P(X_2 = 0) &= P(X_2 = 0 \vert X_1 = 0) \cdot P(X_1 = 0) +
+                  P(X_2 = 0 \vert x_1 = 2) \cdot P(X_1 = 2)
+                = 1 \cdot 0.1 + (0.1)^2 \cdot 0.9
+                = 0.109                                                     \\
+    P(X_2 = 2) &= P(X_2 = 2 \vert X_1 = 0) \cdot P(X_1 = 0) +
+                  P(X_2 = 2 \vert X_1 = 2) \cdot P(X_1 = 2)
+                = 0 + 2 \cdot 0.1 \cdot 0.9^2
+                = 0.162                                                     \\
+    P(X_2 = 4) &= P(X_2 = 4 \vert X_1 = 0) \cdot P(X_1 = 0) +
+                  P(X_2 = 4 \vert X_1 = 2) \cdot P(X_1 \ 2)
+                = 0 + 0.9*3
+                = 0.729
+\end{align*}
+\end{solution}
+
+\input{section3/section3_sub1_function_of_random_variable}
+\input{section3/section3_sub2_exprection_of_a_discrete_rv}

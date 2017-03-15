@@ -1,0 +1,197 @@
+\subsection{Expectation of a Discrete Random Variable}
+\begin{definition}
+        If $X$ is a discrete random variable with probability distribution
+    $p(x_i), i = 1, 2, \dots$, then the expectation of $X$ is given by,
+    \begin{equation*}
+        E[X] = \sum_{i = 1, 2, \dots} x_i \cdot p(x_i)
+    \end{equation*}
+        If $X$ is $\mathbb{R}^d$-valued, then $E[X]$ is a number in
+    $\mathbb{R}^d$.
+\end{definition}
+
+\noindent
+\textbf{Note}: If $X$ is $\mathbb{R}$-valued and $x_1^+, x_2^+, \dots$ are the
+positive values assumed by, and $x_1^-, x_x^-, \dots$ are the negative values
+assumed by $X$, then $E[X]$ is only defined when either $\sum_{i = 1, 2,
+\dots} x_i^+ \cdot p(x_i^+) < \infty$ or $\sum_{i=1, 2, \dots} x_i^- \cdot
+p(x_i^-) < \infty$. If both of these quantities are infinite, then we say
+expectation of $X$ does not exist. Similar consideration apply to
+$\mathbb{R}^d$-valued random variables.
+
+\begin{example}
+    Roll a fair die until $6$ appears and let $X$ be the number of required
+tosses. We have already computed the distribution of $X$ as $p(i) =
+(\frac{5}{6})^{i-1} \cdot \frac{1}{6}$, $i = 1, 2, \dots$. Hence, 
+\begin{equation*}
+    E[X] = \sum_{i \geq 1} i \cdot (\frac{5}{6})^{i-1} \cdot \frac{1}{6}    
+         = \frac{1}{6} \cdot (1 - \frac{5}{6})^{-2}                         
+         = \frac{1}{6} \cdot 36
+         = 6
+\end{equation*}
+\end{example}
+
+\begin{example}
+    If $E$ is an event and $1_E$ is the random variable defined by,
+    \begin{equation*}
+        1_E(w) = \begin{cases}
+            1 & w \in E                                                      \\
+            0 & w \notin E
+        \end{cases}
+    \end{equation*}
+    then, 
+    \begin{equation*}
+        E[1_E] = 1 \cdot P(E) + 0 \cdot P(E^\complement) 
+               = P(E)
+    \end{equation*}
+\end{example}
+
+\begin{example}
+    $k$ buses carrying a total of $n_1 + n_2 + \dots + n_k$ students set off on
+a trip. The $j$-th bus is carrying $n_j$ many students.
+\begin{enumerate}[noitemsep, topsep=0em]
+    \item 
+    Upon arrival, one student is chosen at random, and every student on the
+same bus as the selected student is given a candy. If each candy costs $\$1$
+and $X$ denotes the total cost of the candy, find the distribution of $X$ and
+compute $E[X]$.
+    \item
+    Upon arrival, one buses out of $k$-bus is chosen at random and each student
+on that bus is given a candy. If each candy costs $\$1$ and $Y$ denotes the
+cost of the candy, find the distribution of $Y$ and compute $E[Y]$.
+    \item
+    Show that $E[X] \geq E[Y]$.
+\end{enumerate}
+    Assume $n_i \neq n_j, \quad \forall i \neq j$.
+\end{example}
+\begin{solution} \quad                                                       \\
+    \begin{enumerate}[noitemsep, topsep=0em]
+        \item 
+        possible values of $X$ are $n_1, n_2, \dots, x_k$ (By assumption these
+        are all distinct).
+        \begin{equation*}
+            p_X(n_i) = P(X = n_i) = \frac{n_i}{n_1 + \dots +n_k} 
+            \quad i = 1, 2, \dots, k
+        \end{equation*}
+        Hence, 
+        \begin{equation*}
+            E[X] = \sum_{i = 1}^k n_i \cdot p_X(n_i)
+                 = \sum_{i = 1}^k n_i \cdot \frac{n_i}{n_1 + \dots + n_k}
+                 = \sum_{i = 1}^k \frac{(n_i)^2}{n_1 + \dots + n_k}
+                 = \frac{\sum_{i = 1}^k (n_i)^2}{\sum_{i = 1}^k n_i}
+        \end{equation*}
+        
+        \item
+        possible values of $Y$ are $n_1, n_2, \dots, n_k$ and,
+        \begin{equation*}
+            p_Y(n_i) = P(Y = n_i) = \frac{1}{k} \quad i = 1, 2, \dots, k
+        \end{equation*}
+        Hence,
+        \begin{equation*}
+            E[Y] = \sum_{i = 1}^k n_i \cdot p_Y(n_i)
+                 = \frac{\sum_{i = 1}^k n_i}{k}
+        \end{equation*}
+        
+        \item
+        Since $\sum_{i=1}^k (n_i)^2 \geq \frac{(\sum_{i=1}^k n_i)^2}{k}$ by
+        Cauchy-Schwarz inequality. It follows that, 
+        \begin{equation*}
+            E[X] \geq E[Y]
+        \end{equation*}
+    \end{enumerate}
+\end{solution}
+
+\begin{theorem}
+    Let $X$ be on $\mathbb{R}^m$-valued discrete random variable and $g :
+\mathbb{R}^m \rightarrow \mathbb{R}^n$ be a mapping function. If the set of
+possible values of $X$ are $x_1, x_2, \dots$ and the distribution of $X$ is
+given by $p_X(x_i)$, $i = 1, 2, \dots$, then
+\begin{equation*}
+    E[g(X)] = \sum_{i \geq 1} g(x_i) \cdot p_X(x_i)
+\end{equation*}
+\end{theorem}
+\begin{proof}
+    If the possible values of $Y = g(X)$ are $y_1, y_2, \dots$, then the
+probability distribution of $Y$ is given by,
+\begin{equation*}
+    p_Y(y_j) = \sum_{i : g(x_i) = y_j} p_X(x_i) \quad j = 1, 2, \dots
+\end{equation*}
+Hence,
+\begin{align*}
+    E[g(X)] &= E[Y]                                                          \\
+            &= \sum_{j \geq 1} y_j \cdot p_Y(y_j)                            \\
+            &= \sum_{j \geq 1} \sum_{i : g(x_i) = y_j} g(x_i) \cdot p_X(x_i) \\
+            &= \sum_{i \geq 1} g(x_i) \cdot p_X(x_i)
+\end{align*}
+as claimed.
+\end{proof}
+
+\begin{example}
+    The distribution of $X$ is given by,
+    \begin{align*}
+        &p_X(-2) = 1 / 10                     &p_X(-1) = 2 / 10              \\
+        &p_X(0) = 2 / 10                      &p_X(1) = 3 / 10               \\
+        &p_X(2) = 2 / 10                      &
+    \end{align*}
+    Then,
+    \begin{align*}
+        E[X^2] &= (-2)^2 \cdot \frac{1}{10} +
+                  (-1)^2 \cdot \frac{2}{10} +
+                  0^2 \cdot \frac{2}{10} +
+                  1^2 \cdot \frac{3}{10} +
+                  2^2 \cdot \frac{2}{10}                                     \\
+               &= \frac{4 + 2 + 0 + 3 + 8}{10}                               \\
+               &= \frac{17}{10}
+    \end{align*}
+    This is often easier than finding the distribution of $X^2$ explicitly and
+then computing $E[X^2]$.
+\end{example}
+
+\begin{theorem}
+    If $X$ is an $\mathbb{R}^m$-valued discrete random variable and $g_i :
+\mathbb{R}^m \rightarrow \mathbb{R}^n$, for $i = 1, 2, \dots, k$, then,
+\begin{equation*}
+    E[g_1(X) + g_2(X) + \dots + g_k(X)]
+    = E[g_1(X)] + E[g_2(X)] + \dots + E[g_k(X)]
+\end{equation*}
+\end{theorem}
+\begin{proof}
+    \begin{align*}
+           E[g_1(X) + g_2(X) + \dots + g_k(X)]
+        &= \sum_{x} (g_1(x) + g_2(x) + \dots + g_k(x)) \cdot p_X(x)          \\
+        &= \sum_{i = 1}^k \sum_{x} g_i(x) \cdot p_X(x)                       \\
+        &= \sum_{i = 1}^k E[g_i(X)]
+    \end{align*}
+\end{proof}
+
+\begin{theorem}[linearity of expectation]
+    If $X$ is an $\mathbb{R}^d$ valued random variable, $b \in \mathbb{R}^d$,
+and $a \in \mathbb{R}$, then 
+\begin{equation*}
+    E[aX + b] = aE[X] + b
+\end{equation*}
+\end{theorem}
+\begin{solution} \quad                                                       \\
+    \begin{equation*}
+        E[aX+b] = E[aX] + E[b]
+    \end{equation*}
+    Then the expectation of the constant random variable $Y = b$ is 
+    \begin{equation*}
+        \begin{cases}
+            E(Y) = b \cdot P(Y = b) = b                                      \\
+            E(aX) = \sum_{x} a \cdot x \cdot p_X(x) 
+                  = a \sum_{x} x \cdot p_X(x)
+                  = a E[X]
+        \end{cases}
+        \Rightarrow
+        E[aX + b] = E[aX] + E[b] = aE[X] + b
+    \end{equation*}
+    Thus the claim follows.
+\end{solution}
+
+\begin{example}
+    If $X$ is a real-valued discrete random variable, then
+    \begin{equation*}
+          E[X^2 + 2 \sin{X} + 3)
+        = E[X^2] + 2 E[\sin{X}] + 3
+    \end{equation*}
+\end{example}

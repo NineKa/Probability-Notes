@@ -1,0 +1,36 @@
+\subsection{Functions of Random Variable}
+If $X : S \rightarrow \mathbb{R}^m$ is an random variable and $g : \mathbb{R}^m
+\rightarrow \mathbb{R}^n$ is a function, then $g(x)$ is an
+$\mathbb{R}^n$-valued random variable. If the possible values of $X$ are $x_1,
+x_2, \dots$ and $p_X(x_i), i = 1, 2, \dots$ is the distribution of $X$, then
+the distribution of $Y = g(x)$ can be computed as follows:
+\begin{enumerate}[noitemsep, topsep=0em]
+    \item list all possible values $y_1, y_2, \dots$ of $Y$, 
+    \item for each $j$, find the set 
+          \[ E_j = \lbrace x \vert x \in \lbrace x_1, x_2, \dots \rbrace, 
+                                   g(x) = y_i \rbrace,                       \]
+    \item the distribution of $Y$ is given by,
+          \begin{equation*}
+              p_Y(y_j) = \sum_{x \in E_j} p_X(x), \quad j = 1, 2, 3, \dots
+          \end{equation*}
+\end{enumerate}
+
+\begin{example}
+    The distribution of $X$ is given by,
+    \begin{align*}
+        &p_X(-3) = 1 / 16                    &p_X(-2) = 2 / 16              \\
+        &p_X(-1) = 1 / 16                    &p_X(0)  = 3 / 16              \\
+        &p_X(1)  = 4 / 16                    &p_X(2)  = 3 / 16              \\
+        &p_X(4)  = 2 / 16                    &\quad
+    \end{align*}
+\end{example}
+\begin{solution}
+    The possible values of $Y$ are $0, 1, 4, 9, 16$,
+    \begin{align*}
+        p_Y(0) &= p_X(X = 0) = 3 / 16                                      \\
+        p_Y(1) &= p_X(X = -1) + p_X(X = 1) = 1 / 16 + 4 / 16 = 5 / 16      \\
+        p_Y(4) &= p_X(X = -2) + p_X(X = 2) = 2 / 16 + 3 / 16 = 5 / 16      \\
+        p_Y(9) &= p_X(X = -3) = 1 / 16                                     \\
+        p_Y(16) &= p_X(X = 4) = 2 / 16
+    \end{align*}
+\end{solution}
