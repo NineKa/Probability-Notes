@@ -1,0 +1,81 @@
+\subsection{Variance of an Random Variable}
+\begin{definition}
+    If $X$ is an $\mathbb{R}$-valued random variable with $E[X^2] < \infty$,
+then the variance of $X$ is defined as,
+    \begin{equation*}
+        V[X] = E[(X - E(X))^2]
+    \end{equation*}
+    It is also often denoted by $\sigma_X^2$. The standard deviation of $X$ is
+defined as $\sqrt{V[X]} = \sigma_X$.
+\end{definition}
+Variance of an random variable is a measure of how dispensed it is around its
+mean. 
+
+\begin{theorem}
+    \begin{equation*}
+        V[X] = E[X^2] - (E[X])^2
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    \begin{align*}
+        V[X] &= E[(X - E[X])^2]                                              \\
+             &= E[X^2 - 2X \cdot E[X] + (E[X])^2]                            \\
+             &= E[X^2] - 2 \cdot E[X] \cdot E[X] + (E[X])^2                  \\
+             &= E[X^2] - (E[X])^2
+    \end{align*}
+\end{proof}
+
+\begin{theorem}
+    If $a, b \in \mathbb{R}$, then,
+    \begin{equation*}
+        V[aX + b] = a^2 V[X]
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $Y = aX + b$, then, 
+    \begin{align*}
+                     E[Y] = aE[X] + b
+        &\Rightarrow Y - E[Y] = a(X - E[X])                                  \\
+        &\Rightarrow V[Y] = E[(Y - E[Y])^2]
+                          = E[a^2 \cdot (X - E[X])^2]
+                          = a^2 \cdot E[(X - E[X])^2]
+                          = a^2 \cdot V[X]
+    \end{align*}
+\end{proof}
+
+\begin{example}
+    If $X$ has discrete uniform distribution on $\lbrace 1, 2, \dots, n
+\rbrace$, i.e., 
+    \begin{equation*}
+        P(X = i) = \frac{1}{n} \quad i = 1, 2, \dots, n
+    \end{equation*}
+    Find $E[X]$ and $\sigma_X$.
+\end{example}
+\begin{solution}
+    \begin{align*}
+        & E[X] = \sum_{i = 1}^n \frac{i}{n} 
+               = \frac{n \cdot (n+1)}{2n} 
+               = \frac{n+1}{2}                                               \\
+        & E[X^2] = \sum_{i = 1}^n \frac{i^2}{n}
+                 = \frac{n \cdot (n_1) \cdot (2n+1)}{6n}
+                 = \frac{(n+1) \cdot (2n+1)}{6}                              \\
+        & V[X] = E[X^2] - (E[X])^2
+               = \frac{(n+1) \cdot (2n+1)}{6} - (\frac{n+1}{2})^2
+               = \frac{n+1}{12} \cdot (4n + 2 - 3n -3)
+               = \frac{n^2 - 1}{12}                                          \\
+        & \sigma_X = \sqrt{v[X]} = \sqrt{\frac{n^2 - 1}{12}}
+    \end{align*}
+\end{solution}
+
+\begin{example}
+    If $X$ denotes the number of the uppermost face while rolling a fair die,
+then $X$ follows a discrete uniform distribution on $\lbrace 1, 2,
+\dots, 6 \rbrace$. Find $E[X], \sigma_X$.
+\end{example}
+\begin{solution}
+    \begin{equation*}
+        E[X] = \frac{6 + 1}{2} = \frac{7}{2} \qquad
+        V[X] = \frac{6^2 - 1}{12} = \frac{35}{12} \qquad
+        \sigma_X = \frac{35}{12}
+    \end{equation*}
+\end{solution}

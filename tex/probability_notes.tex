@@ -1,6 +1,6 @@
 \documentclass{article}
 
-\usepackage[margin=1in]{geometry}
+\usepackage[letterpaper, margin=1in]{geometry}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -15,20 +15,26 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
+\newcommand\note{\noindent \textbf{Note}:}
+
 
 \newcommand\perm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
 \newcommand\comb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+\newcommand\binomialdist[2]{\text{\emph{Bin}}(#1, #2)}
 
 \newenvironment{solution}[1][\proofname]{
   \proof[\ttfamily \scshape \large Solution.]
 }{\endproof}
 
-\newcommand{\includesvg}[2][]{
-  \subimport{#1}{#2.pdf_tex}
-}
+\newcommand{\includesvg}[2][]{\subimport{#1}{#2.pdf_tex}}
 
 \begin{document}
 \input{section1/section1_experiments_samplespace_events_and_probability}
 \input{section2/section2_computing_probabilities}
 \input{section3/section3_discrete_random_variables}
 \end{document}
+
+%
+% TODO:
+%   - in 01-31-2017, some standard formulas & standard limits

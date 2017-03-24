@@ -1,0 +1,27 @@
+\subsection{Binomial Distribution}
+\begin{definition}
+    Let $n \geq 1$ and $p \in [0, 1]$. An random variable $X$ follows a
+binomial distribution with parameters $n$ and $p$, in short $X \sim
+\binomialdist{n}{p}$, if the probability mass function (pmf) of $X$ is given
+by,
+    \begin{equation*}
+        p_X(k) = P(X - k) = {n \choose k}p^k \cdot (1-p)^{n-k}
+        \quad
+        k = 0, 1, \dots, n
+    \end{equation*}
+\end{definition}
+\noindent
+\textbf{Interpretation}: Suppose an experiment consists of $n$ identical trials
+such that, 
+\begin{itemize}[noitemsep, topsep=0em]
+\item
+    each trial results in one of two possible outcomes: success($S$) or failure
+    ($F$);
+\item
+    possibility of success in each trial is $p$ ( and hence probability of
+    failure is $q = 1 - p$);
+\item
+    the trials are independent.
+\end{itemize}
+Then the number of successes in the experiment follows $\binomialdist{n}{p}$
+distribution.

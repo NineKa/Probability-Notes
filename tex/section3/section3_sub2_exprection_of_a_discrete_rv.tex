@@ -191,7 +191,86 @@ and $a \in \mathbb{R}$, then
 \begin{example}
     If $X$ is a real-valued discrete random variable, then
     \begin{equation*}
-          E[X^2 + 2 \sin{X} + 3)
+          E[X^2 + 2 \sin{X} + 3]
         = E[X^2] + 2 E[\sin{X}] + 3
     \end{equation*}
 \end{example}
+
+\begin{theorem}
+    If $X_1, X_2, \dots, X_k$ are $\mathbb{R}^d$-valued discrete randome
+variables defined on the same sample space $S$ then,
+\begin{equation*}
+    E[X_1 + X_2 + \dots + X_k] = E[X_1] + E[X_2] + \dots + E[X_k]   
+\end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $X = \langle x_1, x_2, \dots, x_k \rangle : S \rightarrow
+\mathbb{R}^{kd}$ be a discrete random variable. Further, letting $g_i(X) =
+X_i$, we see that,
+\begin{align*}
+    E[X_1 + X_2 + \dots + X_k] &= E[g_1(X) + g_2(X) + \dots + g_k(X)]        \\
+                               &= \sum_{i = 1}^k E[g_i(X)]                   \\
+                               &= \sum_{i = 1}^k E[X_i]
+\end{align*}
+\end{proof}
+This is an \textbf{extremely useful fact}. Note that this theorem \textbf{does
+not} require any assumption of independence.
+
+\begin{example} \quad                                                        \\
+\begin{itemize}[noitemsep, topsep=0em]
+    \item
+    If $X$ is a discrete real-valued random variable that is nonnegative (i.e.
+the values assumed by $X$ are nonnegative), then $E[X] \geq 0$.
+    \item
+    If $X$ and $Y$ are two discrete real-valued random variables defined on the
+same sample space and $X \geq Y$, then $E[X] \geq E[Y]$.
+\end{itemize}
+\end{example}
+\begin{solution} \quad                                                       \\
+\begin{itemize}[noitemsep, topsep=0em]
+    \item 
+    If the possible value of $X$ are $x_1, x_2, \dots$, then $x_i \geq 0 \quad
+\forall i \geq 1$. Hence $E[X] = \sum_{i \geq 1} x_i \cdot p_X(x_i) \geq 0$.
+    \item
+    Consider $E[X- Y] = E[X] + E[-Y] = E[X] - E[Y]$. Since, $X \geq Y$, then
+for any possible out come $x_1, x_2, \dots$ and $y_1, y_2, \dots$, we have
+$\forall i \geq 1 \quad x_i \geq y_i$. Thus $X - Y$ is a nonnegative discrete
+random variable, and by previous example, we have $E[X - Y] \geq 0 \Rightarrow
+E[X] - E[Y] \geq 0 \Rightarrow E[X] \geq E[Y]$.
+\end{itemize}
+\end{solution}
+
+\begin{example}
+    Let $X$ be the number of times heads appears when a coin is tossed $n$
+times. Assume that probability of landing heads in a single toss is $p$. Find
+$E[X]$.
+\end{example}
+\begin{solution}
+    Define random variable $X_i$ as below,
+    \begin{equation*}
+        X_i = \begin{cases}
+            1   & i\text{-th toss results in heads}                          \\
+            0   & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    Then $E[X_i] = P(\text{heads in }i\text{-th toss}) = p$. Since $X = X_1 +
+X_2 + \dots + X_n$,
+    \begin{equation*}
+        E[X] = E[X_1 + X_2 + \dots + X_n]
+             = E[X_1] + E[X_2] + \dots + E[X_n]
+             = n \cdot p
+    \end{equation*}
+\end{solution}
+\note Assume the tosses to be independent one could write down the
+distribution of $X$ and then compute the expectation. We will do it later.
+
+\begin{theorem}
+    If $X_1, X_2, \dots$ are $\mathbb{R}$-valued random variables defined on
+the same sample space and each $X_i$ is nonnegative, then
+    \begin{equation*}
+        E[X_1 + X_2 + \dots] = \sum_{i = 1}^\infty E[X_i]
+    \end{equation*}
+\end{theorem}
+\note Since $X_i \geq 0 \quad \forall i$, the series $\sum_{i = 1}^\infty$
+always makes sense. It can converge to a finite real value or it can be
+infinite. Same is true for $\sum_{i = 1}^\infty E[X_i]$.
