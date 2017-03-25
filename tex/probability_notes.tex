@@ -10,6 +10,7 @@
 \usepackage{color}
 \usepackage{import}
 \usepackage{float}
+\usepackage[open]{bookmark}
 
 \theoremstyle{definition}
 \newtheorem{theorem}{Theorem}[section]
@@ -22,6 +23,8 @@
 \newcommand\comb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
 
 \newcommand\binomialdist[2]{\text{\emph{Bin}}(#1, #2)}
+\newcommand\bernoullidist[1]{\text{\emph{Bern}}(#1)}
+\newcommand\poissondist[1]{\text{\emph{Poi}}(#1)}
 
 \newenvironment{solution}[1][\proofname]{
   \proof[\ttfamily \scshape \large Solution.]

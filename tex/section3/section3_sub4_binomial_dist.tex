@@ -5,7 +5,7 @@ binomial distribution with parameters $n$ and $p$, in short $X \sim
 \binomialdist{n}{p}$, if the probability mass function (pmf) of $X$ is given
 by,
     \begin{equation*}
-        p_X(k) = P(X - k) = {n \choose k}p^k \cdot (1-p)^{n-k}
+        p_X(k) = P(X = k) = {n \choose k}p^k \cdot (1-p)^{n-k}
         \quad
         k = 0, 1, \dots, n
     \end{equation*}
@@ -25,3 +25,137 @@ such that,
 \end{itemize}
 Then the number of successes in the experiment follows $\binomialdist{n}{p}$
 distribution.
+
+\subsubsection*{Deriving the Binomial Probability Mass Function}
+Suppose probability of landing head while tossing a coin $\frac{1}{4}$. Toss
+the coin $3$ times independently. The sample space will be $S = \lbrace HHH,
+HHT, HTH, THH, HTT, THT, TTH, TTT \rbrace$. Then, 
+\begin{align*}
+    P(HHH) &= \frac{1}{4}^3                                                  \\
+    P(HHT) &= P(HTH) = P(THH) = (\frac{1}{4})^2 \cdot \frac{3}{4}            \\
+    P(HTT) &= P(THT) = P(TTH) = \frac{1}{4} \cdot (\frac{3}{4})^2            \\
+    P(TTT) &= (\frac{3}{4})^3
+\end{align*}
+Thus, probability of any sample point that has $k$ heads and $3-k$ tails (in
+any order) is $(\frac{1}{4})^k \cdot (\frac{3}{4})^{3-k}$. Let $X =
+\#\text{heads in three tosses}$. For $k = 0, 1, 2, 3$, 
+\begin{align*}
+    P(X = k) &= (\frac{1}{4})^k \cdot (\frac{3}{4})^{3 - k} \cdot
+                (\text{the number of sample points that have $k$ heads and
+                $3-k$ tails})                                                \\
+             &= (\frac{1}{4})^k \cdot (\frac{3}{4})^{3 - k} \cdot
+                {3 \choose k}
+\end{align*}
+Same reasoning applies to general $n$ and $p$.
+
+\begin{example}
+    $100$ couples live in a community. Each couple can have either $0$, $1$ or
+$2$ children with probability $\frac{1}{3}$ each. Assume that the couples have
+children independently. Find the distribution of $X = \text{number of couples
+that have at least one child}$.
+\end{example}
+\begin{solution}
+    \[ X \sim \binomialdist{100}{\frac{2}{3}} \]
+\end{solution}
+
+\subsubsection*{Bernoulli Distribution}
+$\binomialdist{1}{p}$ distribution is called the Bernoulli distribution with
+parameter $p$. We will write it as $\bernoullidist{p}$.Thus, if $Y \sim
+\bernoullidist{p}$, then $P(Y = 1) = p$, and $P(Y = 0) = 1 - p$.
+
+The total number of success $X$ in $n$ independent identical trials each
+having probability of of success $p$, follows $\binomialdist{n}{p}$. Let $Y_i =
+1_{\lbrace i\text{-th trial results in success} \rbrace}$. Then $Y_i \sim
+\bernoullidist{p} \quad i = 1, 2, \dots, n$, and $X = \sum_{i = 1}^n Y_i$.
+
+\begin{theorem}
+    If $X \sim \binomialdist{n}{p}$, then,
+    \begin{enumerate}[noitemsep, topsep=0em]
+        \item $E[X] = n \cdot p$,
+        \item $V[X] = n \cdot p \cdot (1 - p)$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    As $X = \sum_{i = 1}^n Y_i$, where $Y_i \sim \bernoullidist{p}$,
+    \[ E[Y_i] = 1 \cdot p + 0 \cdot (1 - p) = p \]
+    \[ \Rightarrow 
+       E[X] = E[\sum_{i = 1}^n Y_i] = \sum_{i = 1}^n E[Y_i] = n \cdot p \]
+\end{proof}
+\begin{proof}
+    \begin{align*}
+        E[X] &= \sum_{k = 0}^n k \cdot P(X = k)                              \\
+             &= \sum_{k = 0}^n k \cdot {n \choose k} \cdot p^k \cdot 
+                (1-p)^{n-k}                                                  \\
+             &= \sum_{k = 1}^n k \cdot \frac{n!}{k!(n-k)!} \cdot p^k \cdot
+                (1-p)^{n-k}                                                  \\
+             &= \sum_{k = 1}^n \frac{n!}{(k-1)! (n-k)!} \cdot p^k \cdot 
+                (1-p)^{n-k}                                                  \\
+             &= n \cdot p \cdot \sum_{k = 1}^n \frac{(n - 1)!}{(k-1)!(n-k)!}
+                \cdot p^{k - 1} \cdot (1-p)^{n-k}                            \\
+             &= n \cdot p \cdot (p + (1 - p))^{n-1}                          \\
+             &= n \cdot p
+    \end{align*}
+    \begin{align*}
+        E[X(X - 1)] &= \sum_{k = 0}^n k \cdot (k - 1) \cdot P(X = k)        \\
+                    &= \sum_{k = 2}^n k \cdot (k - 1) \cdot
+                       {n \choose k} \cdot p^k \cdot (1-p)^{n-k}            \\
+                    &= \sum_{k = 2}^n \frac{n!}{(k - 2)!(n - k)!} \cdot
+                       p^k \cdot (1 - p)^{n - k}                            \\
+                    &= n(n-1)p^2 \sum_{k = 2}^n \frac{(n-2)!}{(k-2)!(n-k)!}
+                       \cdot p^{k - 2} \cdot (1-p)^{n - k}                  \\
+                    &= n \cdot (n-1) \cdot p^2 \cdot (p + (1 - p))^{n - 2}  \\
+                    &= n \cdot (n-1) \cdot p^2
+    \end{align*}
+    \begin{equation*}
+        E[X^2] = E[X(X - 1)] + E[X] 
+               = E[X(X - 1)] + n \cdot p
+               = n \cdot (n - 1) \cdot p^2 + n \cdot p
+    \end{equation*}
+    \begin{align*}
+        V[X] &= E[X^2] - (E[X])^2                                           \\
+             &= n \cdot (n - 1) \cdot p^2 + n \cdot p - n^2 \cdot p^2       \\
+             &= n^2p^2 - np^2 + np - n^2p^2                                 \\
+             &= np(1-p)
+    \end{align*}
+\end{proof}
+
+\begin{example}[exercise 3.58 of textbook]
+    Let $X$ denote the number of defectives among four items selected randomly
+from a large set that is known to contain $10\%$ defectives. If the repair cost
+for the defectives is given by $C = 3X^2 + X + 2$, find $E[C]$.
+\end{example}
+\begin{solution}
+    $X \sim \binomialdist{n}{p}$ where $n = 1$, and $p = 0.1$.Then, 
+    \begin{align*}
+        E[C] &= E[3X^2 + X + 2]                                             \\
+             &= E[3X^2] + E[X] + 2                                          \\
+             &= 3 (V[X] + (E[X])^2) + E[X] + 2                              \\
+             &= 3 (np(1-p) + n^2p^2) + np + 2                               \\
+             &= 3n^2p^2 - 3np^2 + 4np + 2                                   \\
+             &= 3.96
+    \end{align*}
+\end{solution}
+
+\begin{example}
+    A communication system consists of $n$ components, each of which will
+independently function with probability $p$. The system operates effectively if
+at least half of its components function. For what values of $p$ is a
+$5$-component system more likely to operate effectively than a $3$-component
+system?
+\end{example}
+\begin{solution}
+    The number of functioning components $\sim \binomialdist{n}{p}$.
+Probability that a $5$-component system will be effective is,
+\[ {5 \choose 3} p^3 (1-p)^2 + {5 \choose 4} p^4 (1 - p) + p^5 \]
+Probability that a $3$-component system operates effectively is,
+\[ {3 \choose 2} p^2 (1-p) + p^3 \]
+A $5$-component system is more likely to operate effectively if and only if
+\begin{align*}
+    {5 \choose 3} p^3 (1-p)^2 + {5 \choose 4} p^4 (1 - p) + p^5 &>
+    {3 \choose 2} p^2 (1-p) + p^3                                           \\
+    10p^3(1-p)^2 + 5p^4(1-p) + p^5 &> 3p^2(1-p) + p^3 + p^3                 \\
+    (1-p)(10p - 10p^2 + 5p^2 - 3 - p - p^2) &> 0                            \\
+    (1-p)(9p - 6p^2 - 3) = (1-p)(3p - 2p^2 - 1) = (1-p)(1-p)(2p-1) &> 0     \\
+\end{align*}
+Hence, $p > \frac{1}{2}$
+\end{solution}

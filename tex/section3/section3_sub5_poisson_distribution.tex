@@ -1,0 +1,72 @@
+\subsection{Poisson Distribution}
+\begin{definition}
+    An random variable $X$ is said to follow Poisson distribution with
+parameter $\lambda$ ($\lambda > 0$), in short $X \sim \poissondist{\lambda}$,
+if the pmf of $X$ is given by, 
+\begin{equation*}
+    p_X(k) = P(X = k) = e^{-\lambda} \cdot \frac{\lambda^k}{k!}
+    \quad k = 0, 1, 2, \dots
+\end{equation*}
+\end{definition}
+A Poisson random variable approximates the total number of successes in a large
+number of independent trials each of which has a very small probability of
+success. 
+
+\begin{example}
+    If probability of hooking a fish at each attempt is $0.04$, then the number
+of fish caught after $50$ attempts follows $\binomialdist{50}{0.04} \approx
+\poissondist{2}$.
+\end{example}
+
+\begin{theorem}
+    Let $X_n \sim \binomialdist{n}{p_n}$ where $n \cdot p_n \xrightarrow{n
+\rightarrow \infty} \lambda$ for some $\lambda \in (0, \infty)$. Then for each
+$k = 0, 1, 2, \dots$,
+    \[ P(X_n = k) \rightarrow   e^{-\lambda} \cdot \frac{\lambda^k}{k!}
+                              = P(Y = k)                                     \]
+    where $Y \sim \poissondist{\lambda}$.
+\end{theorem}
+\begin{proof}
+\begin{align*}
+    P(X_n = k) &= {n \choose k} p_n^k (1 - p_n)^{n - k}                      \\
+               &= \frac{n(n-1) \cdot (n - k + 1)}{k!} \cdot p_n^k \cdot 
+                  (1 - p_n)^n \cdot (1 - p_n)^{-k}                           \\
+               &\xrightarrow{n \rightarrow \infty} 
+                  \frac{1}{k!} \cdot 1 \cdot \lambda^k \cdot e^{-\lambda} 
+                  \cdot 1                                                    \\
+               &= e^{-\lambda} \frac{\lambda^k}{k!}  
+\end{align*}
+Note that $n \cdot p_n \xrightarrow{n \rightarrow \infty} \lambda \in (0,
+\infty)$, and $p_n \xrightarrow{n \rightarrow \infty} 0$.
+\end{proof}
+
+\begin{theorem}
+    If $X \sim \poissondist{\lambda}$, then,
+    \begin{equation*}
+        E[X] = \lambda \qquad V[X] = \lambda
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    \begin{align*}
+        & E[X] = \sum_{k = 0}^\infty k \cdot P(X = k)                         
+               = \sum_{k = 1}^\infty k \cdot e^{-\lambda} \cdot
+                 \frac{\lambda^k}{k!}                                         
+               = e^{-\lambda} \cdot \sum_{k = 1}^\infty
+                 \frac{\lambda^k}{(k-1)!}                                     
+               = e^{-\lambda} \cdot \lambda \cdot \sum_{k = 1}^\infty
+                 \frac{\lambda^{k-1}}{(k-1)!}                                 
+               = e^{-\lambda} \cdot \lambda \cdot e^\lambda 
+               = \lambda                                                     \\
+        & E[X(X-1)] = \sum_{k = 2}^\infty k(k-1) \cdot P(X = k)
+                    = \sum_{k = 2}^\infty k(k-1) e^{-\lambda} \cdot
+                      \frac{\lambda^k}{k!}
+                    = e^{-\lambda} \cdot \sum_{i = 2}^\infty
+                      \frac{\lambda^k}{(k-2)!}
+                    = \lambda^2 \cdot e^{-\lambda} \cdot e^\lambda
+                    = \lambda^2                                              \\
+        & E[X^2] = E[X(X - 1)] + E[X] = \lambda^2 + \lambda                  \\
+        & V[X] = E[X^2] - (E[X])^2  
+               = \lambda^2 + \lambda - \lambda^2
+               = \lambda
+    \end{align*}
+\end{proof}
