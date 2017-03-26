@@ -70,3 +70,65 @@ Note that $n \cdot p_n \xrightarrow{n \rightarrow \infty} \lambda \in (0,
                = \lambda
     \end{align*}
 \end{proof}
+
+\begin{example}
+    A book has $500$ pages. The probability that a typographical error occurs
+in a page is $0.005$. Use Poisson approximation to find the probability that
+not more than one page contains a typo.
+\end{example}
+\begin{solution}
+    Let $X$ denote the number of pages that contain a typo. Then $X
+\sim \binomialdist{500}{0.005}$. Hence,
+    \[ P(X \leq 1) = P(X = 0) + P(X = 1) \approx P(Y = 0) + P(Y = 1) \]
+    where, $Y \sim \poissondist{2.5}$ ($500 \cdot 0.005 = 2.5$). Hence,
+    \[ 
+       P(X \leq 1) = e^{-2.5} \cdot (1 + \frac{2.5}{1!})
+                   = 3.5 \cdot e^{-2.5}
+    \]
+\end{solution}
+
+\begin{example}
+    An item is a store has a marked price of $\$100$. For each customer
+purchasing the item during a particular day, the store owner reduces the price
+of the item by a factor of one-half (i.e. the first customer pays $\$50$, the
+second pays $\$25$ etc.). If the number of customers who purchase the item
+during the day follows a Poisson distribution with mean $2$, find the expected
+price of the item at the end of the day.
+\end{example}
+\begin{solution}
+    If $Y$ denotes the number of customers who purchase that item during the
+day, then,
+    \[ Y \sim \poissondist{2} (\lambda = 2 \text{ as mean equals two.}) \]
+    The cost at the end of the day is $C = 100 \cdot (\frac{1}{2})^Y$. Hence, 
+    \[
+        E[(\frac{1}{2})^Y] = \sum_{k = 0}^\infty (\frac{1}{2})^k \cdot
+                             e^{-2} \cdot \frac{2^k}{k!}
+                           = \sum_{k = 0}^\infty e^{-2} \cdot \frac{1}{k!}
+                           = e^{-2} \cdot e 
+                           = e^{-1}
+    \]
+    \[
+        E[C] = E[100 \cdot (\frac{1}{2})^Y]
+             = 100 \cdot E[(\frac{1}{2})^Y]
+             = 100 \cdot e^{-1}
+    \]
+\end{solution}
+
+\begin{example}
+    A radioactive piece of rock emits particles at random time intervals. Let
+$X_1$ denote the time at which the first particle is emitted. If the number of
+particles emitted in a time interval of length $t$ follows a Poisson
+distribution with mean $\lambda t$, find $P(X_1 > x)$ for $x > 0$.
+    \begin{figure*}[!htp]
+        \centering
+        \def\svgwidth{\textwidth}
+        \includesvg[./section3/figure/]{sec3-sub5-fig1}
+    \end{figure*}
+\end{example}
+\begin{solution}
+    Let $N_x \coloneqq \#\text{particles emitted in time interval }[0, x]$.
+Then, 
+    \[ N_x \sim \poissondist{\lambda x} \] 
+    Now, 
+    \[P(X_1 > x) = P(N_x = 0) = e^{-\lambda x} \]
+\end{solution}

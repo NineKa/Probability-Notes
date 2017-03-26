@@ -1,0 +1,128 @@
+\subsection{Geometric Distribution}
+\begin{definition}
+    An random variable $X$ follows a geometric distribution with probability of
+success $p$, or simply $X \sim \geometricdist{p}$, if the pmf of $X$ is given
+by, 
+    \[ p_X(k) = P(X = k) = p \cdot (1-p)^{k - 1} \quad k = 1, 2, 3, \dots \]
+\end{definition}
+This is indeed a pmf, since $p_X(k) \geq 0, \forall k \geq 1$, and 
+    \[ \sum_{k = 1}^\infty p_X(k) = p \cdot \sum_{k = 1}^\infty (1 - p)^{k - 1}
+                                  = \frac{p}{1 - (1 - p)}
+                                  = 1                                        \]
+
+\noindent
+\textbf{Interpretation}: suppose that, 
+\begin{itemize}[noitemsep, topsep=0em]
+    \item you have an infinite sequence of independent and identical trials;
+    \item each trial can result in either success or failure;
+    \item probability of success in each trial is $p$ (hence probability of
+          failure in each trial is $q = 1-p$).
+\end{itemize}
+Let $Y$ denote the first trial that results in a success. Then $Y \sim
+\geometricdist{p}$. Then, 
+\begin{align*}
+    P(Y = k) &= P( \bigcap_{i=1}^{k-1} \lbrace \text{failure in $i$-th trial}
+                \rbrace \cap \lbrace \text{success in $k$-th trial} \rbrace) \\
+             &= \prod_{i=1}^{k - 1} P(\text{failure in $i$-th trial}) \cdot 
+                P(\text{success in $k$-th trial})                            \\
+             &= (1-p)^{k-1} \cdot p
+\end{align*}
+
+\begin{example}
+    Exactly $10^6$ lottery tickets are sold every week. Jim buys $2$ tickets
+every week. If $X$ denotes the number of weeks Jim has to wait before he wins
+for the first time, what is the distribution of $X$?
+\end{example}
+\begin{solution}
+    \[ X \sim \geometricdist{\frac{2}{10^6}} \]
+\end{solution}
+
+\begin{theorem}
+    If $X \sim \geometricdist{p}$, then
+    \[ E[X] = \frac{1}{p} \qquad V[X] = \frac{1-p}{p^2} \]
+\end{theorem}
+\begin{proof}
+    \[ E[X] = \sum_{k = 1}^\infty k \cdot p \cdot (1-p)^{k - 1}
+            = p \cdot \frac{1}{(1 - ( 1 - p))^2}
+            = \frac{1}{p}                                                    \]
+    \begin{align*}
+        E[X^2] &= \sum_{k = 1}^\infty k^2 \cdot p \cdot (1 - p)^{k - 1}      \\
+               &= \sum_{k = 1}^\infty k(k - 1) \cdot p \cdot (1 - p)^{k - 1} +
+                  \sum_{k = 1}^\infty k \cdot p \cdot (1 - p)^{k - 1}        \\
+               &= p(1 - p) \sum_{k = 1}^\infty k(k - 1)(1 - p)^{k - 2} +
+                  \frac{1}{p}                                                \\
+               &= p(1 - p) \cdot 2 \cdot (1 - (1 - p))^{-3} + \frac{1}{p}    \\
+               &= \frac{2(1-p)}{p^2} + \frac{1}{p}                           
+                = \frac{2}{p^2} - \frac{1}{p}
+    \end{align*}
+    \[ V[X] = E[X^2] - (E[X])^2
+            = \frac{2}{p^2} - \frac{1}{p} - (\frac{1}{p})^2
+            = \frac{1}{p^2} - \frac{1}{p}
+            = \frac{1 - p}{p^2}                                              \]
+\end{proof}
+
+\begin{example}
+    If $Y \sim \geometricdist{p}$, show that, 
+    \begin{enumerate}[noitemsep, topsep=0em]
+        \item $P(Y > k) = (1 - p)^k$, for $k = 1, 2, 3, \dots$, 
+        \item $P(Y > k_1 + k+2 \vert Y > k_1) = (1 - p)^{k_2} = P(Y > k_2)$,
+              for $k_1, k_2 = 1, 2, 3, \dots$,
+        \item is called the memoryless property of the geometric distribution
+    \end{enumerate}
+\end{example}
+\begin{solution} \quad                                                       \\
+    \begin{enumerate}[noitemsep, topsep=0em]
+        \item 
+        \begin{align*}
+           P(Y > k) &= \sum_{j = k + 1}^\infty P(Y = j)                      \\
+                    &= \sum_{j = k + 1}^\infty p \cdot (1 - p)^{j - 1}       \\
+                    &= p \cdot (1 - p)^k \cdot \sum_{j = k + 1}^\infty        
+                       (1 - p)^{j - k - 1}                                   \\
+                    &= p (1 - p)^k \cdot \frac{1}{1 - (1 - p)}               \\
+                    &= (1 - p)^k                                             
+        \end{align*}
+        Alternatively,
+        \[ P(Y > k) = P(\text{zero successes in first $k$ trials})
+                    = (1 - p)^k                                              \]
+        \item
+        \[   P(Y > k_1 + k_2 \vert Y > k_1)
+           = \frac{P(\lbrace Y > k_1 + k_2 \rbrace \cap \lbrace Y > k_1
+             \rbrace)}{P(Y > k_1)}  
+           = \frac{Y > k_1 + k_2}{P(Y > k_1)}
+           = \frac{(1 - p)^{k_1 + k_2}}{(1 - p)^{k_1}}
+           = (1 - p)^{k_2}                                                   \]
+    \end{enumerate}
+\end{solution}
+
+\begin{example}
+    Snakes and ladders is a two-players game in which Player $1$ and Player $2$
+take turns rolling a fair die, and the player to roll $1$ first gets to move
+his chip first. Assume that player $1$ rolls the die first.
+\begin{enumerate}[noitemsep, topsep=0em]
+    \item What is the probability that Player $1$ moves his chip first?
+    \item Given that player $1$ moves first, what is the probability that he
+moves on his second roll (overall third roll of the die)?
+\end{enumerate}
+\end{example}
+\begin{solution}
+    \begin{enumerate}[noitemsep, topsep=0em]
+        \item 
+        Let $Y$ be the first time $1$ turns up. Then,
+        \begin{align*}
+            P(\text{Player $1$ moves first})
+                &= P(Y = 1) + P(Y = 3) + P(Y = 5) + \dots                    \\
+                &= \sum_{k = 0}^\infty \frac{1}{6}(1 - \frac{1}{6})^{2k}     \\
+                &= \frac{1}{6} \sum_{k = 0}^\infty (\frac{5}{6})^{2k}        \\
+                &= \frac{\frac{1}{6}}{1 - \frac{25}{36}}
+                 = \frac{1}{6} \cdot \frac{36}{11}
+                 = \frac{6}{11}
+        \end{align*}
+        \item
+        \begin{align*}
+            P(Y = 3 \vert \text{Player $1$ moves first})
+                &= \frac{P(Y = 3)}{\frac{6}{11}}                             \\
+                &= (\frac{5}{6})^2 \cdot \frac{1}{6} \cdot \frac{11}{6}      \\
+                &= \frac{275}{1296}
+        \end{align*}
+    \end{enumerate}
+\end{solution}
