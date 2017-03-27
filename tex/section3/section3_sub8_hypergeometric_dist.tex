@@ -1,0 +1,94 @@
+\subsection{Hypergeometric Distribution}
+\begin{definition}
+    Suppose $\mathbf{N}, n$ and $r$  are positive integers such that $n \leq
+\mathbf{N}$ and $r \leq \mathbf{N}$. Then an random variable $Y$ follows a
+hypergeometric distribution with parameters $\mathbf{N}$, $n$ and $r$, or
+simply $Y \sim \hypergeometricdist{\mathbf{N}}{n}{r}$, if
+\[ p_Y(k) = 
+   P(Y = k) = \frac{{r \choose k} {{\mathbf{N} - r} \choose {n - k}}}       
+              {{\mathbf{N} \choose n}}                                       \]
+where $k$ is an integer such that, $0 \leq k \leq r$ and $0 \leq n - k \leq
+\mathbf{N} - r$.
+\end{definition}
+
+\noindent
+This is indeed a pmf. Clearly, $P(Y = k) \geq 0$. To see why $\sum_{k = 0}^n
+P(Y = k) = 1$, note that, 
+\[ (1 + x)^\mathbf{N} = (1 + x)^r \cdot (1 + x)^{\mathbf{N} - r}             \]
+and the coefficient of $x^n$ on the left side is ${\mathbf{N} \choose n}$,
+where as the right side can be expanded as, $(\sum_{j = 0}^r {r \choose j}
+\cdot x^j) \cdot (\sum_{s = 0}^{\mathbf{N} - r} {{\mathbf{N} - r} \choose s}
+\cdot x^s)$, and hence the coefficient of $x^n$ on the right side is 
+$\sum_{k = 0 \lor (n + r - \mathbf{N})}^{r \land n} {r \choose k} \cdot
+{{\mathbf{N} - r} \choose {n - k}}$. Hence, 
+\[ 
+    \sum_{k = 0 \lor (n + r - \mathbf{N})}^{r \land n} 
+        {r \choose k} \cdot
+        {{\mathbf{N} - r} \choose {n - k}}
+    =
+    {{\mathbf{N}} \choose n}
+\]
+which shows that $\sum P(Y = k) = 1$.
+
+\note There is a simple combinatorial argument for proving the above identity
+which we will do next.
+
+\noindent
+\textbf{Interpretation}: suppose an jar contains $\mathbf{N}$ distinguishable
+balls of which $r$ are red and $(\mathbf{N} - r)$ are blue, and you select an
+unordered sample of $n$ balls without replacement at random. If $Y$ denotes the
+number of red balls in the sample, then $Y \sim
+\hypergeometricdist{\mathbf{N}}{n}{r}$.
+
+Total number of possible samples is $\mathbf{N} \choose n$. The number of
+sample in which there are exactly $k$ read and $(n - k)$ blue balls is ${r
+\choose k} {{\mathbf{N} - r} \choose {n - k}}$. Hence the claim follows.
+
+\begin{theorem}[Binomial approximation to Hypergeometric Distribution]
+    If $\mathbf{N} \rightarrow \infty$, $\frac{r_\mathbf{N}}{\mathbf{N}}
+\rightarrow p \in (0, \infty)$, $n$ is kept fixed, and $Y_{\mathbf{N}, n,
+r_\mathbf{N}} \sim \hypergeometricdist{\mathbf{N}}{n}{r_\mathbf{N}}$, then 
+\[
+    \lim_{\mathbf{N} \rightarrow \infty} P(Y_{\mathbf{N}, n, r_\mathbf{N}} = k)
+  = {n \choose k} \cdot p^k \cdot (1 - p)^{n - k}
+\]
+for $k = 0, 1, \dots, n$.
+\end{theorem}
+\note An unordered sample (without replacement) of $n$ balls out of
+$\mathbf{N}$ many balls can be drawn by sequentially drawing $n$ balls without
+replacement and then ignoring the order in which they were drawn. The theorem
+above essentially says that if both $\mathbf{N}$ and $r_\mathbf{N}$ are large,
+such that $\frac{r_\mathbf{N}}{\mathbf{N}} \approx p$, then sampling without
+replacement is almost equivalent to sampling with replacement which corresponds
+to binomial distribution with parameters $n$ and $p$.
+\begin{proof}
+    First note that the bounds $0 \lor (n + r_\mathbf{N} - \mathbf{N}) \leq k
+\leq r_\mathbf{N} \land n$ correspond to $0 \leq k \leq n$ in the case
+$\mathbf{N} \rightarrow \infty$ limit. Now for every $0 \leq k \leq n$,
+\begin{align*}
+    \frac{{r_\mathbf{N} \choose k}{{N - r_\mathbf{N}} \choose {n -k}}}
+         {{\mathbf{N} \choose n}}
+ &= \frac{r_\mathbf{N} (r_\mathbf{N} - 1) \dots (r_\mathbf{N} - k + 1)}{k!}
+    \cdot
+    \frac{(\mathbf{N} - r_\mathbf{N}) \dots (\mathbf{N} - r_\mathbf{N} - n
+         + k + 1)}{(n-k)!}
+    \cdot
+    \frac{n!}{\mathbf{N}(\mathbf{N} - 1) \dots (\mathbf{N} - n + 1)}         \\
+ &\approx \frac{r_\mathbf{N}^k}{k!} \cdot
+          \frac{(\mathbf{N} - r_\mathbf{N})^{n - k}}{(n - k)!} \cdot
+          \frac{n!}{\mathbf{N}^n}                                            \\
+ &= \frac{r_\mathbf{N}^k \mathbf{N}^{n - k}}{\mathbf{N}^n} \cdot
+    \frac{n!}{k! (n - k)!} \cdot
+    (1 - \frac{r_\mathbf{N}}{\mathbf{N}})^{n - k}                            \\
+ &\approx p^k \cdot {n \choose k} \cdot (1 - p)^{n - k}
+\end{align*}
+\end{proof}
+
+\begin{theorem}
+    If $Y \sim \hypergeometricdist{\mathbf{N}}{n}{r}$, then,
+    \[ E[Y] = \frac{n \cdot r}{\mathbf{N}} \qquad
+       V[Y] = n \cdot 
+              \frac{r}{\mathbf{N}} \cdot 
+              \frac{\mathbf{N} - r}{\mathbf{N}} \cdot
+              \frac{\mathbf{N} - n}{\mathbf{N} - 1}                          \]
+\end{theorem}

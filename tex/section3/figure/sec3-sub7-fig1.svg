@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1024 768" style="enable-background:new 0 0 1024 768;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st1{font-family:'MyriadPro-Regular';}
+	.st2{font-size:12px;}
+</style>
+<g>
+	<line class="st0" x1="66.5" y1="103" x2="66.5" y2="154"/>
+</g>
+<g>
+	<line class="st0" x1="218.5" y1="103" x2="218.5" y2="154"/>
+</g>
+<g>
+	<line class="st0" x1="495.5" y1="103" x2="495.5" y2="154"/>
+</g>
+<line class="st0" x1="66.5" y1="128.5" x2="218.5" y2="128.5"/>
+<line class="st0" x1="495.5" y1="128.5" x2="218.5" y2="128.5"/>
+<line class="st0" x1="495.5" y1="128.5" x2="716.5" y2="128.5"/>
+<text transform="matrix(1 0 0 1 220.0117 154.2412)"><tspan x="0" y="0" class="st1 st2">$X_1$-th trial</tspan><tspan x="0" y="14.4" class="st1 st2">(first success)</tspan></text>
+<text transform="matrix(1 0 0 1 495.3682 154.0688)"><tspan x="0" y="0" class="st1 st2">$X_1 + X_2$-th trial</tspan><tspan x="0" y="14.4" class="st1 st2">(second success)</tspan></text>
+<text transform="matrix(1 0 0 1 724.2529 128.46)" class="st1 st2">$\dots$</text>
+</svg>

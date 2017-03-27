@@ -1,0 +1,103 @@
+\subsection{Negative Binomial Distribution}
+This is a generalization of the geometric distribution. 
+\begin{definition}
+    An random variable $Y$ follows a negative binomial distribution with
+parameters $r$ and $p$, where $r \in \lbrace 1, 2, \dots \rbrace$ and $p
+\in [0, 1]$, if its pmf is given by, 
+\[ p_Y(k) = P(Y = k) = {{k - 1} \choose {r - 1}} p^r (1 - p)^{k - r}
+   \quad k = r, r+1, r+2, \dots                                              \]
+\end{definition}
+This is a pmf, since, 
+\[   \sum_{k = r}^\infty p_Y(k) 
+   = \sum_{k = r}^\infty {{k - 1} \choose {r - 1}} p^r (1 - p)^{k - r}  
+   = p^r ((1 - (1 - p))^{-r}
+   = p^r \cdot p^{-r}
+   = 1                                                                       \]
+
+\noindent
+\textbf{Interpretation}: Same setup as a geometric distribution:
+\begin{enumerate}[noitemsep, topsep=0em]
+    \item infinite sequence of independent and identical trials;
+    \item each trial has two possible outcomes - success and failure;
+    \item probability of success in each trial is $p$, and probability of
+          failure in each trial is $(1 - p)$. 
+\end{enumerate}
+If the $r$-th success occurs in the $y$-th trial, then,
+\[ Y \sim \negbinomialdist{r}{p} \]
+(When $r = 1$, we get a $\binomialdist{p}$ distribution). As, for $k \geq n$
+\[
+    P(Y = k) = P(\lbrace \text{success in $k$-th trial} \rbrace \cap
+                 \lbrace \text{$r-1$ success in the first $k-1$ trials}\rbrace)
+\]
+Note that the probability of any sequence of successes and failures of length
+$k - 1$ that has $r - 1$ success and $k - r$ failures is $p^{r - 1}(1 - p)^{k -
+r}$. Thus,
+\begin{align*}
+    P(Y = k) &= p \cdot p^{r - 1}(1 - p)^{k - r} \cdot
+                (\# \text{sequences of length $k - 1$ that have $r - 1$
+                successes and $k - r$ failures})                             \\
+             &= p^r \cdot (1 - p)^{k - r} \cdot {{k - 1} \choose {r - 1}}  
+\end{align*}
+Suppose the first success occurs at the $X_1$-th trial, and then the second
+success occurs $X_2$ many trials after that. Define the random  variables,
+$X_2, X_3, \dots, X_r$ similarly. 
+\begin{figure*}[!htp]
+    \centering
+    \def\svgwidth{\textwidth}
+    \includesvg[./section3/figure/]{sec3-sub7-fig1}
+\end{figure*}
+
+\noindent
+Note that,
+\[ X_1 \sim \geometricdist{p} \quad X_2 \sim \geometricdist{p} \quad
+   \dots \quad X_r \sim \geometricdist{p}                                   \]
+and
+\[ Y = X_1 + \dots + X_r                                                    \]
+Thus a $\negbinomialdist{r}{p}$ random variable can be expressed as a sum of
+$r$ $\geometricdist{p}$ random variables. 
+
+\begin{theorem}
+    If $Y \sim \negbinomialdist{r}{p}$, then,
+    \[ E[Y] = \frac{r}{p} \qquad V[Y] = \frac{r(1 - p)}{p^2}                \]
+\end{theorem}
+\begin{proof}
+    If $Y \sim \negbinomialdist{r}{p}$ then,
+    \[ E[Y] = E[X_1 + X_2 + \dots + x_r]                                    \]
+    where $X_i \sim \geometricdist{p} \quad i = 1, 2, \dots, r$. Hence,
+    \[ E[Y] = E[X_1] + E[X_2] + \dots + E[X_r]
+            = \frac{r}{p}                                                   \]
+    Alternatively,
+    \begin{align*}
+        E[Y] &= \sum_{k = r}^\infty k \cdot {{k - 1} \choose {r - 1}} p^r
+                (1 - p)^{k - r}                                             \\
+             &= \sum_{k = r + 1}^\infty (k - r) \cdot {{k - 1} \choose {r - 1}}
+                p^r \cdot (1 - p)^{k - r} + r \sum_{k = r}^\infty {{k - 1} 
+                \choose {r - 1}} p^r (1 - p)^{k - r}                        \\
+             &= p^r (1 - p) (\sum_{k = r + 1}^\infty (k - r){{k - 1} \choose
+                {r - 1}} (1 - p)^{k - r - 1}) + r                           \\
+             &= p^r (1 - p) (- \frac{\delta}{\delta p} \sum_{k = r}^\infty
+                {{k - 1} \choose {r - 1}} \cdot (1 - p)^{k - r}) + r        \\
+             &= p^r (1 - p)(- \frac{\delta}{\delta p} (1 - (1 - p))^{-r})
+                + r                                                         \\
+             &= p^r (1 - p) \cdot \frac{r}{p^{r + 1}} + r                   \\
+             &= \frac{r(1 - p)}{p} + r
+              = \frac{r}{p}
+    \end{align*}
+    \[ V[Y] = E[Y^2] - (E[Y])^2 = E[Y^2] - \frac{r^2}{p^2}                  \]
+    To compute $E[Y^2]$, one can use a similar technique, $i.e.$ differentiate
+the power series twice. The calculation is slightly larger.
+\end{proof}
+
+\begin{example}
+    A radio station asks a question with four possible choices for its answers
+and asks people to call and answer the question. The second caller to answer
+correctly will win a special price. Assuming that people just make a random
+guess about the answer, find the probability that the fifth caller will win the
+prize. 
+\end{example}
+\begin{solution}
+    If the $X$-th caller wins the prize, then $X \sim
+\negbinomialdist{2}{\frac{1}{4}}$. Hence, 
+    \[ P(X = 5) = {4 \choose 1} (\frac{1}{4})^2 (\frac{3}{4})^3
+                = \frac{27}{256}                                            \]
+\end{solution}

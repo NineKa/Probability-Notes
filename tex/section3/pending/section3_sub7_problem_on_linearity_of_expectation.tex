@@ -1,0 +1,41 @@
+\subsection{Problem on Linearity of Expectation}
+\begin{example}
+    When a coin is tossed multiple times, a run of length $k$ means a maximal
+sequence of $k$ consecutive heads on tails. For example,
+\begin{itemize}[noitemsep, topsep=0em]
+    \item number of runs $6$: $\langle H \vert TTT \vert HH \vert T \vert H
+          \vert T \rangle$,
+    \item number of runs $5$: $\langle H \vert T \vert H \vert T \vert HHH
+          \rangle$.
+\end{itemize} 
+    Let $X_n$ denote the number of runs when a coin is tossed $n$ times. Assume
+that probability of landing heads in each toss is $p$. Find $E[X_n]$.
+\end{example}
+
+\note You can compute the numbers of runs by scanning the sequence left to
+right and add a $+1$ to the current count every time a new run starts. This can
+be used to compute $E[X_n]$
+
+\begin{solution}
+    Note that the first letter always starts a new run, and for $i \geq 2$, the
+$i$-th letter starts a new run if and only if the $i$-th letter is different
+from the $(i - 1)$-th letter. 
+
+    Let $Y_1 \coloneqq 1$, and $Y_i \coloneqq 1_{\lbrace i\text{-th letter is
+different from }(i - 1)\text{-th letter} \rbrace}$, for $2 \leq i \leq n$.
+Then, 
+    \[ X_n = Y_1 + Y_2 + \dots + Y_n
+       \Rightarrow E[X_n] = E[Y_1] + E[Y_2] + \dots + E[Y_n]                 \]
+    
+    Now $E[Y_1] = 1$ and for $2 \leq i \leq n$, 
+    \begin{align*}
+        E[Y_i] &= E[1_{\lbrace \text{$i$-th letter is different from $(i -
+                  1)$-th letter} \rbrace}]                                   \\
+               &= P(\text{$i$-th letter is different from $(i - 1)$-th 
+                  letter})                                                   \\
+               &= P(\text{$(i-1)$-th letter is $T$ and $i$-th letter is $H$})+
+                  P(\text{$(i-1)$-th letter is $H$ and $i$-th letter is $T$})\\
+               &= 2p(1 - p)
+    \end{align*}
+    \[ \Rightarrow E[X_n] = 1 + 2 (n - 1) \cdot p( 1 - p)                    \]
+\end{solution}
