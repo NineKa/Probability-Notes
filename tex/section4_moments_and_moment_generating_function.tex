@@ -1,0 +1,193 @@
+\section{Moments and Moment-Generating Function (mgf)}
+\begin{definition}
+    The $k$-th moment of a real-valued random variable $X$ is defined to be
+$E[X^k]$, often denoted by $M_k^\prime$. The $k$-th central moment of $X$ is
+defined to be,
+    \[ M_k \coloneqq E[X - M_1^\prime]^k = E[X- E[X]]^k                      \]
+\end{definition}
+\note $M_1^\prime = E[X]$ and $M_2 = V[X]$.
+
+\begin{definition}
+    The moment-generating function (mgf) of a real-valued random variable $X$
+is defined to be,
+    \[ m_X(t) \coloneqq E[e^{tX}] \quad t \in \mathbb{R}                     \]
+\end{definition}
+\note Sine $e^{tX}$ is a nonnegative random variable, $E[e^{tX}]$ always makes
+sense, but it can be infinite for some values of $t$.
+
+\note $m_X(0) = 1$ and $m_X(t) \geq 0 \quad \forall t$
+
+\begin{example}[examples of real-valued random variable for which not all
+                moments are finite]
+\[ p_1(n) = P(X_1 = n) = \frac{6}{\pi^2 n^2} \quad n = 1, 2, 3, \dots       \]
+Clearly $P_1(n) \geq 0$. That $\sum_{n = 1}^\infty p_1(n) = 1$ follows from the
+fact that $\sum_{n = 1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}$. Now,
+\[ E[X_1] = \frac{6}{\pi^2} \sum_{n = 1}^\infty \frac{n}{n^2}
+          = \frac{6}{\pi^2} \sum_{n = 1}^\infty \frac{1}{n}
+          = \infty                                                          \]
+Now consider,
+\[ p_2(n) = P(X_2 = n) = \frac{1}{\zeta(3) n^3} \quad n = 1, 2, 3, \dots    \]
+Then
+\[  E[X_2] = \frac{1}{\zeta(3)} \sum_{n = 1}^\infty \frac{1}{n^2} < \infty
+    \qquad
+    E[X_2^2] = \frac{1}{\zeta(3)} \sum_{n = 1}^\infty \frac{1}{n} = \infty  \]
+\end{example}
+
+\begin{theorem}
+    If the mgt of $X$, $m_X(t)$ is finite on $(-a, a)$, for some $a > 0$, then
+    \[ E[\vert X \vert^\beta] < \infty \quad \forall \beta > 0              \]
+\end{theorem}
+\begin{proof}
+    For every $\alpha, \beta > 0$, $\exists c_{\alpha, \beta} > 0$, such that,
+    \[ y^\beta \leq c_{\alpha, \beta} e^{\alpha y} \quad \forall y \geq 0   \]
+    Hence,
+    \[ X^\beta \cdot 1_{\lbrace X > 0 \rbrace} \leq
+           c_{\alpha, \beta} e^{\alpha X} \cdot 1_{\lbrace X > 0 \rbrace}
+       \qquad \Rightarrow
+       E[X^\beta \cdot 1_{\lbrace X > 0 \rbrace}]
+       \leq c_{\alpha, \beta} E[e^{\alpha X} \cdot 1_{\lbrace X > 0 \rbrace}]
+       \leq c_{\alpha, \beta} E[e^{\alpha X}]
+       \leq \infty
+    \]
+    Whenever $0 < \alpha < a$, By considering $-X$ instead of $X$ we get,
+    \[ \begin{cases}
+           E[\vert X \vert^\beta \cdot 1_{\lbrace X > 0 \rbrace}] < \infty   \\
+           E[\vert X \vert^\beta \cdot 1_{\lbrace X < 0 \rbrace}] < \infty
+       \end{cases}
+       \Rightarrow
+       E[\vert X \vert^\beta] =
+           E[\vert X \vert^\beta \cdot 1_{\lbrace X > 0 \rbrace}] +
+           E[\vert X \vert^\beta \cdot 1_{\lbrace X < 0 \rbrace}]
+       < \infty                                                              \]
+\end{proof}
+
+\begin{theorem}
+    If the mgf of $X$, $m_X(\cdot)$, is finite on the interval $(-a, a)$, then
+$m_X(\cdot)$ admits a power-series expansion on $(-a, a)$:
+\begin{equation}
+    \label{section4_thm1_ref1}
+    m_X(t) = \sum_{k = 0}^\infty \frac{t^k}{k!} E[X^k]
+    \quad \text{for } t \in (-a, a)
+\end{equation}
+   Consequently, $m_X(\cdot)$ is differentiable infinitely many times on $(-a,
+a)$, and,
+\[   \frac{\delta^r}{\delta t^r} m_X(t)
+   = \sum_{k = 0}^\infty \frac{t^k}{k!} E[X^{k+r}]
+   \quad \text{for } t \in (-a, a), r = 1, 2, 3, \dots                      \]
+    In particular,
+\[        \left. \frac{\delta^r}{\delta t^r} m_X(t) \right\vert_{t = 0} =E[X^r]
+   \qquad \left. \frac{\delta}{\delta t} m_X(t) \right\vert_{t = 0} = E[X],
+          \left. \frac{\delta^2}{\delta t^2} m_X(t) \right
+              \vert_{t = 0} = E[X^2],
+          \dots                                                             \]
+\end{theorem}
+\note \ref{section4_thm1_ref1} is the reason $m_X(\cdot)$ is called the moment
+generating function.
+
+\begin{example}[Binomial Distribution]
+    $X \sim \binomialdist{n}{p}$,
+    \[
+         E[e^{tX}] = \sum_{k = 0}^n e^{tk} {n \choose k} p^k (1 - p)^{n - k}
+                   = \sum_{k = 0}^n {n \choose k} (pe^t)^k (1 - p)^{n - k}
+                   = (1 - p + p e^t)^n
+    \]
+    Note that,
+    \[
+         \left. \frac{\delta}{\delta t} (1 - p + p e^t)^n \right \vert_{t = 0}
+       = \left. n (1 - p + p e^t)^{n - 1} \cdot p \right \vert_{t = 0}
+       = n p
+       = E[X]
+    \]
+\end{example}
+
+\begin{example}[Poisson Distribution]
+    $X \sim \poissondist{\lambda}$,
+    \[
+         E[e^{tX}] = \sum_{k = 0}^\infty e^{tk} e^{-\lambda} \cdot
+                     \frac{\lambda^k}{k!}
+                   = \sum_{k = 0}^\infty e^{-\lambda} \cdot
+                     \frac{(\lambda e^t)^k}{k!}
+                   = e^{-\lambda} \cdot e^{\lambda e^t}
+                   = e^{\lambda e^t - \lambda}
+    \]
+    Note that,
+    \[
+         \left. \frac{\delta}{\delta t} e^{\lambda e^t - \lambda} \right
+             \vert_{t = 0}
+       = \left. \lambda \cdot e^{-\lambda + \lambda e^t + t} \right
+             \vert_{t = 0}
+       = \lambda
+       = E[X]
+    \]
+\end{example}
+
+\begin{example}[Geometric Distribution]
+    $X \sim \geometricdist{p}$,
+    \[
+        E[e^{tX}] = \sum_{k = 1}^\infty e^{kt} \cdot (1 - p)^{k - 1} \cdot p
+                  = p \cdot e^t \cdot \sum_{r = 0}^\infty e^{rt} (1 - p)^r
+    \]
+    This sum is finite only when,
+    \[ (1 - p) \cdot e^t < 1 \Rightarrow t < -\log{(1 - p)}                  \]
+    For $t \in (- \infty, \vert \log{(1 - p)} \vert)$,
+    \[ E[e^{tX}] = \frac{p \cdot e^t}{1 - (1 - p)e^t}                        \]
+    Note that,
+    \[
+\left. \frac{\delta}{\delta t} \frac{p \cdot e^t}{1 - (1 - p)e^t} \right
+            \vert_{t = 0}
+      = \left. \frac{e^t p}{1 - e^t(1 - p)} +
+               \frac{e^{2t} (1 - p) p}{(1 - e^t(1 - p))^2}
+                                                           \right\vert_{t = 0}
+      = 1 + \frac{1 - p}{p}
+      = \frac{p + 1 - p}{p}
+      = \frac{1}{p}
+                                                                             \]
+\end{example}
+
+\begin{theorem}
+    Suppose $X$ and $Y$ are two real-valued random variables with respective
+mgfs, $m_X(\cdot)$ and $m_Y(\cdot)$. If $\exists a > 0$ such that $m_X(t) <
+\infty \quad \forall t \in (-a, a)$, and $m_Y(t) < \infty \quad \forall t
+\in (-a, a)$, and $m_X(t) = m_Y(t) \forall t \in (-a, a)$, then $X$ and $Y$
+have the same probability distribution.
+\end{theorem}
+
+\begin{example}
+    If $m_X(t) = \frac{1}{6} e^t + \frac{2}{6} e^{2t} + \frac{3}{6} e^{3t}$,
+find,
+    \begin{enumerate}[noitemsep, topsep=0em]
+        \item $E[X]$,
+        \item $V[X]$, and,
+        \item the distribution of $X$.
+    \end{enumerate}
+\end{example}
+\begin{solution} \quad                                                       \\
+    \begin{enumerate}[noitemsep, topsep=0em]
+        \item
+        \[
+             m_X^\prime(t) 
+           = \frac{1}{6}e^t + \frac{4}{6}e^{2t} + \frac{9}{6}e^{3t}
+           \Rightarrow
+           E[X] = m_X^\prime(0) = \frac{14}{6} = \frac{7}{3}
+        \]
+        \item
+        \[
+             m_X^{\prime\prime}(t)
+           = \frac{1}{6}e^t + \frac{8}{6}e^{2t} + \frac{27}{6}e^{3t}
+           \Rightarrow
+           E[X^2] = m_X^{\prime\prime}(0) = \frac{36}{6} = 6
+           \Rightarrow
+           V[X] = E[X^2] - (E[X])^2
+                = 6 - \frac{49}{9} = \frac{5}{9}
+        \]
+        \item
+        Let $Y$ have the distribution,
+        \[
+            P(Y = 1) = \frac{1}{6} \quad
+            P(Y = 2) = \frac{2}{6} \quad
+            P(Y = 3) = \frac{3}{6}
+        \]
+        Then $m_X(t) = m_Y(t) \quad \forall t \in \mathbb{R}$, which implies
+that $X$ has the same distribution as $Y$.
+    \end{enumerate}
+\end{solution}

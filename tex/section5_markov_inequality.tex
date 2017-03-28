@@ -1,0 +1,15 @@
+\section{Markov's Inequality}
+\begin{theorem}
+    If $X$ is a real-valued nonnegative random variable, then
+    \[ P(X \geq a) \leq \frac{E[X]}{a} \qquad a > 0                          \]
+\end{theorem}
+\begin{proof}
+\begin{align*}
+   &X = X \cdot 1_{\lbrace x \geq a \rbrace} + X \cdot 1_{\lbrace x < a\rbrace}
+      \geq a \cdot 1_{\lbrace x \geq a \rbrace} + 0
+      = a \cdot 1_{\lbrace x \geq a \rbrace}                                 \\
+   &\Rightarrow \exists X \geq E[a \cdot 1_{\lbrace x \geq a \rbrace}]
+                          = a P(X \geq a)                                    \\
+   &\Rightarrow P(X \geq a) \leq \frac{E[X]}{a}
+\end{align*}
+\end{proof}

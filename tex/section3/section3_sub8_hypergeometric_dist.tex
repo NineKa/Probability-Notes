@@ -92,3 +92,32 @@ $\mathbf{N} \rightarrow \infty$ limit. Now for every $0 \leq k \leq n$,
               \frac{\mathbf{N} - r}{\mathbf{N}} \cdot
               \frac{\mathbf{N} - n}{\mathbf{N} - 1}                          \]
 \end{theorem}
+\begin{proof}
+    If $1 \leq k \leq n$ and $0 \leq n - k \leq \mathbf{N} - r$, then,
+    \[   k {r \choose k} {{\mathbf{N} - r} \choose {n - k}}
+       = \frac{n!}{(k - 1)!(r - k)!} {{\mathbf{N} - r} \choose {n - k}}      
+       = r {{r - 1} \choose {k - 1}} {{\mathbf{N} - r} \choose {n - k}}      
+       = r {{r - 1} \choose {k - 1}}
+         {{\mathbf{N} - 1 - (r - r)} \choose {n - 1 - (k - 1)}}              \]
+    Hence,
+    \[   \sum k {r \choose k} {{\mathbf{N} - r} \choose {n - k}}
+       = r {{\mathbf{N} - 1} \choose {n - 1}}                                
+       \qquad \Rightarrow
+         E[Y]
+       = \frac{r {{\mathbf{N} - 1} \choose {n - 1}}}{{\mathbf{N} \choose n}} 
+       = \frac{r n}{\mathbf{N}}                                              \]
+    Similar argument can be applied on $V[Y]$ but with a larger computation.
+\end{proof}
+
+\begin{example}[exercise 3.108 of textbook]
+    A shipment of $20$ cameras includes $3$ that are defective. What is the
+minimum number of cameras that must be selected if we require $P(\text{at least
+} 1 \text{ defective}) \geq 0.8$?
+\end{example}
+\begin{solution}
+    If $n$ cameras are selected, then
+    \[ f(n) = P(0 \text{ defective}) = \frac{{17 \choose n}}{{20 \choose n}}  
+       \qquad \Rightarrow
+       f(8) \leq 0.2 \leq f(7)                                               \]
+    So minimum sample size is $8$.
+\end{solution}
