@@ -1,0 +1,88 @@
+\subsection{Uniform Distribution}
+\begin{definition}
+Let $\theta_1 \leq \theta_2$. An random variable $X$ is said to have a uniform
+distribution on the interval $[\theta_1, \theta_2]$, or simply $X \sim
+\uniformdist{\theta_1}{\theta_2}$, if and only if the function $f$ given by,
+\[
+    f(x) = \begin{cases}
+        \frac{1}{\theta_2 - \theta_1}      & x \in [\theta_1, \theta_2].     \\
+        0                                  & \text{otherwise}
+    \end{cases}
+\]
+is a density for $X$. In particular, the cumulative distribution function of
+$X$ is given by,
+\[
+    F_X(x) = \begin{cases}
+        0                                        & x < \theta_1              \\
+        \frac{x - \theta_1}{\theta_2 - \theta_1} & \theta_1 \leq x < \theta_2\\
+        1                                        & \theta_2 \leq x
+    \end{cases}
+\]
+\begin{figure}[H]
+    \centering
+    \def\svgwidth{0.5\textwidth}
+    \includesvg[./section4/figure/]{sec3-fig4}    
+\end{figure}
+\end{definition}
+
+\begin{theorem} \quad                                                        \\
+\begin{enumerate}[noitemsep, topsep=0em]
+\item
+    If $X \sim \uniformdist{0}{1}$, then $\forall a \in \mathbb{R}, b > 0$,
+\[ 
+    Y = a + bX \sim \uniformdist{a}{a + b}
+\]
+\item
+    If $X \sim \uniformdist{\theta_1}{\theta_2}$ and $\theta_1 < \theta_2$,
+then $\forall \theta_3, \theta_4 \in [\theta_1, \theta_2]$ with $\theta_3 <
+\theta_4$, the random variable $Z$ whose distribution is given by,
+\[
+    P(Z \leq \mathbb{Z}) \coloneqq P(X \leq \mathbb{Z} \vert 
+                                     X \in [\theta_3, \theta_4])
+\]
+is uniformly distributed over $[\theta_3, \theta_4]$, i.e., $Z \sim
+\uniformdist{\theta_3}{\theta_4}$.
+\end{enumerate}
+\end{theorem}
+\begin{proof} \quad                                                          \\
+\begin{enumerate}[noitemsep, topsep=0em]
+\item
+\begin{align*}
+    P(Y \leq y) &= P(a + bX \leq y)
+                 = P(X \leq \frac{y - a}{b})
+                 = F_X \left( \frac{y - a}{b} \right)                        \\
+    &\Rightarrow F_Y(y) = \begin{cases}
+        0                   & y < a                                          \\
+        \frac{y - a}{b}     & a \leq y < a + b                               \\
+        1                   & b \leq y
+    \end{cases}                                                              \\
+    &\Rightarrow Y \sim \uniformdist{a}{a + b}
+\end{align*}   
+\item
+\[
+    P(Z \leq \mathbb{Z}) = \frac
+        {P(X \in (-\infty, \mathbb{Z}] \cap [\theta_3, \theta_4]))}
+        {P(X \in [\theta_3, \theta_4])}
+\]
+Now,
+\[
+    (-\infty, \mathbb{Z}] \cap [\theta_3, \theta_4] = \begin{cases}
+        \emptyset               & \mathbb{Z} < \theta_3                      \\
+        [\theta_3, \mathbb{Z}]  & \theta_3 \leq \mathbb{Z} < \theta_4        \\
+        [\theta_3, \theta_4]    & \theta_4 \leq \mathbb{Z}
+    \end{cases}
+\]
+and, $P(X \in [\theta_3, \theta_4]) = \frac{\theta_4 - \theta_3}{\theta_2 -
+\theta_1}$. Hence,
+\[
+    P(Z \leq \mathbb{Z}) = \begin{cases}
+        0                       & \mathbb{Z} < \theta_3                      \\
+        \frac{\mathbb{Z}-\theta_3}{\theta_4 - \theta_3} 
+            & \theta_3 \leq \mathbb{Z} < \theta_4                            \\
+        1                       & \theta_4 \leq \mathbb{Z}
+    \end{cases}
+    \Rightarrow
+    Z \sim \uniformdist{\theta_3}{\theta_4}
+\]
+\end{enumerate}
+\end{proof}

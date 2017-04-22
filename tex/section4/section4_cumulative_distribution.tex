@@ -209,3 +209,31 @@ where $F_X$ has a jump, set
     p_X(x) = F_X(x) - F_X(x-)
 \]
 and define $p_X(x) = 0$ at all other $x \in \mathbb{R}$.
+
+\begin{theorem}
+Assume that $X$ is a real-valued random variable with density $f$. Then for any
+$a, b \in \mathbb{R}$ with $a < b$, 
+\[
+    P(X \in (a, b]) = P(X \in [a, b]) = P(X \in (a, b))
+                    = F(b) - F(a)
+                    = \int_{a}^b f(u) du
+\]
+\begin{proof}
+\[
+    P(X = a) = 0 = P(X = b)
+    \Rightarrow
+    P(X \in (a, b]) = P(X = a) + P(X \in (a, b]) = P(X \in [a, b])
+\]
+First four equalities follow similarly,
+\[
+    P(X \in (a, b]) = P(X \leq b) - P(X \leq a)
+                    = F_X(b) - F_X(a)
+                    = \int_{-\infty}^b f(u) du - \int_{-\infty}^a f(u) du 
+                    = \int_{a}^b f(u) du
+\]
+\end{proof}
+\end{theorem}
+
+\input{section4/section4_sub1_distribution_of_a_function_of_an_rv}
+\input{section4/section4_sub2_expectation}
+\input{section4/section4_sub3_uniform_distribution}

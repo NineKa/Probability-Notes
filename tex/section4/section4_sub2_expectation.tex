@@ -1,0 +1,177 @@
+\subsection{Expectation}
+\begin{definition}
+If $X$ is real-valued random variable with a density $f$, and either 
+\[
+    \int_0^\infty f(x) \quad dx < \infty
+    \qquad \text{or} \qquad
+    \int_{-\infty}^0 \vert x \vert f(x) \quad dx < \infty
+\]
+then the expectation of $X$ is defined as,
+\[
+    E[X] = \int_{-\infty}^{\infty} x f(x) \quad dx
+\]
+If both $\int_{0}^{\infty} x f(x) \quad dx$ and $\int_{-\infty}^0 \vert x
+\vert f(x) \quad dx$ are infinite, then we say that $E[X]$ does not exist.
+\end{definition}
+\note the similarity with discrete random variables essentially we are
+replacing pmf by density and sum by integral.
+
+\begin{definition}
+For any real-valued random variable $X$ with cumulative distribution function
+$F_X$, then expectation of $X$ is given by,
+\[
+    E[X] = \int_{-\infty}^{\infty} x \quad dF_X(x)
+\]
+where the integral is interpreted in the Riemann-Stieltjes sense. 
+\end{definition}
+
+\begin{theorem}[without proof]
+Let $X_1$, $X_2$, $\dots$, $X_k$ be continuous random variables defined on the
+same sample space having densities $f_1$, $f_2$, $\dots$, $f_k$ respectively.
+\begin{enumerate}[noitemsep, topsep=0em]
+\item
+    Let $c \in \mathbb{R}$ and $g : \mathbb{R} \rightarrow \mathbb{R}$. Then, 
+\[
+    E[c \cdot g(X_1)] = c \cdot E[g(X_1)] 
+                      = c \cdot \int_{-\infty}^{\infty} g(u)f_1(u) \quad du
+\]
+\item
+\[
+    E[X_1 + \dots + X_k] = E[X_1] + \dots + E[X_k]
+                         = \int_{-\infty}^{\infty} x f_1(x) \quad dx +
+                           \dots +
+                           \int_{-\infty}^{\infty} x f_k(x) \quad dx
+\]
+\end{enumerate}
+\end{theorem}
+\note Even if $X_1$, $X_2$ are continuous random variables with densities,
+$g(X_1)$ or $X_1 + X_2$ may not be continuous random variables. In that case, 
+$E[g(X_1)]$ or $E[X_1 + X_2]$ is defined through the Riemann-Stielljes
+integral. But the above theorem says that the expected values computed using
+that definition coincides with,
+\[
+    \int_{-\infty}^{\infty} g(x) f(x) \quad dx
+    \qquad \text{and} \qquad
+    \int_{-\infty}^{\infty} x f_1(x) \quad dx + 
+    \int_{-\infty}^{\infty} x f_2(x) \quad dx
+\]
+respectively.
+
+\begin{definition}
+If $X$ has density $f$,  then the variance of $X$ is given by, 
+\[
+    V[X] = E[(x - \mu)^2]
+         = \int_{-\infty}^{\infty} (x - \mu)^2 f(x) \quad dx
+\]
+where $\mu = E[X]$. Consequently,
+\[
+    V[X] = E[X^2] - \mu^2
+         = \int_{-\infty}^{\infty} x^2 f(x) \quad dx -
+           \left( \int_{-\infty}^{\infty} x f(x) \quad dx \right)^2
+\]
+\end{definition}
+
+\begin{example} \quad                                                        \\
+\[
+    F_X(x) = \begin{cases}
+        0                    & x \leq 0                                      \\
+        \frac{x}{8}          & 0 < x < 2                                     \\
+        \frac{x^2}{16}       & 2 \leq 4 < 4                                  \\
+        1                    & 4 \leq x 
+    \end{cases}
+\]
+\begin{enumerate}[noitemsep, topsep=0em]
+\item Find $P(1 \leq X \leq 3)$.
+\item Find the density of $X$.
+\item Find $E[X]$, $V[X]$.
+\end{enumerate}
+\end{example}
+\begin{solution} \quad \linebreak                                
+\begin{enumerate}[noitemsep, topsep=0em]
+\item
+\[
+    P(1 \leq X \leq 3) = F_X(3) - F_X(1)
+                       = \frac{9}{16} - \frac{1}{8}
+                       = \frac{7}{16}
+\]
+\item
+Density $f_x(\cdot)$ is given by,
+\[
+    f_X(x) = \begin{cases}
+        0                  & x \leq 0                                       \\
+        \frac{1}{8}        & 0 < x < 2                                      \\
+        0                  & x = 2                                          \\
+        \frac{x}{8}        & 2 < x < 5                                      \\
+        0                  & 4 \leq x
+    \end{cases}
+\]
+\end{enumerate}
+\begin{figure}[H]
+    \centering
+    \begin{multicols}{2}
+    \def\svgwidth{\linewidth}
+    \includesvg[./section4/figure/]{sec3-fig2}
+    \columnbreak
+    \def\svgwidth{\linewidth}
+    \includesvg[./section4/figure/]{sec3-fig3}
+    \end{multicols}
+\end{figure}
+\note If instead of $F_X$, you were given $f_X$, then you could compute $P(1
+\leq X \leq 3)$ using $\int_{1}^{3} f_x(u) \quad du$.
+\item
+\[
+    E[X] = \int_{-\infty}^{\infty} x f(x) \quad dx
+         = \int_{0}^2 \frac{x}{8} \quad dx + 
+           \int_{2}^4 \frac{x^2}{8} \quad dx
+      %% = TODO: finish computation
+\]
+\[
+    E[X^2] = \int_{-\infty}^{\infty} x^2 f(x) \quad dx
+           = \int_{0}^{2} \frac{x^2}{8} \quad dx +
+             \int_{2}^{4} \frac{x^3}{8} \quad dx
+        %% = TODO: finish computation
+\]
+\[
+    V[X] = E[X^2] - (E[X])^2 %% = TODO: finish computation
+\]
+\end{solution}
+
+\begin{example}
+Suppose $X$ is a continuous random variable with density $f(\cdot)$ and
+$E[\vert X \vert] < \infty$. Show that, 
+\[
+    \lim_{a \rightarrow \infty} a P(\vert X \vert \geq a) = 0
+\]
+\end{example}
+\begin{solution}
+\begin{equation} \label{ref-sec4-thm2-1}
+    E[\vert X \vert] = \int_{-\infty}^{\infty} \vert x \vert f(x) \quad dx
+                     < \infty
+    \Rightarrow
+    \lim_{a \rightarrow \infty} \left[
+        \int_{a}^{\infty} x f(x) \quad dx +
+        \int_{-\infty}^{-a} \vert x \vert f(x) \quad dx
+    \right] = 0
+\end{equation}
+Now,
+\[
+    \int_{a}^{\infty} f(x) \quad dx \geq a \int_{a}^{\infty} f(x) \quad dx
+                                    =    a P(X \geq a)
+\]
+Similarly,
+\[
+         \int_{-\infty}^{-a} \vert x \vert f(x) \quad dx 
+    \geq a \int_{-\infty}^{-a} f(x) dx
+    =    a P(x \leq -a)
+\]
+Hence \ref{ref-sec4-thm2-1} implies that,
+\[
+    \lim_{a \rightarrow \infty} [
+        a P(X \geq a) +
+        a P(X \leq -a)
+    ] = 0
+    \Rightarrow
+    \lim{a \rightarrow \infty} a P(\vert X \vert \geq a) = 0
+\]
+\end{solution}
+

@@ -1,0 +1,73 @@
+\subsection{Distribution of a Function of an Random Variable}
+If $X$ is a real-valued random variable having a density function and $g :
+\mathbb{R} \rightarrow \mathbb{R}$, then the cumulative distribution function
+of $g(x)$ can be computed in a straightforward manner. Let $Y = g(X)$, then the
+cumulative distribution function of $Y$ is, 
+\[
+    F_Y(y) = P(g(X) \leq y) 
+           = P(X \in g^{-1}(-\infty, y])
+\]
+The density of $Y$, if it exists, can be computed just by differentiating
+$F_Y$.
+
+\begin{example}
+The density of $X$ is given by,
+\[
+    f(x) = \begin{cases}
+        c \cdot \vert x \vert       & x \in (-1, 1)                          \\
+        0                           & \text{otherwise}
+    \end{cases}
+\]
+\begin{enumerate}[noitemsep, topsep=0em]
+\item Find the value of $c$.
+\item Find the cumulative distribution function and the density of $Y = X^2$.
+\end{enumerate}
+\end{example}
+\begin{solution} \quad                                                       \\
+\begin{enumerate}[noitemsep, topsep=0em]
+\item
+\[
+    \int_{-\infty}^\infty f(x) \quad dx = 1
+    \Rightarrow \int_{-1}^1 c \vert x \vert \quad dx = 1
+    \Rightarrow 2c \cdot \int_{0}^1 x \quad dx = 1
+    \Rightarrow c = 1
+\] 
+\item
+For $y < 0$
+\[
+    P(Y \leq y) = P(X^2 \leq y) = P(\emptyset) = 0
+\]
+And for $1 \geq y \geq 0$, then
+\[
+    P(X^2 \leq y) = P(-\sqrt{y} \leq X \leq \sqrt{y})
+                  = \int_{-\sqrt{y}}^{\sqrt{y}} f(u) \quad du
+                  = \int_{-\sqrt{y}}^{\sqrt{y}} \vert u \vert \quad du
+                  = 2 \int_{0}^{\sqrt{y}} u \quad du
+                  = y
+\]
+If $y > 1$, then
+\[
+    P(X^2 \leq y) = \int_{-\sqrt{y}}^{\sqrt{y}} f(u) \quad du
+                  = \int_{-1}^{1} \vert u \vert \quad du +
+                    \int_{1}^{\sqrt{y}} 0 \quad du +
+                    \int_{-\sqrt{y}}^{-1} 0 \quad du
+                  = 1
+\]
+Hence the cumulative distribution function of $Y$ is given by,
+\[
+    F_Y(y) = \begin{cases}
+        0         & y < 0                                                    \\
+        u         & 0 \leq y \leq 1                                          \\
+        1         & y < 1         
+    \end{cases}
+\]
+The density of $Y$ is given by,
+\[
+    f_Y(y) = \begin{cases}
+        0         & y \leq 0                                                 \\
+        1         & 0 < y < 1                                                \\
+        0         & 1 \leq y
+    \end{cases}
+\]
+\end{enumerate}
+\end{solution}
