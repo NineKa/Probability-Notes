@@ -1,0 +1,22 @@
+\subsection{Chebyshev's Inequality}
+\begin{theorem}
+If $X$ is.a real-valued random variable, and $E[X] = \mu$ and $V[x] =
+\sigma^2$, then
+\[
+	P(\vert X - \mu \vert \geq x \cdot \sigma) \leq \frac{1}{x^2} 
+	\qquad \forall x > 0
+\]
+\end{theorem}
+\noindent \textbf{Interpretation}: The theorem simply says that $X$ is
+concentrated around its mean with high probability, i.e. with probability at
+least $1 - \frac{1}{x^2}$, $X$ falls in the interval $(\mu - x \sigma,
+\mu + x \sigma)$.
+\begin{proof}
+\[
+	  P(\vert X - \mu \vert) \geq x \sigma
+	= P(\vert X - \mu \vert^2 \geq x^2 \sigma^2)
+	\leq \frac{E[x - \mu]^2}{x^2 \sigma^2}
+	= \frac{\sigma^2}{x^2 \sigma^2}
+	= \frac{1}{x^2}
+\]
+\end{proof}

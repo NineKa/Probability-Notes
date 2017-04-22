@@ -1,0 +1,211 @@
+\section{Cumulative Distribution Function}
+\begin{definition}
+For any real-valued random variable $Y$, the function $F_y : \mathbb{R}
+\rightarrow [0, 1]$ defined by,
+\[
+	F_Y(y) = P(Y \leq y)
+\]
+is called the cumulative distribution function (or cdf, or distribution
+function) of $Y$.
+\end{definition}
+\begin{example}
+If $Y$ is a real-valued discrete random variable taking the values $y_1, y_2,
+\dots$, then,
+\[
+    F_Y(y) = P(Y \leq y) 
+           = \sum_{j : y_j \leq y} P(Y = y_j)
+\]
+\end{example}
+\begin{example}
+The pmf of $Y$ is given by,
+\[
+    p_Y(0) = \frac{1}{6} \qquad
+    p_Y(1) = \frac{1}{3} \qquad
+    p_Y(1.5) = \frac{1}{2}
+\]
+Find the cumulative distribution function of $Y$.
+\end{example}
+\begin{solution}
+\[
+    F_Y(y) = P(Y \leq y)
+           = \sum_{y_j \leq y} P_Y(y_j)
+\]
+Hence,
+\[
+    F_Y(y) = \begin{cases}
+        0                                              & y < 0          \\
+        \frac{1}{6}                                    & 0 \leq y < 1   \\
+        \frac{1}{6}+\frac{1}{3} =\frac{1}{2}           & 1 \leq y < 1.5 \\
+        \frac{1}{6}+\frac{1}{3}+\frac{1}{2} = 1        & 1.5 \leq y
+    \end{cases}
+\]
+\begin{figure}[H]
+    \centering
+    \includesvg[./section4/figure/]{sec3-fig1}
+    \caption{Graph of $F_Y(\cdot)$}
+\end{figure}
+\end{solution}
+\begin{example}
+$Y \sim \geometricdist{p}$, find the cumulative distribution function of $Y$. 
+\end{example}
+\begin{solution}
+\begin{align*}
+    & P(Y = k) = p(1 - p)^{k - 1} \qquad k = 1, 2, \dots                     \\
+    & \Rightarrow F_Y(y) = \sum_{k = 1}^{\lfloor y \rfloor} p (1 - p)^{k - 1}\\
+    & \Rightarrow F_Y(y) = \begin{cases}
+        0                  & y < 1                                           \\
+        1 - (1 - p)^k      & k \leq y < k + 1, k = 1, 2, 3, \dots
+    \end{cases}
+\end{align*}
+\end{solution}
+\begin{theorem}
+If $F : \mathbb{R} \rightarrow [0, 1]$ is the cumulative distribution function
+of a real-valued random variable, then the following holds:
+\begin{enumerate}[noitemsep, topsep=0em]
+\item \label{ref-sec4-thm1-1}
+    $F$ is non-decreasing on $\mathbb{R}$, i.e. if $y_1 \leq y_2$, then
+$F(y_1) \leq F(y_2)$.
+\item \label{ref-sec4-thm1-2}
+    $F(\infty) \coloneqq \lim_{x \rightarrow \infty} F(x) = 1$.
+\item \label{ref_sec4-thm1-3}
+    $F(-\infty) \coloneqq \lim{x \rightarrow -\infty} F(x) = 0$.
+\item \label{ref_sec4-thm1-4}
+    $F$ is a right continuous function, i.e. $\forall y \in \mathbb{R}$ and
+sequence $\lbrace y_n \rbrace$ such that $y_1 \geq y_2 \geq y_3 \geq
+\dots$ and $\lim_{n \rightarrow \infty} y_n = y$, $\lim_{n \rightarrow \infty}
+F(y_n) = F(y)$.
+\end{enumerate}
+\end{theorem}
+\begin{proof} \quad                                                          \\
+\begin{enumerate}[noitemsep, topsep=0em]
+\item
+    If $y_1 \leq y_2$, then $\lbrace y \leq y_1 \rbrace \subseteq \lbrace y
+\leq y_2 \rbrace \Rightarrow P(Y \leq y_1) \leq P(Y \leq y_2) \Rightarrow
+F(y_1) \leq F(y_2)$.
+\item
+    Take any sequence $x_n \uparrow \infty$. Let $A_0 = \lbrace Y \leq x_0
+\rbrace$ and for all $n \geq 1$, let $A_n = \lbrace x_{n - 1} \leq Y \leq x_n
+\rbrace$. Then,
+\[
+    \lbrace x \in \mathbb{R} \rbrace = \bigcup_{n = 0}^\infty A_n
+\]
+and the events $A_n$ are mutually disjoint. Hence,
+\[
+    1 = P(x \in \mathbb{R})
+      = P(\bigcup_{n = 0}^\infty A_n)
+      = \sum_{n = 0}^\infty P(A_n)
+      = \lim_{n \rightarrow \infty} \left[ \sum_{k = 0}^n P(A_k) \right]
+      = \lim_{n \rightarrow \infty} P(Y \leq x_n)
+      = \lim_{n \rightarrow \infty} F(x_n)
+\]
+\item
+    Note that, for any $y \in \mathbb{R}$, $1 - F(y) = P(Y > y)$. Consider any
+decreasing sequence $y_n \downarrow -\infty$, and use arguments similar to the
+ones used in \ref{ref-sec4-thm1-2} to show that, 
+\[
+                \lim_{n \rightarrow \infty} P(Y_1 > y_n) \ 1
+    \Rightarrow 1 - F(y_n) \xrightarrow{n \rightarrow \infty} 1
+    \Rightarrow F(y_n) \xrightarrow{n \rightarrow \infty} 0
+\]
+\item
+    Fix $y \in \mathbb{R}$ and a sequence $y_n \downarrow y$. Let $A_0 =
+\lbrace y_1 < Y \rbrace$, and for any $n \geq 1$, let $A_n = \lbrace y_{n + 1}
+< Y \leq y_n \rbrace$. Then $A_0, A_1, A_2, \dots$ are mutually disjoint and,
+\begin{align*}
+    &\bigcup_{n = 0}^\infty A_n = \lbrace y < Y \rbrace                      \\
+    \Rightarrow &
+    P(y < Y) = P(\bigcup_{n = 0}^\infty A_n)
+             = \sum_{k = 0}^\infty P(A_k)
+             = \lim_{n \rightarrow \infty} \left[ \sum_{k = 0}^n P(A_k) \right]
+             = \lim_{n \rightarrow \infty} P(Y > y_{n + 1})                  \\
+    \Rightarrow &
+    1 - F(y) = \lim_{n \rightarrow \infty} [1 - F(y_{n + 1})]                \\
+    \Rightarrow &
+    F(y) = \lim_{n \rightarrow \infty} F(y_n)
+\end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}[without proof]
+If $F : \mathbb{R} \rightarrow [0, 1]$ satisfies \ref{ref-sec4-thm1-1},
+\ref{ref-sec4-thm1-2}, \ref{ref_sec4-thm1-3}, and \ref{ref_sec4-thm1-4} of
+previous theorem, then there exists a real-valued random variable $X$ on some
+sample space such that $F$ is the cumulative distribution function of $X$.
+\end{theorem}
+
+\begin{theorem}
+For $x \in \mathbb{R}$, let 
+\[
+    F_X(x-) \coloneqq \lim_{y \uparrow x} F_X(y)
+\]
+Then $F_X(x-) = P(X < x)$. In particular, $P(X = x) = F_X(x) - F_X(x-)$.
+\begin{proof}
+Imitate the arguments used in the argument earlier.
+\end{proof}
+\end{theorem}
+
+The cumulative distribution function of a discrete real-valued random variable
+has jumps.
+
+\begin{definition}
+A real-valued random variable $Y$ with cumulative distribution function
+$F_Y(\cdot)$ is said to be a continuous random variable if $F_Y$ is a
+continuous function on $\mathbb{R}$.
+\end{definition}
+
+The cumulative distribution function of a continuous real-valued random
+variable $Y$ does not have any jumps. In particular, $\forall y \in
+\mathbb{R}$,
+\[
+    P(Y = y) = P(Y \leq y) - P(Y \leq y)
+             = F_Y(y) - F_Y(y-)
+             = 0
+\]
+\begin{definition}
+A function $f : \mathbb{R} \rightarrow [0, \infty)$ is called a density
+function if,
+\[
+    \int_{-\infty}^\infty f(x) dx = 1
+\]
+\end{definition}
+\begin{definition}
+A real-valued continuous random variable $X$ has density function $f_X(\cdot)$
+if $\forall x \in \mathbb{R}$, 
+\[
+    F_X(x) = P(X \leq x) = \int_{-\infty}^x f_x(u) du
+\]
+\end{definition}
+\note From the definition, one can see that $F_X^\prime(x) = f_X(x)$ at every
+$x$ that is a continuity point of $f_X$.
+
+If a continuous random variable $X$ has a density then it can be computed as
+follows. At every $x \in \mathbb{R}$ where the cumulative distribution
+function $F_X$ is differentiable, set
+\[
+    f_x(x) \coloneqq F_X^\prime(x) = 0
+\]
+At every other $x$, set $f_X(x) = 0$.
+\begin{example} \quad                                                        \\
+\[
+    F_X(x) = \begin{cases}
+        0               & x < 0                                              \\
+        1 - e^{-x}      & x \geq 0
+    \end{cases}
+\]
+is a continuous cumulative distribution function. The corresponding density is,
+\[
+    f_X(x) = \begin{cases}
+        0               & x \leq 0                                           \\
+        e^{-x}          & x > 0
+    \end{cases}
+\]
+\end{example}
+
+This is analogous to the case of discrete random variables. If $X$ is a
+real-valued discrete random variable with cumulative distribution function
+$F_X$, then its pmf can be computed as follows. At every $x \in \mathbb{R}$
+where $F_X$ has a jump, set
+\[
+    p_X(x) = F_X(x) - F_X(x-)
+\]
+and define $p_X(x) = 0$ at all other $x \in \mathbb{R}$.

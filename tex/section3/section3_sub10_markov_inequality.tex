@@ -1,4 +1,4 @@
-\section{Markov's Inequality}
+\subsection{Markov's Inequality}
 \begin{theorem}
     If $X$ is a real-valued nonnegative random variable, then
     \[ P(X \geq a) \leq \frac{E[X]}{a} \qquad a > 0                          \]
@@ -13,3 +13,17 @@
    &\Rightarrow P(X \geq a) \leq \frac{E[X]}{a}
 \end{align*}
 \end{proof}
+
+\paragraph{A simple consequence of Markov's inequality}
+\begin{lemma}
+If $X$ is a real-valued random variable and $E[\vert X \vert^\alpha]$ for some
+$\alpha > 0$, then $\forall a > 0$,
+\[
+	P(\vert x \vert > a) = P(\vert x \vert^\alpha > a^\alpha)
+	                     \leq \frac{E[\vert X \vert^\alpha]}{a^\alpha}
+\]
+by applying Markov's inequality to the random variable $\vert X
+\vert^\alpha$.
+\end{lemma}
+\note These are simple examples of what is called `tail-bounds' for random
+variables.

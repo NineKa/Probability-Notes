@@ -1,0 +1,33 @@
+\subsection{Chernoff Bound}
+\begin{theorem}
+If $X$ is a real-valued random variable with moment generating function
+$m_X(\cdot)$, then
+\[
+	P(X \geq x) \leq e^{-tx} \cdot m_X(t)
+\]
+for any $t > 0$, $x \in \mathbb{R}$. Consequently,
+\[
+	P(X \geq x) \leq \inf_{t > 0} \left[ e^{-tx} m_X(t) \right]
+\]
+\end{theorem}
+\begin{proof}
+For any $t>0$,
+\[
+	  P(X \geq x)
+	= P(e^{tX} \geq e^{tx}) 
+	\leq \frac{E[e^{tX}]}{e^{tx}}
+	= e^{-tx} m_X(t)
+\]
+\end{proof}
+\begin{example}
+$X \sim \poissondist{\lambda}$, for any $c > 1$,
+\[
+	  P(X \geq c \lambda)
+	= P(X - \lambda \geq (c - 1) \lambda)
+	\leq \frac{E[(X - \lambda)^2]}{(c-1)^2 \lambda^2}
+	= \frac{\lambda}{(c-1)^2 \lambda^2}
+	= \frac{1}{(c-1)^2 \lambda}
+\] 
+Thus, Chebyshev's Inequality yields a simple polynomial tail bound. A stronger
+bound can be obtained using Chernoff type arguments.
+\end{example}

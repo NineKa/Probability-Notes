@@ -14,6 +14,7 @@
 
 \theoremstyle{definition}
 \newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
 \newcommand\note{\noindent \textbf{Note}:}
@@ -36,11 +37,16 @@
 \newcommand{\includesvg}[2][]{\subimport{#1}{#2.pdf_tex}}
 
 \begin{document}
+\cleardoublepage
+\pagenumbering{gobble}
+\tableofcontents
+\cleardoublepage
+\pagenumbering{arabic}
+
 \input{section1/section1_experiments_samplespace_events_and_probability}
 \input{section2/section2_computing_probabilities}
 \input{section3/section3_discrete_random_variables}
-\input{section4_moments_and_moment_generating_function}
-\input{section5_markov_inequality}
+\input{section4/section4_cumulative_distribution}
 \end{document}
 
 %
