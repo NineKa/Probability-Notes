@@ -1,0 +1,47 @@
+\subsection{Gamma Distribution}
+\begin{definition}
+The Gamma function $\Gamma : (0, \infty) \rightarrow \mathbb{R}$ is defined as,
+\[
+    \Gamma(\alpha) = \int_{0}^{\infty} x^{\alpha - 1} e^{-x} \quad dx
+\]
+\end{definition}
+\note It is easy to show that this integral is finite when $\alpha > 0$.
+
+\begin{theorem} \quad                                                        \\
+\begin{enumerate}[noitemsep, topsep=0em]
+\item \[ \forall \alpha \geq 0, \Gamma(\alpha + 1) = \alpha \Gamma(\alpha) \]
+\item \[ \Gamma(n + 1) = n!, n = 1, 2, 3, \dots                            \]
+\item \[ \Gamma(\frac{1}{2}) = \sqrt{\pi}                                  \]
+\end{enumerate}
+\end{theorem}
+\begin{proof} \quad                                                          \\
+\begin{enumerate}[noitemsep, topsep=0em]
+\item Using integration by parts,
+\[
+      \Gamma(\alpha + 1) = \int_0^{\infty} x^\alpha e^{-x} \quad dx
+    = \left. x^\alpha e^{-x} \right\vert_{\infty}^0 +
+      \int_0^{\infty} \alpha x^{\alpha - 1} e^{-x} \quad dx
+    = 0 + \alpha \Gamma(\alpha)
+    = \alpha \Gamma(\alpha)
+\]
+\item
+\[
+    \Gamma(1) = \int_{0}^{\infty} e^{-x} \quad dx = 1
+\]
+\[
+    \Gamma(n + 1) = n \Gamma(n)
+                  = n (n - 1) \Gamma(n - 1)
+                  = \dots
+                  = n \times (n - 1) \times \dots \times 3 \times 2 \times 1
+                  = n!
+\]
+\item Substitute $x = \frac{u^2}{2}$, 
+\[
+    \Gamma(\frac{1}{2}) = \int_{0}^{\infty} \frac{1}{\sqrt{x}} e^{-x} \quad dx
+                        = \int_{0}^{\infty} \sqrt{2} e^{-\frac{u^2}{2}} \quad
+                          du
+                        = \sqrt{2} \cdot \sqrt{\frac{\pi}{2}}
+                        = \sqrt{\pi}
+\]
+\end{enumerate}
+\end{proof}

@@ -1,0 +1,278 @@
+\subsection{Normal Distribution / Gaussian Distribution}
+Normal distribution `approximates' many other probability distributions. This
+is a classical result called the central limit theorem (CLT), which we will
+discuss later.
+\begin{definition}
+Suppose $\mu \in \mathbb{R}$ and $\sigma > 0$. A random variable $X$ follows a
+`normal distribution' with parameters $\mu$ and $\sigma^2$, or in short $X
+\sim \normaldist{\mu}{\sigma^2}$, if and only if,
+\[
+    f_{\mu, \sigma^2}(x) = \frac{1}{\sigma \sqrt{2\pi}} 
+        \exp \left( -\frac{(x - \mu)^2}{2\sigma^2} \right)
+        \qquad x \in \mathbb{R} 
+\]
+is a density for $X$.
+\end{definition}
+
+\begin{theorem} \quad                                                        \\
+\[
+    \int_{0}^{\infty} e^{-\frac{x^2}{2}} \quad dx = \sqrt{\frac{\pi}{2}}
+\]
+In particular,
+\[
+    \int_{-\infty}^{\infty} f_{\mu, \sigma^2}(x) \quad dx = 1
+\]
+\end{theorem}
+\begin{proof}
+Let $I = \int_{0}^{\infty} e^{-\frac{x^2}{2}} \quad dx$. Then,
+\[
+    I^2 = (\int_{0}^{\infty} e^{-\frac{x^2}{2}} \quad dx) \cdot
+          (\int_{0}^{\infty} e^{-\frac{x^2}{2}} \quad dx)
+        = \int_{0}^{\infty} \int_{0}^{\infty}
+              e^{-\frac{x^2 + y^2}{2}}
+          \quad dxdy
+\]
+Switch to polar coordinates,
+\[
+    x = r \cdot \cos{\theta} \qquad y = r \cdot \sin{\theta}
+\]
+The Jacobian of this transformation is
+\[
+    \mathcal{J}(r, \theta) = \det \left\vert \begin{array}{cc}
+          \frac{\delta}{\delta r} r \cdot \cos{\theta}
+        & \frac{\delta}{\delta \theta} r \cdot \cos{\theta}                  \\
+          \frac{\delta}{\delta r} r \cdot \sin{\theta}
+        & \frac{\delta}{\delta \theta} r \cdot \sin{\theta}
+    \end{array} \right\vert
+    = \det \left\vert \begin{array}{cc}
+          \cos{\theta}         & -r \cdot \sin{\theta}                       \\
+          \sin{\theta}         &  r \cdot \cos{\theta}
+    \end{array} \right\vert
+    = r \cdot \cos^2{\theta} + r \cdot \sin^2{\theta}
+    = r
+\]
+Hence,
+\begin{align*}
+    I^2 &= \int_{r = 0}^{\infty} \int_{\theta = 0}^{\frac{\pi}{2}} 
+           \exp \left(
+               -\frac{r^2 \cos^2{\theta} + r^2 \sin^2{\theta}}{2}
+           \right)
+           \vert \mathcal{J}(r, \theta) \vert \quad drd\theta                \\
+        &= \int_{r = 0}^{\infty} \int_{\theta = 0}^{\frac{\pi}{2}}
+               \exp \left( -\frac{r^2}{2} \right) \cdot r 
+           \quad drd\theta                                                   \\
+        &= \left(
+               \int_{0}^{\infty} e^{-\frac{r^2}{2}} r \quad dr
+           \right) \cdot
+           \left(
+               \int_{0}^{\frac{\pi}{2}} 1 \quad d\theta                 
+           \right)                                                           \\
+        &= \left(
+               \int_{0}^{\infty} e^{-u} \quad du
+           \right)
+           \cdot \frac{\pi}{2}
+         = \frac{\pi}{2}
+\end{align*}
+And we have,
+\[
+    I = \sqrt{\frac{\pi}{2}}
+\]
+To evaluate $\int_{\infty}^{\infty} f_{\mu, \sigma^2}(x) \quad dx$, subsitute
+$y = \frac{x - \mu}{\sigma}$. Then,
+\begin{align*}
+    \int_{-\infty}^{\infty} 
+         \frac{1}{\sigma \sqrt{2\pi}}
+         \exp \left( - \frac{(x - \mu)^2}{2 \sigma^2} \right)
+    \quad du
+    &= \int_{-\infty}^{\infty}
+           \frac{1}{\sigma \sqrt{2\pi}}
+           \exp \left( - \frac{y^2}{2} \right) \sigma
+        \quad dy                                                             \\
+    &= \frac{1}{\sqrt{2 \pi}}
+       \int_{-\infty}^{\infty}
+           \exp \left( - \frac{y^2}{2} \right) 
+       \quad dy                                                              \\
+    &= \frac{1}{\sqrt{2 \pi}} \cdot 2 \cdot
+       \int_{0}^{\infty} e^{-\frac{y^2}{2}} \quad dy                         \\
+    &= \frac{1}{\sqrt{2 \pi}} \cdot 2 \cdot \sqrt{\frac{\pi}{2}}        
+     = 1
+\end{align*}
+\end{proof}
+
+\begin{definition}
+The function,
+\[
+    \phi(x) = \frac{1}{\sqrt{2 \pi}} e^{-\frac{x^2}{2}} \qquad x \in \mathbb{R}
+\]
+is called the standard normal density. $\phi$ is the density of a random
+variable that follows a $\normaldist{0}{1}$ distribution. Its cumulative
+distribution function is given by,
+\[
+    \Phi(x) = \int_{-\infty}^{\infty} \phi(u) \quad du
+\]
+There is no closed form expression for $\Phi(\cdot)$. Only approximate values
+of $\Phi(x)$ can be calculated.
+\begin{figure}[H]
+    \centering
+    \def\svgwidth{0.5\linewidth}
+    \includesvg[./section4/figure/]{sec3-fig5}    
+\end{figure}
+\end{definition}
+
+\begin{theorem}
+If $X \sim \normaldist{0}{1}$, then $\mu + \sigma X \sim
+\normaldist{\mu}{\sigma^2}$ for all $\mu \in \mathbb{R}$, $\sigma > 0$.
+Conversely, if $Y \sim \normaldist{\mu}{\sigma^2}$, then,
+\[
+    \frac{y - \mu}{\sigma} \sim \normaldist{0}{1}
+\]
+\end{theorem}
+\begin{proof}\quad                                                           \\
+\begin{align*}
+      P(\mu + \sigma X \leq y) = P(X \leq \frac{y - \mu}{\sigma})
+   &= \int_{-\infty}^{\frac{y - \mu}{\sigma}}
+          \frac{1}{\sqrt{2\pi}} e^{\frac{x^2}{2}}
+      \quad dx                                                               \\
+   &= \int_{-\infty}^{y} 
+          \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{(t - \mu)^2}{2\sigma^2}}
+      \quad dt
+      \qquad \left( x = \frac{t - u}{\sigma} \right)                         \\
+   &= \int_{-\infty}^{y}
+          f_{\mu, \sigma^2}(t)
+      \quad dt                                                               \\
+   &\Rightarrow \mu + \sigma X \sim \normaldist{\mu}{\sigma^2}
+\end{align*}
+The other part follows similarly.
+\end{proof}
+
+\begin{theorem}
+If $X \sim \normaldist{\mu}{\sigma^2}$, then
+\begin{enumerate}[noitemsep, topsep=0em]
+\item
+\[
+    E[X] = \mu
+\]
+\item
+\[
+    V[X] = \sigma^2
+\]
+\item
+\[
+    m_X(t) = \exp \left( \mu t + \sigma^2 \frac{t^2}{2} \right)
+\]    
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Assume that $Y \sim \normaldist{0}{1}$. Then,
+\[
+    X \overset{\text{d}}{=} \mu + \sigma Y
+    \Rightarrow \begin{cases}
+        E[X] = \mu + \sigma E[Y]                                           \\
+        V[X] = \sigma^2 V[Y]                                               \\
+        m_X(t) = E [\exp(t(\mu + \sigma Y))] = E[e^{tu} \cdot e^{t \sigma Y}]
+               = e^{t\mu} E[\exp(t \sigma Y)]
+               = e^{t\mu} m_Y(t \sigma)
+    \end{cases}
+\]
+Now,
+\begin{align*}
+    E[X] &= \int_{-\infty}^{\infty} \frac{y}{\sqrt{2 \pi}} e^{\frac{-y^2}{2}}
+            \quad dy                                                       \\
+         &= \int_{-\infty}^{0} \frac{y}{\sqrt{2 \pi}} e^{\frac{-y^2}{2}} \quad
+            dy +
+            \int_{0}^{\infty} \frac{y}{\sqrt{2 \pi}} e^{\frac{-y^2}{2}} \quad
+            dy                                                             \\
+         &= -\int_{0}^{\infty} \frac{u}{\sqrt{2 \pi}} e^{\frac{-u^2}{2}}
+            \quad du +
+            \int_{0}^{\infty} \frac{y}{\sqrt{2 \pi}} e^{\frac{-y^2}{2}} \quad
+            dy                                                             \\
+         &= 0                                                              \\
+    \Rightarrow E[X] &= \mu
+\end{align*}
+\begin{align*}
+    m_Y(t) &= \int_{-\infty}^{\infty} e^{ty} \frac{1}{\sqrt{2\pi}}
+              e^{-\frac{y^2}{2}} \quad dy                                  \\
+           &= \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}
+              \exp \left(
+                  -\frac{y^2 - 2ty}{2}
+              \right) \quad dy                                             \\
+           &= e^{\frac{t^2}{2}}
+              \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}
+              \exp \left(
+                  -\frac{y^2 - 2ty + t^2}{2}
+              \right) \quad dy                                             \\
+           &= e^{\frac{t^2}{2}}
+              \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}
+              \exp \left(
+                  -\frac{(y - t)^2}{2}
+              \right) \quad dy                                             \\
+           &= e^{\frac{t^2}{2}}                                            \\
+    \Rightarrow m_X(t) &= \exp (\mu t + \sigma^2 \frac{t^2}{2})
+\end{align*}
+\[
+    \begin{cases}
+        m_Y^\prime(t) = t e^{\frac{t^2}{2}}                                \\
+        m_Y^{\prime\prime}(t) = t^2 e^{\frac{t^2}{2}} + e^{\frac{t^2}{2}}  \\
+    \end{cases}
+    \Rightarrow m_Y^{\prime\prime}(0) = 1
+    \Rightarrow E[Y^2] = 1
+    \Rightarrow V[Y] = E[Y^2] - (E[Y])^2 = 1 - 0 = 1
+    \Rightarrow V[X] = \sigma^2
+\]
+\end{proof}
+
+\begin{definition}
+If $Y$ is a real-valued random variable with cumulative distribution function
+$F$ and $p \in (0, 1)$, then the $p$-th quantile of $Y$, denoted by
+$\mathcal{Q}_p$ is given by,
+\[
+    \mathcal{Q}_p \coloneqq \min \lbrace y : F(y) \geq p \rbrace
+\]
+Thus, $F(\mathcal{Q}_p) \geq p$. If $F$ is continuous (i.e., if $Y$ is a
+continuous random variable), then $F(\mathcal{Q}_p) = p$.
+\end{definition}
+\note The quantiles for standard normal distribution are available from
+standard tables (or using any software).
+
+\begin{example}
+A soft-drink machine can be regulated so that it discharges an average of
+$\mu$ ounces per cup. The ounces of fill are normally distributed with standard
+distribution of $0.3$ ounce. Give the setting for $\mu$ so that $8$oz cups will
+overflow only $1\%$ of the time.
+\end{example}
+\begin{solution}
+Let $\mu_0$ be the required value. Let $X$ denote the amount discharged. Then
+$X \sim \normaldist{\mu_0}{(0.3)^2}$. 
+\begin{align*}
+    P(X \geq 8) = 0.01 \Rightarrow & P(X \leq 8) = 0.99                    \\
+    \Rightarrow & P \left(
+        \frac{x - \mu_0}{0.3} \leq \frac{8 - \mu_0}{0.3}
+    \right) = 0.99                                                         \\
+    \Rightarrow & \Phi \left( \frac{8 - \mu_0}{0.3} \right) = 0.99 
+        \qquad \text{since } \frac{X - \mu_0}{0.3} \sim \normaldist{0}{1}  \\
+    \Rightarrow & \frac{8 - \mu_0}{0.3} = \mathcal{Q}_{0.99}               \\
+    \Rightarrow & \mu_0 = 8 - 0.3 \mathcal{Q}_{0.99}
+\end{align*}
+\end{solution}
+
+\begin{example}
+Scores on an examination are assumed to be normally distributed with mean $78$
+and variance $36$. What is the probability that a person taking the exam score
+higher than $72$?
+\end{example}
+\begin{solution}
+Let $X$ denote his/her score. Then $X \sim \normaldist{78}{36}$.
+\begin{align*}
+    P(X \geq 72) &= P \left(
+                        \frac{X - 78}{6} \geq \frac{72 - 78}{6}
+                    \right)                                                \\
+                 &= 1 - \Phi{-1} \qquad 
+                    \text{since } \frac{X - 78}{6} \sim \normaldist{0}{1}  \\
+                 &= \Phi(1) 
+\end{align*}
+\end{solution}
+
+\begin{example}
+Show that $1 - \Phi(-x) = \Phi(x)$.
+\end{example}
+%% TODO

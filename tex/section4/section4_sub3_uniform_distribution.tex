@@ -86,3 +86,73 @@ and, $P(X \in [\theta_3, \theta_4]) = \frac{\theta_4 - \theta_3}{\theta_2 -
 \]
 \end{enumerate}
 \end{proof}
+
+\begin{theorem}
+If $X \sim \uniformdist{\theta_1}{\theta_2}$, then
+\begin{enumerate}[noitemsep, topsep=0em]
+\item  \[  E[X] = \frac{\theta_1 + \theta_2}{2}                              \]
+\item  \[  V[X] = \frac{(\theta_2 - \theta-1)^2}{12}                         \]
+\item 
+\[
+    m_X(t) = \begin{cases}
+        \frac{(e^{t\theta_2} - e^{t\theta_1)}}{t(\theta_2 - \theta_1)} 
+            & t \neq 0                                                       \\
+        1
+            & t = 0
+    \end{cases}
+\]    
+\end{enumerate}
+\end{theorem}
+\begin{proof}\quad                                                           \\
+\begin{enumerate}[noitemsep, topsep=0em]
+\item
+\[
+    E[X] = \int_{-\infty}^{\infty} x f_X(x) \quad dx
+         = \int_{\theta_1}^{\theta_2} \frac{x}{\theta_2 - \theta_1} \quad dx   
+         = \frac{1}{2(\theta_2 - \theta_1)}(\theta_2^2 - \theta_1^2)
+         = \frac{\theta_1 + \theta_2}{2}
+\]
+\item
+    Suppose $Y \sim \uniformdist{0}{1}$. Then $X \overset{\text{d}}{=} a +
+bY$, where $a = \theta_1$, $b = \theta_2 - \theta_1$. Now,
+\[
+    E[Y] = \frac{1}{2}
+    \qquad \text{and} \qquad
+    E[Y^2] = \int_{0}^{1} y^2 \quad dy = \frac{1}{3}
+    \Rightarrow
+    V[Y] = E[Y^2] - (E[Y])^2
+         = \frac{1}{3} - \frac{1}{4}
+         = \frac{1}{12}
+\]
+Hence,
+\[
+    V[X] = V[a + bY] = b^2 V[Y]
+         = \frac{(\theta_2 - \theta_1)^2}{12}
+\]
+\item
+    Note that $m_X(t) = E[e^{tX}] = 1$ if $t = 0$. If $t \neq 0$, then,
+\[
+    m_X(t) = E[e^{tX}] 
+           = \int_{-\infty}^{\infty} e^{tX} \cdot f_X(x) \quad dx
+           = \int_{\theta_1}^{\theta_2} \frac{e^{tX}}{\theta_2 - \theta_1} 
+             \quad dx
+           = \frac{e^{t\theta_2} - e^{t\theta_1}}{t(\theta_2 - \theta_1)}
+\]
+\end{enumerate}
+\end{proof}
+
+\begin{example}
+The radius of a circle is an random variable that has a $\uniformdist{0}{1}$
+distribution. What is the probability that its area is bigger than $1$?
+\end{example}
+\begin{solution}
+Let $A$ be random variable equals to the size of the circle. Note that $A =
+\pi R^2$, where $R \sim \uniformdist{0}{1}$,
+\[
+    P(A \geq 1) = P(\pi R^2 \geq 1)
+                = P(R \geq \frac{1}{\sqrt{\pi}})
+                = \int_{\frac{1}{\sqrt{\pi}}}^{1} 1 \quad dx
+                = 1 - \frac{1}{\sqrt{\pi}}
+\]
+\end{solution}
+
