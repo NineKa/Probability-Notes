@@ -1,0 +1,419 @@
+\section{Multivariate Probability Distribution}
+\begin{definition}
+If $X_1$, $X_2$ are two discrete random variables defined on the same sample
+space, then their joint probability mass function is given by,
+\[
+    p_{X_1, X_2}(x_1, x_2) = P(X_1 = x_1, X_2 = x_2)
+\]
+for $x_1 \in \mathbb{R}$ and $x_2 \in \mathbb{R}$.
+\end{definition}
+\note The event $\lbrace X_1 = x_1, X_2 = x_2 \rbrace$ is same as $\lbrace X_1
+= x_1 \rbrace \cap \lbrace X_2 = x_2 \rbrace$.
+
+\begin{theorem}
+Suppose $X_1$, $X_2$ are two discrete random variables defined on the same
+sample space with joint probability mass function $p$.
+\begin{enumerate}[noitemsep, topsep=0em]
+\item
+\[
+    p(x_1, x_2) \geq 0 \qquad \forall x_1, x_2 \in \mathbb{R}
+\]
+\item If $P(X_1 = x_1) = 0$, then $p(x_1, x_2) = 0 \quad \forall x_2 \in
+\mathbb{R}$. Similarly, if $P(X_2 = x_2) = 0$, then $p(x_1, x_2) = 0 \quad
+\forall x_1 \in \mathbb{R}$. Thus $p(x_1, x_2) > 0$ only for finite or
+countably many pairs $\langle x_1, x_2 \rangle$.
+\item
+\[
+    \sum_{x_1} \sum_{x_2} p(x_1, x_2) = 1
+\]
+where the sum is over all pairs $\langle x_1, x_2 \rangle$, such that $p(x_1,
+x_2) > 0$. (Thus, it's really a sum over finite or countably many terms).
+\end{enumerate}
+\end{theorem}
+\begin{proof} \quad                                                          \\
+\begin{enumerate}[noitemsep, topsep=0em]
+\item Since it's a probability.
+\item If $P(X_1 = x_1) = 0$,
+\[
+    p(x_1, x_2) = P(X_1 = x_1, X_2 = x_2) \leq P(X_1 = x_1) = 0
+    \qquad \Rightarrow \qquad
+    p(x_1, x_2) = 0 \quad \forall x_2 \in \mathbb{R}
+\]
+\item Let $S$ be the sample space on which $X_1$ and $X_2$ are defined. Let
+$A_i, i = 1, 2$, be the set such that $P(X_i = a) > 0$ for all $a \in A_i$. The
+$p(x_1, x_2) = 0$ if $\langle x_1, x_2 \rangle \notin A_1 \times A_2$, and,
+\[
+    1 = P(S) = P \left(
+                        \bigcup_{x_1 \in A_1, x_2 \in A_2}
+                        \lbrace X_1 = x_1, X_2 = x_2 \rbrace
+               \right)
+             = \sum_{x_1 \in A_1} \sum_{x_2 \in A_2} P(X_1 = x_1, X_2 = x_2)
+             = \sum_{x_1} \sum_{x_2} p(x_1, x_2)
+\]
+\end{enumerate}
+\end{proof}
+
+\begin{example}
+We are given two dice - Die I and Die II. Die I is unbiased, and probability
+that face $i$ appears while rolling Die II is proportional to $i$, $1 \leq i
+\leq 6$. let $X_1$,$X_2$ denote the numbers on the uppermost faces of the two
+dice when they are rolled independently. Find the joint probability mass
+function of $X_1$, $X_2$.
+\end{example}
+\begin{solution}
+\[
+    P(X_2 = i) = ci \quad i = 1, 2, \dots, 6
+    \qquad \Rightarrow \qquad
+    c= \frac{1}{\sum_{i = i}^6 i} = \frac{1}{21}
+\]
+$P(X_1 = x, X_y = y) = 0$ if either $x \notin \lbrace 1, \dots, 6 \rbrace$ or
+$y \notin \lbrace 1, \dots, 6 \rbrace$. Now for $i, j \in \lbrace 1,
+\dots, 6 \rbrace$, 
+\[
+    P(X_1 = i, X_2 = j) = P(X_1 = i) \cdot P(X_2 = j)
+                        = \frac{1}{6} \cdot \frac{j}{21}
+                        = \frac{j}{126}
+\]
+Hence, the joint probability mass function of $X_1$, $X_2$ is,
+\[
+    p(i, j) = \begin{cases}
+        \frac{j}{126}            & i,j = 1, 2, \dots, 6                      \\
+        0                        & \text{otherwise}
+    \end{cases}
+\]
+\end{solution}
+
+Given the joint probability mass function of two discrete random variables, we
+can compute the probability distribution of each of those random variables.  
+\begin{theorem}
+Suppose $X_1$, $X_2$ are two discrete random variables with joint probability
+mass function $p_{x_1, x_2}(\cdot, \cdot)$. Then the probability mass function
+of $X_1$ is given by,
+\[
+    p_{X_1}(x_1) = \sum_{x_2 \in \mathbb{R}} p_{x_1,x_2}(x_1, x_2)
+\]
+(This is called the marginal distribution of $X_1$) Similarly, the probability
+mass function $X_2$ is given by,
+\[
+    p_{X_2}(x_2) = \sum_{x_1 \in \mathbb{R}} p_{x_1,x_2}(x_1, x_2)
+\]
+\end{theorem}
+\note each of the sums in the above theorem is taken over finite or countably
+many terms, since $p(X_1, X_2) > 0$ only for finite or countably many pairs
+$\langle x_1, x_2 \rangle$.
+\begin{proof}
+Let $A_i, i = 1, 2$ denote the set of possible values of $X_i$. Then the
+probability mass function of $X_1$ is given by,
+\[
+    p_{X_1}(x_1) = P(X_1 = x_1)
+                 = P \left(
+                       \bigcup_{x_2 \in A_2} 
+                       \lbrace X_1 = x_1, X_2 = x_2 \rbrace
+                   \right)
+                 = \sum_{x_2 \in A_2} P(X_1 = x_1, X_2 = x_2)
+                 = \sum_{x_2} p_{x_1, x_2}(x_1, x_2)
+\]
+\end{proof}
+
+\begin{definition}
+Suppose $X_1$ and $X_2$ are two discrete random variables with joint
+probability mass function $p$, and marginal distributions $p_1$ and $p_2$
+respectively. Then the conditional distribution of $X_1$ given $X_2 = x_2$ is
+given by,
+\[
+    P_{X_1 \vert X_2 = x_2}(x_1) = \frac {P(X_1 = x_2, X_2 = x_2}
+                                         {P(X_2 = x_2)}
+                                 = \frac {p(x_1, x_2)}{p_2(x_2)}
+\]
+if $p_2(x_2) > 0$. (if $p_2(x_2) = 0$, then the above conditional probability
+is not defined)
+\end{definition}
+
+\begin{theorem}[restatement]
+If $X_1$ and $X_2$ are two discrete random variables with joint probability
+mass function $p(\cdot, \cdot)$ and $g : \mathbb{R}^2 \rightarrow \mathbb{R}$,
+then,
+\[
+    E[g(x_1, x_2)] = \sum_{x_1} \sum_{x_2} g(x_1, x_2) p(x_1, x_2)
+\]
+\end{theorem}
+
+\begin{example}
+The joint distribution of $X_1$, and $X_2$ is given in the following,
+\[ 
+\begin{array}{lll}
+     p(X_1 = -2, X_2 = 1) = \frac{6}{16}
+    &p(X_1 = 0 , X_2 = 1) = 0
+    &p(X_1 = 1 , X_2 = 1) = \frac{1}{16}                                     \\
+     p(X_1 = -1, X_2 = 2) = 0
+    &p(X_1 = 0 , X_2 = 2) = \frac{7}{16}
+    &p(X_1 = 1 , X_2 = 2) = \frac{2}{16}
+\end{array}
+\]
+\begin{enumerate}[noitemsep, topsep=0em]
+\item Find the marginal distribution of $X_1$ and $X_2$.
+\item Find $E[X_1^{2}X_2]$ and $E[X_1 + X_2]$.
+\item Find the conditional distribution of $X_1$ given $X_2 = 1$ and given
+      $X_2 = 2$.
+\end{enumerate}
+\end{example}
+\begin{solution}
+This is indeed a joint probability mass function, since,
+\[
+    \frac{6}{16} + 0 + \frac{1}{16} + 0 + \frac{7}{16} + \frac{2}{16} = 1
+\]
+\begin{enumerate}[noitemsep, topsep=0em]
+\item
+\[
+    p_{X_1}(x_1) = \sum_{x_2} p_{x_1, x_2}(x_1, x_2)
+    \qquad
+    p_{X_2}(x_2) = \sum_{x_1} p_{x_1, x_2}(x_1, x_2)
+\]
+Given a tabular representation of the joint probability mass function as above,
+the row sums will give the marginal distribution of $X_2$, and the column sums
+will given the marginal distribution of $X_1$. Thus, the marginal distribution
+of $X_1$ is given by,
+\[
+    p_(X_1)(-2) = \frac{3}{8} \qquad
+    p_(X_1)(0)  = \frac{7}{16}\qquad
+    p_(X_1)(1)  = \frac{1}{16}
+\]
+Thus marginal distribution of $X_2$ is given by,
+\[
+    p_(X_2)(1) = \frac{7}{16} \qquad
+    p_(X_2)(2) = \frac{9}{16}
+\]
+\item
+\[
+    E[X_1^2 X_2] = (-2)^2 \cdot 1 \cdot \frac{6}{16} + 
+                   0 +
+                   \frac{1}{16} +
+                   0 +
+                   0 +
+                   1^2 \cdot 2 \cdot\frac{2}{16}
+                 = \frac{24}{16} + \frac{1}{16} + \frac{4}{16}
+                 = \frac{29}{16}
+\]
+\[
+    E[X_1 + X_2] = (-1) \cdot \frac{6}{16} +
+                   0 +
+                   2 \cdot \frac{1}{16} +
+                   0 +
+                   2 \cdot \frac{7}{16} +
+                   3 \cdot \frac{2}{16}
+                 = -\frac{6}{16} + \frac{2}{16} + \frac{14}{16} + \frac{6}{16}
+                 = 1
+\]
+\item
+\[
+    \begin{cases}
+        p_{X_1 \vert X_2 = 1}(-1) = \frac{6 / 16}{7 / 16} = \frac{6}{7}      \\
+        p_{X_1 \vert X_2 = 1}(0)  = \frac{0}{7 / 16} = 0                     \\
+        p_{X_1 \vert X_2 = 1}(1)  = \frac{1 / 16}{7 / 16} = \frac{1}{7}
+    \end{cases}
+    \qquad
+    \begin{cases}
+        p_{X_1 \vert X_2 = 2}(-1) = \frac{0}{9 / 16} = 0                     \\
+        p_{X_1 \vert X_2 = 2}(0)  = \frac{7 / 16}{9 / 16} = \frac{7}{9}      \\
+        p_{X_1 \vert X_2 = 2}(1)  = \frac{2 / 16}{9 / 16} = \frac{2}{9}
+    \end{cases}
+\]
+\end{enumerate}
+\end{solution}
+
+\begin{example}
+Let $p_1, p_2 \in (0, 1)$. The joint probability mass function of $X_1$, $X_2$
+is given by,
+\[
+    p(m, n) = p_1(1 - p_1)^n \cdot {n \choose m} p_2^m (1 - p_2)^{n - m}
+    \quad m = 0, 1, \dots, n \text{ and } n = 0, 1, 2, \dots
+\]
+Find the marginal distribution of $X_1$ and $X_2$. Find the conditional
+distribution of $X_1$ given $X_2$ and of $X_2$ given $X_1$.
+\end{example}
+\begin{solution}
+The marginal distribution of $X_2$ is given by,
+\[
+    p_{X_2}(n) = \sum_{m = 0}^n p_1 (1 - p_1)^n {n \choose m} p_2^m 
+                                (1 - p_2)^{n - m}
+\]
+for $n = 0, 1, 2, \dots$. (Note that $X_2 \overset{\text{d}}{=} Y - 1$, where
+$Y \sim \geometricdist{p_1}$)
+The marginal distribution of $X_1$ is given by, 
+\begin{align*}
+    p_{X_1}(m) &= \sum_{n = m}^\infty p_1 (1 - p_1)^n {n \choose m} p_2^m
+                                      (1 - p_2)^{n - m}                      \\
+               &= p_1 p_2^m (1 - p_1)^m
+                  \sum_{n - m}^\infty {n \choose m} (1 - p_1)^{n - m}
+                                      (1 - p_2)^{n - m}                      \\
+               &= p_1 p_2^m (1 - p_1)^m (1 - (1 - p_1)(1 - p_2))^{-(m + 1)}  \\
+               &= \frac{p_1}{p_1 + p_2 - p_1 p_2}
+                  \left( \frac{p_2 - p_1 p_2}{p_1 + p_2 - p_1 p_2} \right)^m
+\end{align*}
+for $m = 0, 1, 2, \dots$. (Note that $X_1 \overset{\text{d}}{=} Y^\prime - 1$,
+where $Y^\prime \sim \geometricdist{\frac{p_1}{p_1 + p_2 - p_1 p_2}}$)
+
+For $m = 0, 1, 2, \dots$, the conditional distribution of $X_2$ given $X_1 = m$
+is given by,
+\[
+    p_{X_2 \vert X_1 = m}(n) = \frac{p(m, n)}{p_{X_1}(m)}
+                             = \begin{cases}
+        0                             & n < m                                \\
+        \frac{p_1(1 - p_1)^n{n \choose m}p_2^m (1 - p_2)^{n - m}}
+             {\left(\frac{p_1}
+                         {p_1 + p_2 - p_1 p_2} \right)
+              \frac{p_2^m (1 - p_1)^m}
+                   {(p_1 + p_2 - p_1 p_2)^m}}
+        = {n \choose m}[(1 - p_1)(1 - p_2)]^{n - m}
+          [1 - (1 - p_1)(1 - p_2)]^{m + 1}          & n \geq m 
+    \end{cases}
+\]
+(This is same as the distribution of $Y^{\prime\prime} - 1$, where
+$Y^{\prime\prime} \sim \negbinomialdist{m + 1}{p_1 + p_2 - p_1 p_2}$)
+For $n = 0, 1, 2, \dots$, the conditional distribution of $X_1$ given $X_2 = n$
+is given by,
+\[
+      p_{X_1 \vert X_2 = n}(m) 
+    = \frac{p(m, n)}{p_{X_2}(n)} 
+    = {n \choose m} p_2^m (1 - p_2)^{n - m}
+\]
+for m = 0, 1, \dots, n. (Note, this is same as a $\binomialdist{n}{p_2}$
+distribution)
+\end{solution}
+
+\begin{example}
+A hand of $10$ cards is dealt from a standard deck of $52$ cards. Let $X_1$ and
+$X_2$ respectively denote the number of hearts and diamonds in the hand. Write
+down the joint probability mass function of $X_1$ and $X_2$.
+\begin{solution}\quad                                                        \\
+\[
+    p(n_1, n_2) = \frac{{13 \choose n_1} {13 \choose n_2} {26 \choose {10
+                  - n_1 - n_2}}} {{52 \choose 10}}
+\]
+for nonnegative integers $n_1$, $n_2$. satisfying $n_1 + n_2 \leq 10$.
+\end{solution}
+\end{example}
+
+\begin{definition}[joint cumulative distribution function]
+For any two random variables $X_1$, $X_2$ (not necessarily discrete) define on
+the same sample space, the joint cumulative distribution function (cdf) is
+defined as,
+\[
+    F(x_1, x_2) = P(X_1 \leq x_1, X_2 \leq x_2) \quad x_1, x_2 \in \mathbb{R}
+\]
+\note $F : \mathbb{R}^2 \rightarrow [0, 1]$.
+\end{definition}
+
+\begin{theorem}
+If $F$ is the joint cumulative distribution function $X_1$ and $X_2$, then,
+\begin{enumerate}[noitemsep, topsep=0em]
+\item 
+    $F(x_1, x_2) \leq F(x_1, \overline{x_2})$ where $x_1 \leq
+\overline{x_2}$. Similarly $F(x_1, x_2) \leq F(\overline{x_1}, x_2)$ where
+$x_1 \leq \overline{x_1}$. So $F$ is coordinate-wise increasing.
+\item
+    The function $F_1(x_1) \coloneqq \lim_{x_2 \uparrow \infty} F(x_1, x_2)$ is
+the cumulative distribution function of $X_1$. Similarly, $F_2(x_2) \coloneqq
+\lim_{x_1 \uparrow \infty} F(x_1, x_2)$ is the cumulative distribution function
+of $X_2$.
+\item
+\[
+    \lim_{x_1 \rightarrow -\infty} F(x_1, x_2) = 0 \quad x_2 \in \mathbb{R}
+    \qquad
+    \lim_{x_2 \rightarrow -\infty} F(x_1, x_2) = 0 \quad x_1 \in \mathbb{R}
+\]
+\item
+\[
+    \lim_{x_1 \rightarrow +\infty \quad x_2 \rightarrow +\infty} 
+        F(x_1, x_2) = 1
+\]
+\item
+    If $x_1^{(n)} \downarrow x_1$ and $x_2^{(n)} \downarrow x_2$, then,
+\[
+    F(x_1^{(n)}, x_2^{(n)}) \downarrow F(x_1, x_2)
+\]
+\item
+    If $x_1 \leq \overline{x_1}$ and $x_2 \leq \overline{x_2}$, then,
+\[
+    F(\overline{x_1}, \overline{x_2}) - F(\overline{x_1}, x_2) - 
+    F(x_1, \overline{x_2}) + F(x_1, x_2) \geq 0
+\]
+\end{enumerate}
+\end{theorem}
+\begin{proof}\quad                                                           \\
+\begin{enumerate}[noitemsep, topsep=0em]
+\item Notice $x_2 \leq \overline{x_2}$,
+\begin{align*}
+    &\lbrace X_1 \leq x_1, X_2 \leq x_2 \rbrace \subseteq
+    \lbrace X_1 \leq x_1, X_2 \leq \overline{x_2} \rbrace                    \\
+    &\Rightarrow
+    P(X_1 \leq x_1, X_2 \leq x_2) \leq P(X_1 \leq x_1, X_2 \leq \overline{x_2})
+                                                                             \\
+    &\Rightarrow
+    F(x_1, x_2) \leq F(x_1, \overline{x_2})
+\end{align*}
+\item Let $X_2^{(n)}$ be an increasing sequence such that $x_2^{(n)}
+\rightarrow \infty$. Then,
+\begin{align*}
+    P(X_1 \leq x_1) &= P(X_1 \leq x_1, X_2 \in \mathbb{R})                   \\
+                    &= P\left(
+                         \lbrace X_1 \leq x_1, X_2 \leq x_2^{(1)} \rbrace
+                         \bigcup_{n = 2}^\infty \left\lbrace
+                             X_1 \leq x_1, x_2^{(n - 1)} < X_2 \leq x_2^{(n)}
+                         \right\rbrace
+                       \right)                                               \\
+                    &= P(X_1 \leq x_1, X_2 \leq x_2^{(1)}) + 
+                       \sum_{n = 1}^\infty P \left(
+                           X_1 \leq x_1, x_2^{(n - 1)} < X_2 \leq x_2^{(n)}
+                       \right)                                               \\
+                    &= \lim_{m \rightarrow \infty} \left[
+                            P(X_1 \leq x_1, X_1 \leq x_2^{(1)}) +
+                            \sum_{n = 2}^m P \left(
+                                X_1 \leq x_1, x_2^{(n - 1)} < X_2 \leq
+                                              x_2^{(n)}
+                            \right)
+                       \right]                                               \\
+                    &= \lim_{m \rightarrow \infty} P \left(
+                           X_1 \leq x_1, X_2 \leq x_2^{(m)}
+                       \right)                                               \\
+                    &= \lim_{m \rightarrow \infty} F\left( 
+                           x_1, x_2^{(m)}
+                       \right)
+\end{align*}
+Thus, $F_1(x_1)$ is the cumulative distribution function of $X_1$.
+\item
+\[
+    F(x_1, x_2) = P(X_1 \leq x_1, X_2 \leq x_2) \leq P(X_1 \leq x_1)
+    \qquad \Rightarrow \qquad
+    \lim_{x_1 \rightarrow -\infty} F(x_1, x_2) \leq
+    \lim_{x_1 \rightarrow -\infty} P(X_1 \leq x_1) = 0
+\]
+\note We proved earlier that $F(x) \rightarrow 0$ as $x \rightarrow -\infty$
+for any one-dimensional cumulative distributed function $F$.
+\item
+\begin{align*}
+    1 - F(x_1, x_2) &= 1 - P(X_1 \leq x_1, X_2 \leq x_2)                     \\
+                    &= P(\lbrace X_1 > x_1 \rbrace \cup 
+                        \lbrace X_2 > x_2 \rbrace)                           \\
+                    &\leq P(X_1 > x_1) + P(X_2 > x_2)                        \\
+                    &= [1 - F_1(x_2)] + [1 - F_2(x_2)]
+\end{align*}
+Since $\lim_{x_1 \rightarrow +\infty} F_1(x_1) = 1 = \lim_{x_2 \rightarrow
+\infty} F_2(x_2)$, then claim follows.
+\item
+\begin{align*}
+      F(x_1^{(n)}, x_2^{(n)}) - F(x_1, x_2)                     
+    &\leq P(X_1 \in (x_1, x_1^{(n)}]) + P(X_2 \in (x_1, x_2^{(n)}])          \\
+    &= [F_1(x_1^{(n)}) - F_1(x_1)] + [F_2(x_2^{(n)} - F_2(x_2)]
+    \rightarrow 0
+\end{align*}
+as $x_1^{(n)} \downarrow x_1$ and $x_2^{(n)} \downarrow x_2$.
+\item
+\[
+     F(\overline{x_1}, \overline{x_2}) - F(\overline{x_1}, x_2) -
+     F(x_1, \overline{x_2}) + F(x_1, x_2)
+    = p(x_1 < X_1 \leq \overline{x_1}, x_2 < X_2 \leq \overline{x_2 })
+    \geq 0
+\]
+\end{enumerate}
+\end{proof}
