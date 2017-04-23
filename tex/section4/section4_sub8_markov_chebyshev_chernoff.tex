@@ -1,0 +1,121 @@
+\subsection{Markov's inequality / Chebyshev's Inequality / Chernoff Bound}
+Same as discrete cases,
+\begin{enumerate}[noitemsep, topsep=0em]
+\item
+\[
+    P(\vert X \vert \geq a) \leq \frac{E[\vert X \vert]}{a}
+    \qquad \forall a > 0
+\]
+or more generally,
+\[
+    P(\vert X \vert \geq a) \leq \frac {E[\vert X \vert^\alpha]}{a^\alpha}   
+    \qquad \forall a > 0, \alpha > 0
+\]
+\item if $E[X^2] < \infty$
+\[
+    P(\vert X - E[X] \geq a) \leq \frac{V[X]}{a^2}
+\]
+\item
+\[
+    P(X \geq a) \leq e^{-ta}m_X(t)
+    \qquad \forall t \geq 0
+\]
+\end{enumerate}
+
+\begin{example}
+Let $X$ be a nonnegative continuous random variable. Let $\mu_n^\prime
+\coloneqq E[X^n] \leq \infty$, and let $\mathcal{Q}_p$ be the $p$-th quantile
+of $X$. Show that,
+\[
+    \mathcal{Q}_p \leq \left(
+        \frac{\mu_n^\prime}{1 - p} 
+    \right)^{\frac{1}{n}}
+\]
+\end{example}
+\begin{solution}
+\[
+    P(X > x) \leq \frac{\mu_n^\prime}{x^n} \qquad \forall n > 0
+\]
+Let $x_0 = \left( \frac{\mu_n^\prime}{1 - p} \right)^{\frac{1}{n}}$, we see
+that,
+\[
+    P(X > x_0) \leq 1 - p
+    \Rightarrow
+    P(X \leq x_0) \geq p
+    \Rightarrow
+    \mathcal{Q}_p \leq x_0 = \left( \frac{\mu_n^\prime}{1 - p}
+                             \right)^{\frac{1}{n}}
+\]
+\end{solution}
+
+\begin{lemma}
+If $Z \sim \normaldist{0}{1}$, then,
+\[
+    \frac{2}{\sqrt{2\pi}} \left(
+        \frac{1}{\mathcal{Z}}-\frac{1}{\mathcal{Z}^3}
+    \right)^{e^{-\frac{Z^2}{2}}}
+    \leq
+    P(\vert Z \vert > \mathcal{Z})
+    \leq
+    \frac{2}{\sqrt{2\pi}}e^{-\frac{\mathcal{Z}^2}{2}}
+\]
+for all $\mathcal{Z} > 1$.
+\end{lemma}
+\begin{proof}
+\[
+      P(\vert Z \vert \geq \mathcal{Z})
+    = P(Z \geq \mathcal{Z}) + P(Z \leq -\mathcal{Z})
+    = 2P(Z \geq \mathcal{Z})
+\]
+Now, (substitute $\frac{u^2}{2} = v$)
+\begin{align*}
+      P(Z \geq \mathcal{Z}) 
+    = \int_{\mathcal{Z}}^{\infty}
+          \frac{1}{\sqrt{2\pi}} e^{-\frac{u^2}{2}}
+      \quad du
+    \leq& \int_{\mathcal{Z}}^{\infty}
+          \frac{u}{\mathcal{Z}}
+          \frac{1}{\sqrt{2\pi}}
+          e^{-\frac{u^2}{2}}
+    \quad du                                                              \\
+    =& \frac{1}{\mathcal{Z}\sqrt{2\pi}}
+       \int_{\mathcal{Z}}^{\infty} u e^{-\frac{u^2}{2}} \quad du          \\
+    =& \frac{1}{\mathcal{Z}\sqrt{2\pi}}
+       \int_{\frac{\mathcal{Z}^2}{2}}^{\infty}
+           e^{-v}
+       \quad dv                                                           \\
+    =& \frac{1}{\mathcal{Z}\sqrt{2\pi}} e^{-\frac{\mathcal{Z}^2}{2}}
+\end{align*}
+To get the lower bound, we integrate by parts:
+\begin{align*}
+      P(Z \geq \mathcal{Z}) \cdot \sqrt{2\pi}
+    = \int_{\mathcal{Z}}^{\infty}
+          e^{-\frac{u^2}{2}}
+      \quad du
+    = \int_{\mathcal{Z}}^{\infty}
+          \frac{1}{u} \cdot u e^{-\frac{u^2}{2}}
+      \quad du
+    &= \left. 
+           u e^{-\frac{u^2}{2}} \frac{1}{u^2}
+       \right\vert_{\infty}^{\mathcal{Z}} -
+       \int_{\mathcal{Z}}^{\infty}
+           \frac{1}{u^2} \cdot e^{-\frac{u^2}{2}}
+       \quad du              
+       \qquad \text{integrate by parts}                                      \\
+    &= \frac{1}{\mathcal{Z}} e^{-\frac{\mathcal{Z}^2}{2}} -
+       \int_{\mathcal{Z}}^{\infty}
+           \frac{1}{u^3} \cdot u e^{-\frac{u^2}{2}}
+       \quad du                                                              \\
+    &\geq \frac{1}{\mathcal{Z}} e^{-\frac{\mathcal{Z}^2}{2}} -
+          \frac{1}{\mathcal{Z}^3} \int_{\mathcal{Z}}^{\infty}
+              u e^{-\frac{u^2}{2}}
+          \quad du                                                           \\
+    &= \frac{1}{\mathcal{Z}} e^{-\frac{\mathcal{Z}^2}{2}} -
+       \frac{1}{\mathcal{Z}^3} e^{-\frac{\mathcal{Z}^2}{2}}
+\end{align*}
+\[
+    \Rightarrow
+    P(Z \geq \mathcal{Z}) \geq
+        \frac{1}{\sqrt{2\pi}} (\frac{1}{\mathcal{Z}} - \frac{1}{\mathcal{Z}^3})
+\]
+\end{proof}

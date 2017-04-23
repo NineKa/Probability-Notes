@@ -1,0 +1,116 @@
+\subsection{Two Special Cases}
+\subsubsection*{Exponential Distribution}
+\begin{definition}
+The Exponential distribution with scale parameter $\beta > 0$, in short
+$\expdist{\beta}$, is the probability distribution $\Gamma(1, \beta)$. Its
+density is given by,
+\[
+    f(x) = \begin{cases}
+        \frac{1}{\beta} e^{-\frac{x}{\beta}}   & x \geq 0.                \\
+        0                                      & x < 0                    
+    \end{cases}
+\]
+\end{definition}
+
+\subsubsection*{Chi-squared Distribution}
+\begin{definition}
+The Chi-squared distribution with $v > 0$ degrees of freedom , or in short
+$\chidist{v}$, is the probability distribution $\gammadist{\frac{v}{2}}{2}$.
+Its density is,
+\[
+    f(x) = \begin{cases}
+        \frac{x^{\frac{v}{2} - 1} e^{-\frac{x}{2}}}
+             {2^{\frac{v}{2}} \Gamma(\frac{v}{2})}       & x \geq 0       \\
+        0                                                & x < 0
+    \end{cases}
+\]
+\end{definition}
+
+\begin{theorem}[memoryless property of $\expdist{\beta}$]
+Suppose $X \sim \expdist{\beta}$. Then for any $a, b > 0$,
+\[
+      P(X \geq a + b \vert X \geq a)
+    = P(X \geq b)
+    = e^{-\frac{b}{\beta}}
+\]
+\end{theorem}
+\note Compare with the memoryless property of the geometric distribution.
+\begin{proof}
+Take $\mathcal{Z} = \frac{y}{\beta}$
+\[
+    P(X \geq x) = \int_{x}^{\infty} 
+                      \frac{1}{\beta} e^{-\frac{y}{\beta}}
+                  \quad dy
+                = \int_{\frac{x}{\beta}}^{\infty}
+                      e^{-\mathcal{Z}}
+                  \quad d\mathcal{Z}
+                = \left. 
+                      e^{-\mathcal{Z}}
+                  \right\vert_{\infty}^{\frac{x}{\beta}}
+                = e^{-\frac{x}{\beta}}
+\]
+Hence,
+\[
+      P(X \geq a + b \vert X \geq a)
+    = \frac{P(X \geq a + b)}{P(X \geq a)}
+    = \frac{e^{-\frac{a + b}{\beta}}}{e^{-\frac{a}{\beta}}}
+    = e^{-\frac{b}{\beta}}
+    = P(X \geq b)
+\]
+\end{proof}
+
+\begin{theorem}
+If $X \sim \normaldist{0}{1}$, then $Y \coloneqq X^2 \sim \chidist{1}$.
+\end{theorem}
+\begin{proof}
+If $y < 0$, then $P(Y \leq y) = 0$. If $y \geq 0$, then,
+\begin{align*}
+    P(Y \geq y) &= P(X^2 \leq y)                                       \\
+                &= P(-\sqrt{y} \leq X \leq \sqrt{y})                   \\
+                &= \int_{-\sqrt{y}}^{\sqrt{t}} \phi(t) \quad dt        \\
+                &= \int_{-\sqrt{y}}^{\sqrt{t}}
+                       \frac{1}{\sqrt{2\pi}} e^{-\frac{t^2}{2}}
+                   \quad dt                                            \\
+                &= 2 \int_{0}^{\sqrt{y}}
+                       \frac{1}{\sqrt{2\pi}} e^{-\frac{t^2}{2}}
+                   \quad dt                                            \\
+                &= 2 \int_{0}^{\sqrt{y}}
+                       \frac{1}{\sqrt{2\pi}} e^{-\frac{u}{2}}
+                       \frac{1}{2\sqrt{u}}
+                   \quad dt \qquad t^2 = u                             \\
+                &= \int_{0}^{\sqrt{y}} \frac 
+                       {u^{\frac{1}{2} - 1} e^{-\frac{u}{2}}}
+                       {2^{\frac{1}{2}} \Gamma(\frac{1}{2})}
+                   \quad du
+\end{align*}
+which is the cumulative distribution function of a $\chidist{1} (\equiv
+\gammadist{\frac{1}{2}}{2})$ distribution. Hence $X^2 \sim \chidist{1}$.
+\end{proof}
+
+\begin{example}
+If $Y$ has an exponential distribution and $P(Y > 2) == 0.0821$, find $P(Y
+\leq 1.7)$.
+\end{example}
+\begin{solution}
+Suppose $Y \sim \expdist{\beta}$. Then, (tike $\frac{x}{\beta} = u$)
+\[
+    P(Y \geq y) = \int_{y}^{\infty} \frac{e^{-\frac{x}{\beta}}}{\beta}
+                  \quad dx
+                = \int_{\frac{y}{\beta}}^{\infty} e^{-u} \quad du
+                = e^{-\frac{y}{\beta}} 
+\]
+Hence,
+\[
+    P(Y > 2) = e^{-\frac{2}{\beta}} = 0.0821
+    \Rightarrow
+    \frac{2}{\beta} = \vert \ln{0.0821} \vert
+                    \approx 2.5
+    \Rightarrow
+    \beta = \frac{2}{2.5} = \frac{4}{5}
+\]
+\[
+    P(Y \leq 1.7) = 1 - \exp{-\frac{1.7}{\beta}}
+                  = 1 - \exp{-\frac{8.5}{4}}
+                  = 1 - e^{-\frac{17}{8}}
+\]
+\end{solution}

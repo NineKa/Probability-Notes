@@ -45,3 +45,122 @@ The Gamma function $\Gamma : (0, \infty) \rightarrow \mathbb{R}$ is defined as,
 \]
 \end{enumerate}
 \end{proof}
+
+\begin{definition}
+A real-valued random variable $Y$ is said to have a gamma distribution with
+shake parameter $\alpha > 0$ and scale parameter $\beta > 0$, if,
+\[
+    f(y) = \begin{cases}
+        \frac{y^{\alpha - 1} e^{-\frac{y}{\beta}}}{\beta^\alpha \Gamma(\alpha)}
+            & y \geq 0                                                       \\
+        0
+            & y < 0                                     
+    \end{cases}
+\]
+is a density for $Y$.
+\end{definition}
+This is indeed a probability distribution function, as (take $u =
+\frac{y}{\beta}$)
+\[
+      \int_{-\infty}^{\infty} f(y) \quad dy
+    = \int_{0}^{\infty} 
+          \frac{y^{\alpha - 1}e^{-\frac{y}{\beta}}}{\beta^\alpha\Gamma(\alpha)}
+      \quad dy
+    = \int_{0}^{\infty} 
+          \frac
+          {\beta^{\alpha - 1} u^{\alpha - 1} e^{-u} \beta}
+          {\beta^{\alpha} \Gamma(\alpha)}
+      \quad du
+    = \int_{0}^{\infty}
+          \frac{u^{\alpha - 1}e^{-u}}{\Gamma(\alpha)}
+      \quad du
+    = 1
+\]
+There is no closed form expression for the cumulative distribution function,
+\[
+    \int_{0}^{x}
+        \frac{y^{\alpha - 1}e^{-\frac{y}{\beta}}}{\beta^\alpha \Gamma(\alpha)}
+    \quad dy
+\]
+\begin{theorem}
+If $Y \sim \gammadist{\alpha}{\beta}$, then,
+\begin{enumerate}[noitemsep, topsep=0em]
+\item \[
+    E[Y] = \alpha \beta
+\]
+\item \[
+    V[Y] = \alpha \beta^2
+\]
+\item For $t < \frac{1}{\beta}$,
+\[
+    m_Y(t) = (1 - \beta t)^{-\alpha}
+\]
+For $t \geq \frac{1}{\beta}$, $E[e^{ty}] = \infty$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Let $X = \frac{Y}{\beta}$. Then $X \sim \Gamma(\alpha, 1)$, and $E[Y] =
+\beta E[X]$, $V(Y) = \beta^2 V[X]$ and $m_Y(t) = m_X(t\beta)$.
+\begin{enumerate}[noitemsep, topsep=0em]
+\item
+\[
+    E[X] = \int_{0}^{\infty}
+               x \cdot \frac{x^{\alpha - 1}e^{-x}}{\Gamma(\alpha)}
+           \quad dx
+         = \int_{0}^{\infty}
+               \frac{x^\alpha e^{-x}}{\Gamma(\alpha)}
+           \quad dx
+         = \frac{\Gamma(\alpha + 1)}{\Gamma(\alpha)}
+         = \alpha
+\]
+\item
+\[
+    E[X^2] = \int_{0}^{\infty} \frac
+                 {x^2 x^{\alpha - 1} e^{-x}}
+                 {\Gamma(\alpha)}
+             \quad dx
+           = \int_{0}^{\infty} \frac
+                 {x^{\alpha + 1} e^{-x}}
+                 {\Gamma(\alpha)}
+             \quad dx
+           = \frac{\Gamma(\alpha + 1)}{\Gamma(\alpha)}
+           = (\alpha + 1) \alpha
+\]
+\[
+    \Rightarrow
+    V[X] = \alpha(\alpha + 1) - (E[X])^2
+         = \alpha(\alpha + 1) - \alpha^2
+         = \alpha
+\]
+\item
+\[
+    m_X(t) = \int_{0}^{\infty}
+                 e^{tx} \cdot \frac
+                 {x^{\alpha - 1} e^{-x}}
+                 {\Gamma(\alpha)}
+             \quad dx
+           = \int_{0}^{\infty} \frac 
+                 {x^{\alpha - 1} e^{-(1 - t)x}}
+                 {\Gamma(\alpha)}
+             \quad dx
+\]
+This integral is finite only when $t < 1$. In that case,
+\[
+    m_X(t) = \int_{0}^{\infty} \frac 
+                 {x^{\alpha - 1} e^{-(1 - t)x}}
+                 {\Gamma(\alpha)}
+             \quad dx
+           = \frac{1}{(1 - t)^\alpha}
+             \int_{0}^{\infty} \frac 
+                 {(1 - t)^\alpha x^{\alpha - 1} e^{-(1 - t)x}}
+                 {\Gamma(\alpha)}
+             \quad dx
+           = \frac{1}{(1 - t)^\alpha}
+\]
+\[
+    \Rightarrow
+    m_Y(t) = (1 - t\beta)^\alpha
+\]
+when $t\beta < 1$.
+\end{enumerate}
+\end{proof}

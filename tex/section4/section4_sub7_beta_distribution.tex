@@ -1,0 +1,81 @@
+\subsection{Beta Distribution}
+\begin{definition}
+The beta function $B : (0, \infty) \times (0, \infty) \rightarrow \mathbb{R}$
+is defined as,
+\[
+    B(\alpha, \beta) = \int_{0}^{1} 
+                           x^{\alpha - 1}(1 - x)^{\beta - 1}
+                       \quad dx
+\]
+\end{definition}
+
+\begin{theorem}[without proof]
+For all $\alpha, \beta > 0$,
+\[
+    B(\alpha, \beta) = \frac 
+                           {\Gamma(\alpha) \cdot \Gamma(\beta)}
+                           {\Gamma(\alpha + \beta)}
+\]
+\end{theorem}
+
+\begin{definition}
+An random variable $Y$ follows a beta distribution with parameters $\alpha,
+\beta > 0$, or in short $Y \sim \betadist{\alpha}{\beta}$, if 
+\[
+    f(y) = \begin{cases}
+        \frac {y^{\alpha - 1} (1 - y)^{\beta - 1}}
+              {B(\alpha, \beta)}                     & 0 \leq y \leq 1.      \\
+        0                                            & \text{otherwise}
+    \end{cases}
+\]
+is a density for $Y$. 
+\end{definition}
+Like the normal and the gamma distribution, there is no closed form expression
+for the cumulative distribution function of a beta random variable, unless
+$\alpha = 1$, or $\beta = 1$.
+
+\begin{theorem}
+If $Y \sim \betadist{\alpha}{\beta}$, then,
+\[
+    E[Y] = \frac{\alpha}{\alpha + \beta}
+    \qquad \text{and} \qquad
+    V[Y] = \frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)}
+\]
+\end{theorem}
+\begin{proof}
+\[
+    E[Y] = \int_{0}^{1} y \cdot \frac 
+               {y^{\alpha - 1} (1 - y)^{\beta - 1}}
+               {B(\alpha, \beta)}
+           \quad dy
+         = \int_{0}^{1} \frac 
+               {y^\alpha (1 - y)^{\beta - 1}}
+               {B(\alpha, \beta)}
+           \quad dy
+         = \frac{B(\alpha + 1, \beta)}{B(\alpha, \beta)}
+         = \frac
+               {\Gamma{\alpha + 1} \Gamma{\beta} \Gamma{\alpha + \beta}}
+               {\Gamma{\alpha + \beta + 1} \Gamma{\alpha} \Gamma{\beta}}
+         = \frac{\alpha}{\alpha + \beta}
+\]
+By a similar computation,
+\[
+    E[Y^2] = \frac{\Gamma(\alpha + 2) \Gamma(\beta) \Gamma(\alpha + \beta)}
+                  {\Gamma(\alpha + \beta + 2) \Gamma(\alpha) \Gamma(\beta)}
+           = \frac{\alpha (\alpha + 1)}
+                  {(\alpha + \beta) (\alpha + \beta + 1)}
+\]
+\begin{align*}
+    \Rightarrow
+    V[Y] &= E[Y^2] - (E[Y])^2                                              \\
+         &= \frac{\alpha}{\alpha + \beta} \left(
+                \frac{\alpha + 1}{\alpha + \beta + 1} - 
+                \frac{\alpha}{\alpha + \beta}
+            \right)                                                        \\
+         &= \frac{\alpha}{\alpha + \beta}
+            \frac{\alpha^2 + \alpha \beta + \alpha + \beta - \alpha^2
+                  -\alpha \beta - \alpha}
+                 {(\alpha + \beta)(\alpha + \beta + 1)}                    \\
+         &= \frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)}
+\end{align*}
+\end{proof}
